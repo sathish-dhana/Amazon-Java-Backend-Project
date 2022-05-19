@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @Table(name="users")
 public abstract class User {
-	
+	//This has to be looked at
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer userId;
