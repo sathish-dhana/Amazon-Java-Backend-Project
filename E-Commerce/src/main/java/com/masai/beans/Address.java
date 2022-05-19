@@ -1,5 +1,5 @@
 package com.masai.beans;
-
+//Test
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
