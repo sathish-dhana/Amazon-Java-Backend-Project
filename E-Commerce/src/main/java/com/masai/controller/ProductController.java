@@ -21,7 +21,7 @@ public class ProductController {
 	@Autowired
 	private ProductServiceInterface productServ;
 	
-	@PostMapping("/product")
+	@PostMapping("{id}/product")
 	public ResponseEntity<Product> addProduct(@RequestBody Product product){
 		
 		Product productSaved = productServ.addProduct(product);

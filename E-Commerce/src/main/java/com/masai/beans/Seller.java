@@ -1,5 +1,6 @@
 package com.masai.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -8,8 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
-import org.apache.tomcat.jni.User;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 import lombok.Data;
 import lombok.Getter;
@@ -19,11 +19,11 @@ import lombok.Setter;
 
 @Data
 @NoArgsConstructor
-public class Seller extends com.masai.beans.User {
-
-	
+@Entity
+@PrimaryKeyJoinColumn(name = "seller_id")
+public class Seller extends User {
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<Product> products;
+	private List<Product> products = new ArrayList<>();
 	
 }
