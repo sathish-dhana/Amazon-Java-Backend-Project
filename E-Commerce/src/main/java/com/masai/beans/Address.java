@@ -29,10 +29,9 @@ public class Address {
 	private String state;
 	private Integer phoneNumber;
 	private Integer pincode;
-	
-	
-	 @ManyToOne(cascade=CascadeType.ALL) 
-	 private User customer;
+		
+	@ManyToOne(cascade=CascadeType.ALL) 
+	private User customer;
 	 
 }
 

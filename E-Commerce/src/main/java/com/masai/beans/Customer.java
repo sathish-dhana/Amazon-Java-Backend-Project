@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="Customer_Details")
-public class Customer {
+public class Customer extends User{
 	
 	
 //	private Cart cart;

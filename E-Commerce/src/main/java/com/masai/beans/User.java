@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy=InheritanceType.JOINED)
 @Table(name="users")
 public abstract class User {
 	
@@ -42,7 +42,7 @@ public abstract class User {
 	
 	
 	  @OneToMany(cascade = CascadeType.ALL, mappedBy="customer") 
-	  @JoinColumn(name = "address_id") 
+	  //@JoinColumn(name = "address_id") 
 	  private List<Address> addresses = new ArrayList<>();
 	 
 }
