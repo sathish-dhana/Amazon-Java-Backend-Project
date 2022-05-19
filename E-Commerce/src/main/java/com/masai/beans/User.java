@@ -1,5 +1,8 @@
 package com.masai.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -10,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -24,11 +28,10 @@ import lombok.NoArgsConstructor;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @Table(name="users")
 public abstract class User {
-	//This has to be looked at
-	//i looked at this
-	//to check Git
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "user_id")
 	private Integer userId;
 	
 	@Column(name = "user_name")
@@ -37,7 +40,7 @@ public abstract class User {
 	@Column(name = "user_password")
 	private String userPassword;
 	
-	@Embedded
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="customer")
 	@JoinColumn(name = "address_id")
-	private Address address;
+	private List<Address> addresses = new ArrayList<>();
 }
