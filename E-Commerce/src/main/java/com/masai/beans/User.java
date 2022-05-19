@@ -40,7 +40,9 @@ public abstract class User {
 	@Column(name = "user_password")
 	private String userPassword;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="customer")
-	@JoinColumn(name = "address_id")
-	private List<Address> addresses = new ArrayList<>();
+	
+	  @OneToMany(cascade = CascadeType.ALL, mappedBy="customer") 
+	  @JoinColumn(name = "address_id") 
+	  private List<Address> addresses = new ArrayList<>();
+	 
 }

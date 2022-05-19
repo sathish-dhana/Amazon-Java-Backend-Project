@@ -11,17 +11,17 @@ import javax.persistence.OneToMany;
 
 import org.apache.tomcat.jni.User;
 
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Getter
-@Setter
-public class Seller extends User{
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer sellerId;
+@Data
+@NoArgsConstructor
+public class Seller extends com.masai.beans.User {
+
+	
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Product> products;
