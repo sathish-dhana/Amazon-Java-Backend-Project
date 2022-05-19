@@ -1,4 +1,4 @@
-package com.masai.Beans;
+package com.masai.beans;
 
 import java.util.List;
 

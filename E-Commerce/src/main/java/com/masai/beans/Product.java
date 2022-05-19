@@ -1,4 +1,4 @@
-package com.masai.Beans;
+package com.masai.beans;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

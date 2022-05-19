@@ -1,4 +1,4 @@
-package com.masai.Beans;
+package com.masai.beans;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,7 +23,6 @@ import lombok.NoArgsConstructor;
 public abstract class User {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "user_name")
 	private String userName;
 	
