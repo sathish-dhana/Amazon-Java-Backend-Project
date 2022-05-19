@@ -1,0 +1,32 @@
+Modules(updated)
+1) Login service --->  It will have
+					   Role of the user, user name, password
+					   
+2) Customer Service ---> It will be used to add more customers and 
+						it will be the main portal for customers to view, edit, add 
+						and remove users.
+
+3) Seller Service --->  It will be used to add more sellers and 
+						it will be the main portal for sellers to view, edit, add 
+						and remove users.. More products can be added from this portal
+						by the seller.
+						
+4) Product Service ---> All products can be viewed from here irrespective of the user
+						type. (OPTIONAL) - (view products by sellers)
+						
+5) Address service ---> Each user can have multiple addresses. (copy methods from provided
+						word file)
+						
+6) Cart Service ---> Add to cart, Remove from cart
+					(We are using the item class to keep track of the quantity of the 
+					ordered products)
+					when the customers add to their carts, new item will be created
+					and added to the cart.
+					
+					(things to keep in mind) Make sure there is enough quantity to add 
+					to cart
+					
+7) Order service --> to do
+
+8) 
+		
