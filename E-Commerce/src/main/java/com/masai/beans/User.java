@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -19,10 +21,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @Table(name="users")
 public abstract class User {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer userId;
+	
 	@Column(name = "user_name")
 	private String userName;
 	
@@ -30,7 +36,6 @@ public abstract class User {
 	private String userPassword;
 	
 	@Embedded
-	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "address_id")
 	private Address address;
 }
