@@ -1,0 +1,48 @@
+//Note//
+LoginBean - Dto
+userName, Password, Roll
+Address
+make address entity
+autoGen Id
+@ManyToOne(Cascase = cascadeType.All)
+private Customer
+@OneToMAny(Cas, mappedBy="varofadress")
+private List<Order> order = new ArrayList();
+
+
+Class Order {
+	private Integer orderId;
+	private Date orderDate;
+	private String orderStatus;
+	@ManyToOne
+	private Address address;
+	@ManyToOne(cas)
+	private Customer customer;
+	@OneToOne(cas)
+	private Cart cart;
+
+}
+
+class Customer {
+	private genralDetails;
+	@OneTOMany(cas, mappedBy="varofcustomer")
+	private List<Address> address = new ArrayList();
+	@OneToMAny(cas)
+	private List<Order> order = new ArrayList();
+}
+
+
+class Cart {
+	cartId
+	@OneToMany
+	private List<Product> products;
+	@OneToOne(cas, mappedBy="cart")
+	private Order order;
+	@ElementCollection
+	@CollectionTable(name="product_quantity")
+	@MapKeyJoinColumn(name="productId")
+	@Column(name="quantity")
+	private Map<Product, Integer> productList = new HashMap();
+}
+
+		
