@@ -1,5 +1,13 @@
 package com.masai.service;
 
-public interface CustomerServiceInterface {
+import java.util.List;
 
+import com.masai.beans.Customer;
+import com.masai.beans.User;
+
+public interface CustomerServiceInterface {
+	public Customer addCustomer(Customer customer);
+	public Customer removeCustomer(Customer customer);
+	public List<Customer> viewAllCustomers();
+	public Customer updateCustomer(Customer customer);
 }
