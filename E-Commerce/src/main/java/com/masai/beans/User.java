@@ -26,6 +26,7 @@ import lombok.NoArgsConstructor;
 public abstract class User {
 	//This has to be looked at
 	//i looked at this
+	//to check Git
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer userId;
