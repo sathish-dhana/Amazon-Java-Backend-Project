@@ -1,5 +1,7 @@
 package com.masai.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,4 +22,22 @@ public class ProductService implements ProductServiceInterface{
 		
 	}
 
+	@Override
+	public List<Product> getAllProdcuts() {
+	
+		List<Product> allProducts = productRepo.findAll();
+		if(allProducts.isEmpty()) {
+			//should add exception here
+		}
+		return getAllProdcuts();
+	}
+
+	@Override
+	public Product getProductById(Integer id) {
+		
+		Product product = productRepo.findById(id).get();
+		
+		return product;
+	}
+	
 }
