@@ -1,8 +1,8 @@
 Modules(updated)
-1) Login service --->  It will have
+1) Login service (Jatin) --->  It will have
 					   Role of the user, user name, password
 					   
-2) Customer Service ---> It will be used to add more customers and 
+2) Customer Service (Jatin) ---> It will be used to add more customers and 
 						it will be the main portal for customers to view, edit, add 
 						and remove users.
 
@@ -15,7 +15,12 @@ Modules(updated)
 						type. (OPTIONAL) - (view products by sellers)
 						
 5) Address service ---> Each user can have multiple addresses. (copy methods from provided
-						word file)
+						word file) --> Search by city, search by state and search by pincode.
+						
+						//OPTIONAL
+						(Search both customers and sellers)
+						(Ability of the customer to know how much time will it take the seller to ship)
+						
 						
 6) Cart Service ---> Add to cart, Remove from cart
 					(We are using the item class to keep track of the quantity of the 
@@ -27,6 +32,10 @@ Modules(updated)
 					to cart
 					
 7) Order service --> to do
+					@Optional
+					//Ability to send actual text and email updates
+					//use library
 
-8) 
+8) UserDTO validations ---> Update logic for Customers and sellers
+							UserDTO --> Fields -- 
 		
