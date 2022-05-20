@@ -16,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,9 +37,11 @@ public abstract class User {
 	private Integer userId;
 	
 	@Column(name = "user_name")
+	@NotNull
 	private String userName;
 	
 	@Column(name = "user_password")
+//	@Pattern(regexp="regexp = \"^[0-9]{6,12}$\", message = \"username must be of 6 to 12 length with no special characters\"")
 	private String userPassword;
 	
 	
