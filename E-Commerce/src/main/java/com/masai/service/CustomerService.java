@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.masai.beans.Customer;
 import com.masai.exception.CustomerAlreadyExistsException;
+import com.masai.exception.CustomerNotFoundException;
 import com.masai.repository.CustomerCrudRepo;
 
 @Service
@@ -30,14 +31,18 @@ public class CustomerService implements CustomerServiceInterface {
 
 	@Override
 	public Customer removeCustomer(Customer customer) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public List<Customer> viewAllCustomers() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Customer> customers = customerCrudRepo.findAll();
+		if(customers.size() == 0) {
+			throw new CustomerNotFoundException("No Customers registered on the portal!");
+		}
+		
+		return customers;
 	}
 
 	@Override

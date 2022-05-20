@@ -1,11 +1,14 @@
 package com.masai.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,15 +26,26 @@ public class CustomerController {
 	private CustomerServiceInterface customerService;
 	
 	
-	//Able to add customers now. 
-	//Table creation also working fine
-	//TODO --- Handle exceptions and validation. 
-	//Will add rest of the functionality tomorrow
-	@PostMapping("/customers")
+	// Handle		 --> /ecommerce/customersPortal/customer
+	// What is does? --> Adds a new customer
+	// Request Type? --> POST Request
+	// Input 		 --> Customer object (All fields can be null except --userName-- and --userPassword--
+	@PostMapping("/customer")
 	public ResponseEntity<Customer> addCustomer(@RequestBody @Valid Customer customer, HttpSession session) {
 		Customer newCustomer = customerService.addCustomer(customer);
 		session.setAttribute("customerData", newCustomer);
 		return new ResponseEntity(newCustomer, HttpStatus.CREATED);
+	}
+	
+	
+	// Handle		 --> /ecommerce/customersPortal/customers
+	// What is does? --> Returns a list of all the customers
+	// Request Type? --> Get Request
+	// Input 		 --> None
+	@GetMapping("/customers")
+	public ResponseEntity<List<Customer>> viewCustomers() {
+		List<Customer> customers = customerService.viewAllCustomers();
+		return new ResponseEntity(customers, HttpStatus.OK);
 	}
 
 }
