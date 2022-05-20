@@ -16,30 +16,38 @@ public class SellerService implements SellerServiceInterface {
 	@Autowired
 	private SellerCrudRepo sellerCrudRepo;
 	
-	
 	@Override
 	public Seller addSeller(Seller seller) {
 		// TODO Auto-generated method stub
-		Seller savedSeller = sellerCrudRepo.save(seller);
+		
+//		Optional<Seller> checkSeller = sellerCrudRepo.findById(seller.getUserId());
+//		Seller savedSeller = null;
+//		
+//		if (!checkSeller.isPresent()) {
+			Seller savedSeller = sellerCrudRepo.save(seller);
+//		} else {
+//			throw new SellerNotFoundException("seller not found");
+//		}
+//		
 		return savedSeller;
 	}
 
 	@Override
-	public boolean removeSellerById(Seller seller) {
+	public String removeSellerById(Integer sellerId) {
 		// TODO Auto-generated method stub
 		
 		//checking if seller exist or not
-		Optional<Seller> checkSeller = sellerCrudRepo.findById(seller.getUserId());
-		boolean flag = false;
+		Optional<Seller> checkSeller = sellerCrudRepo.findById(sellerId);
+		String message = "Not deleted";
 		
 		if (checkSeller.isPresent()) {
-			sellerCrudRepo.delete(seller);
-			flag = true;
+			sellerCrudRepo.deleteById(sellerId);
+			message = "Deleted seller \nseller name : " + checkSeller.get().getUserName() + "\nId : " + checkSeller.get().getUserId();
 		} else {
-			throw new SellerNotFoundException("sellar not found");
+			throw new SellerNotFoundException("seller not found");
 		}
 
-		return flag;
+		return message;
 	}
 
 	@Override
@@ -50,7 +58,7 @@ public class SellerService implements SellerServiceInterface {
 		
 		//if no seller found in database
 		if (sellers.size() <= 0) {
-			throw new SellerNotFoundException("sellar not found");
+			throw new SellerNotFoundException("seller not found");
 		}
 		
 		return sellers;

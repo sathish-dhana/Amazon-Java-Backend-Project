@@ -20,8 +20,8 @@ public class Item {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer itemId;
 	
-	@Embedded
-	private Product product;
+//	@Embedded
+//	private Product product;
 	
 	private Integer price;
 	private Integer Quantity;
