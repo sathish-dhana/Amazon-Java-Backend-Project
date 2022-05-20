@@ -16,13 +16,8 @@ public class CustomerService implements CustomerServiceInterface {
 	private CustomerCrudRepo customerCrudRepo;
 	
 	@Override
-	public Customer addCustomer(UserDTO customer) {
-		Customer newCustomer = new Customer();
-		
-		newCustomer.setUserName(customer.getUserName());
-		newCustomer.setUserPassword(customer.getUserPassword());
-		
-		Customer savedCustomer = customerCrudRepo.save(newCustomer);
+	public Customer addCustomer(Customer customer) {
+		Customer savedCustomer = customerCrudRepo.save(customer);
 		return savedCustomer;
 	}
 

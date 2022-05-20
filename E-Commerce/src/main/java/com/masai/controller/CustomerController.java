@@ -28,7 +28,7 @@ public class CustomerController {
 	//TODO --- Handle exceptions and validation. 
 	//Will add rest of the functionality tomorrow
 	@PostMapping("/customers")
-	public ResponseEntity<Customer> addCustomer(@RequestBody @Valid UserDTO customer, HttpSession session) {
+	public ResponseEntity<Customer> addCustomer(@RequestBody @Valid Customer customer, HttpSession session) {
 		Customer newCustomer = customerService.addCustomer(customer);
 		session.setAttribute("customerData", newCustomer);
 		return new ResponseEntity(newCustomer, HttpStatus.CREATED);
