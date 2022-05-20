@@ -22,8 +22,8 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer cartId;
 	
-	@OneToMany
-	private List<Item> items;
+//	@OneToMany
+//	private List<Item> items;
 	
 	private Double total;
 }

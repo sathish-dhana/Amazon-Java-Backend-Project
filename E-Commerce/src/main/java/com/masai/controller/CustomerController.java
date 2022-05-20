@@ -1,5 +1,8 @@
 package com.masai.controller;
 
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.beans.Customer;
+import com.masai.beans.UserDTO;
 import com.masai.service.CustomerServiceInterface;
 
 @RestController
@@ -23,9 +27,10 @@ public class CustomerController {
 	//Table creation also working fine
 	//TODO --- Handle exceptions and validation. 
 	//Will add rest of the functionality tomorrow
-	@PostMapping("/customer")
-	public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
+	@PostMapping("/customers")
+	public ResponseEntity<Customer> addCustomer(@RequestBody @Valid UserDTO customer, HttpSession session) {
 		Customer newCustomer = customerService.addCustomer(customer);
+		session.setAttribute("customerData", newCustomer);
 		return new ResponseEntity(newCustomer, HttpStatus.CREATED);
 	}
 

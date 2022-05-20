@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.masai.beans.Customer;
+import com.masai.beans.UserDTO;
 import com.masai.repository.CustomerCrudRepo;
 
 @Service
@@ -15,8 +16,13 @@ public class CustomerService implements CustomerServiceInterface {
 	private CustomerCrudRepo customerCrudRepo;
 	
 	@Override
-	public Customer addCustomer(Customer customer) {
-		Customer savedCustomer = customerCrudRepo.save(customer);
+	public Customer addCustomer(UserDTO customer) {
+		Customer newCustomer = new Customer();
+		
+		newCustomer.setUserName(customer.getUserName());
+		newCustomer.setUserPassword(customer.getUserPassword());
+		
+		Customer savedCustomer = customerCrudRepo.save(newCustomer);
 		return savedCustomer;
 	}
 
