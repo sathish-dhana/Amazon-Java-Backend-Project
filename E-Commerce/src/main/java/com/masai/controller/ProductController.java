@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.beans.Product;
+import com.masai.beans.ProductCategory;
 import com.masai.service.ProductServiceInterface;
 
 @RestController
@@ -46,4 +47,13 @@ public class ProductController {
 		
 		return new ResponseEntity<>(product,HttpStatus.ACCEPTED);
 	}
+	
+	@GetMapping("/category/{cate}")
+	public ResponseEntity<List<Product>> getProdcutByCategory(@PathVariable("cate") ProductCategory cate ){
+	
+		List<Product> allProdcutsCategory = productServ.getProductsByCategory(cate);
+		
+		return new ResponseEntity<List<Product>>(allProdcutsCategory, HttpStatus.ACCEPTED);		
+	}
+	
 }
