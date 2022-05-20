@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.masai.beans.Customer;
+import com.masai.beans.UserDTO;
 import com.masai.exception.CustomerAlreadyExistsException;
 import com.masai.exception.CustomerNotFoundException;
 import com.masai.repository.CustomerCrudRepo;
@@ -30,9 +31,22 @@ public class CustomerService implements CustomerServiceInterface {
 	}
 
 	@Override
-	public Customer removeCustomer(Customer customer) {
+	public String removeCustomer(UserDTO userInfo) {
 		
-		return null;
+		Optional<Customer> customer = customerCrudRepo.findByUserName(userInfo.getUserName());
+		
+		if(customer.isPresent() && customer.get().getUserPassword().equals(userInfo.getUserPassword())) {
+			
+			customerCrudRepo.delete(customer.get());
+			
+		} else {
+			
+			throw new CustomerNotFoundException("username/password is wrong. Please provide the correct details to perform this operation");
+			
+		}
+		
+		return "Successfully deleted " + userInfo.getUserName() + "'s Account from the database";
+		
 	}
 
 	@Override

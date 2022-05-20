@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,6 +47,16 @@ public class CustomerController {
 	public ResponseEntity<List<Customer>> viewCustomers() {
 		List<Customer> customers = customerService.viewAllCustomers();
 		return new ResponseEntity(customers, HttpStatus.OK);
+	}
+	
+	// Handle		 --> /ecommerce/customersPortal/customers/delete
+	// What is does? --> Deletes the user provided if the id and password matches
+	// Request Type? --> Post Request
+	// Input 		 --> UserDTO object which compromises of userName and userPassword
+	@DeleteMapping("/customer")
+	public ResponseEntity<String> deleteCustomer(@RequestBody UserDTO userInfo) {
+		String status = customerService.removeCustomer(userInfo);
+		return new ResponseEntity(status, HttpStatus.OK);
 	}
 
 }
