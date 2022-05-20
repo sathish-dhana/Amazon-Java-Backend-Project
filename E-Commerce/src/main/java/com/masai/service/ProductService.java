@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.masai.beans.Product;
+import com.masai.beans.ProductCategory;
 import com.masai.repository.ProductCrudRepo;
 
 @Service
@@ -29,7 +30,7 @@ public class ProductService implements ProductServiceInterface{
 		if(allProducts.isEmpty()) {
 			//should add exception here
 		}
-		return getAllProdcuts();
+		return allProducts;
 	}
 
 	@Override
@@ -38,6 +39,14 @@ public class ProductService implements ProductServiceInterface{
 		Product product = productRepo.findById(id).get();
 		
 		return product;
+	}
+
+	@Override
+	public List<Product> getProductsByCategory(ProductCategory cate) {
+		
+		List<Product> productsCategory = productRepo.findByCategory(cate);
+		
+		return productsCategory;
 	}
 	
 }
