@@ -2,6 +2,7 @@ package com.masai.beans;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -17,12 +18,11 @@ import lombok.NoArgsConstructor;
 @PrimaryKeyJoinColumn(name = "customer_id")
 public class Customer extends User{
 	
-	
-//	private Cart cart;
+	@OneToOne
+	private Cart cart;
 	
 	@Embedded
 	private Card cardDetails;
-	
 	
 }
 
