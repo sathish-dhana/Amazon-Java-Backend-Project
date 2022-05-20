@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.masai.beans.Seller;
+import com.masai.exception.SellerAlreadyExistException;
 import com.masai.exception.SellerNotFoundException;
 import com.masai.repository.SellerCrudRepo;
 
@@ -20,15 +21,16 @@ public class SellerService implements SellerServiceInterface {
 	public Seller addSeller(Seller seller) {
 		// TODO Auto-generated method stub
 		
-//		Optional<Seller> checkSeller = sellerCrudRepo.findById(seller.getUserId());
-//		Seller savedSeller = null;
-//		
-//		if (!checkSeller.isPresent()) {
-			Seller savedSeller = sellerCrudRepo.save(seller);
-//		} else {
-//			throw new SellerNotFoundException("seller not found");
-//		}
-//		
+		Optional<Seller> checkSeller = sellerCrudRepo.findByUserName(seller.getUserName());
+		Optional<Seller> checkSellerByPassword = sellerCrudRepo.findByUserPassword(seller.getUserPassword());
+		Seller savedSeller = null;
+		
+		if (!checkSeller.isPresent() && !checkSellerByPassword.isPresent()) {
+			savedSeller = sellerCrudRepo.save(seller);
+		} else {
+			throw new SellerAlreadyExistException("Seller Already Exist, check name & password");
+		}
+		
 		return savedSeller;
 	}
 
