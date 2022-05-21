@@ -32,6 +32,8 @@ public class Address {
 	@ManyToOne(cascade=CascadeType.ALL) 
 	private User user;
 	 
+	//validation
+	//regex for pincode
 }
 
 

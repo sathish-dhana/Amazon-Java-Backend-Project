@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.masai.beans.Product;
 import com.masai.beans.Seller;
 import com.masai.exception.SellerAlreadyExistException;
 import com.masai.exception.SellerNotFoundException;
@@ -102,6 +103,22 @@ public class SellerService implements SellerServiceInterface {
 			throw new SellerNotFoundException("sellar not found");
 		}
 		return savedSeller;
+	}
+
+
+	@Override
+	public Seller addProducts(Integer sellerId, Product product) {
+		// TODO Auto-generated method stub
+		Optional<Seller> checkSeller = sellerCrudRepo.findById(sellerId);
+		Seller updatedSeller = checkSeller.get();
+		updatedSeller.getProducts().add(product);
+		
+		if (checkSeller.isPresent()) {
+			sellerCrudRepo.save(updatedSeller);
+		} else {
+			throw new SellerNotFoundException("seller not found");
+		}
+		return updatedSeller;
 	}
 		
 }

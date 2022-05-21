@@ -43,13 +43,14 @@ public class ProductController {
 		
 		  Optional<Seller> sellerr = sellerServ.getSellerCrudRepo().findById(product.getSeller().getUserId());
 		  
-		  if(sellerr.isPresent()) 
-		  { 
+		  if(sellerr.isPresent()) { 
 			  Seller seller = sellerr.get();
-			   seller.getProducts().add(product);
+			  
 			  product.setSeller(seller);
 			  
 			  Product savedProduct = productServ.addProduct(product); 
+			  
+			  sellerServ.addProducts(product.getSeller().getUserId(), product);
 		  
 			  return new ResponseEntity<>(savedProduct, HttpStatus.OK); 
 		  } 
