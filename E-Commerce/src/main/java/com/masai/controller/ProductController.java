@@ -3,6 +3,7 @@ package com.masai.controller;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -19,7 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.beans.Product;
 import com.masai.beans.ProductCategory;
+import com.masai.beans.Seller;
+import com.masai.exception.ProductNotFoundException;
+import com.masai.exception.SellerNotFoundException;
 import com.masai.service.ProductServiceInterface;
+import com.masai.service.SellerServiceInterface;
+import com.masai.service.SellerService;
 
 @RestController
 @RequestMapping("/ecommerce/productsPortal")
@@ -28,11 +34,38 @@ public class ProductController {
 	@Autowired
 	private ProductServiceInterface productServ;
 	
+	@Autowired
+	private SellerService sellerServ;
+	
 	@PostMapping("/product")
 	public ResponseEntity<Product> addProduct(@Valid @RequestBody Product product){
 		
-		Product productSaved = productServ.addProduct(product);
-		return new ResponseEntity<>(productSaved,HttpStatus.CREATED);
+		
+		  Optional<Seller> sellerr = sellerServ.getSellerCrudRepo().findById(product.getSeller().getUserId());
+		  
+		  if(sellerr.isPresent()) 
+		  { 
+			  Seller seller = sellerr.get();
+			   seller.getProducts().add(product);
+			  product.setSeller(seller);
+			  
+			  Product savedProduct = productServ.addProduct(product); 
+		  
+			  return new ResponseEntity<>(savedProduct, HttpStatus.OK); 
+		  } 
+		  else 
+			  throw new SellerNotFoundException("Seller not found");
+		 
+		
+//		Optional<Seller> seller = sellerServ.getSellerCrudRepo().findById(1);
+//		product.setSeller(seller.get());
+		
+		
+		//Product savedProduct = productServ.addProduct(product);
+		
+		
+		//return new ResponseEntity<Product>(savedProduct, HttpStatus.ACCEPTED);
+		
 	}
 	
 	@GetMapping("/all")

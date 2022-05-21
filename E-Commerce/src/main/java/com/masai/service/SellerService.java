@@ -11,7 +11,10 @@ import com.masai.exception.SellerAlreadyExistException;
 import com.masai.exception.SellerNotFoundException;
 import com.masai.repository.SellerCrudRepo;
 
+import lombok.Data;
+
 @Service
+@Data
 public class SellerService implements SellerServiceInterface {
 	
 	@Autowired
