@@ -118,6 +118,9 @@ public class ExceptionHandler {
 	public ResponseEntity<ErrorDetails> sellerHandler(AddressNotFoundException error, WebRequest webRequest) {
 			
 		ErrorDetails errorDetail = new ErrorDetails(LocalDateTime.now(), HttpStatus.BAD_REQUEST.value(), "Bad Request", error.getMessage());
+		
+		return new ResponseEntity<>(errorDetail, HttpStatus.BAD_REQUEST);
+	}
 			
   //-------------------------------------------------------------------------//
 	//									LOGIN EXCEPTIONS
