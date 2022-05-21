@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.masai.beans.Product;
 import com.masai.beans.ProductCategory;
+import com.masai.exception.ProductNotFoundException;
 import com.masai.repository.ProductCrudRepo;
 
 @Service
@@ -28,7 +29,7 @@ public class ProductService implements ProductServiceInterface{
 	
 		List<Product> allProducts = productRepo.findAll();
 		if(allProducts.isEmpty()) {
-			//should add exception here
+			throw new ProductNotFoundException("No product available");
 		}
 		return allProducts;
 	}
@@ -37,7 +38,8 @@ public class ProductService implements ProductServiceInterface{
 	public Product getProductById(Integer id) {
 		
 		Product product = productRepo.findById(id).get();
-		
+		if(product == null)
+			throw new ProductNotFoundException("No product found in the given id");
 		return product;
 	}
 
