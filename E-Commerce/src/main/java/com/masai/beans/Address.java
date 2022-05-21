@@ -26,7 +26,7 @@ public class Address {
 	private Integer addressId;
 	
 	private String city;
-	private String state;
+	private String state;	
 	private Integer pincode;
 		
 	@ManyToOne(cascade=CascadeType.ALL) 
