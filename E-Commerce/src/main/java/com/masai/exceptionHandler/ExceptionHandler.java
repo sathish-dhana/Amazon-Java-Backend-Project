@@ -14,6 +14,8 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+import com.masai.exception.AddressAlreadyExistException;
+import com.masai.exception.AddressNotFoundException;
 import com.masai.exception.CustomerAlreadyExistsException;
 import com.masai.exception.CustomerNotFoundException;
 import com.masai.exception.ErrorDetails;
@@ -94,6 +96,26 @@ public class ExceptionHandler {
 		
 		ErrorDetails errorDetail = new ErrorDetails(LocalDateTime.now(), HttpStatus.BAD_REQUEST.value(), "Bad Request", error.getMessage());
 		
+		return new ResponseEntity<>(errorDetail, HttpStatus.BAD_REQUEST);
+	}
+	
+	//-------------------------------------------------------------------------//
+	//									ADDRESS EXCEPTIONS
+	//-------------------------------------------------------------------------//
+	
+	@org.springframework.web.bind.annotation.ExceptionHandler(AddressAlreadyExistException.class)
+	public ResponseEntity<ErrorDetails> sellerHandler(AddressAlreadyExistException error, WebRequest webRequest) {
+			
+		ErrorDetails errorDetail = new ErrorDetails(LocalDateTime.now(), HttpStatus.BAD_REQUEST.value(), "Bad Request", error.getMessage());
+			
+		return new ResponseEntity<>(errorDetail, HttpStatus.BAD_REQUEST);
+	}
+		
+	@org.springframework.web.bind.annotation.ExceptionHandler(AddressNotFoundException.class)
+	public ResponseEntity<ErrorDetails> sellerHandler(AddressNotFoundException error, WebRequest webRequest) {
+			
+		ErrorDetails errorDetail = new ErrorDetails(LocalDateTime.now(), HttpStatus.BAD_REQUEST.value(), "Bad Request", error.getMessage());
+			
 		return new ResponseEntity<>(errorDetail, HttpStatus.BAD_REQUEST);
 	}
 }
