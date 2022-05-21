@@ -57,7 +57,7 @@ public abstract class User {
 	@Email
 	private String email;
 	
-	  @OneToMany(cascade = CascadeType.ALL, mappedBy="customer") 
+	  @OneToMany(cascade = CascadeType.ALL, mappedBy="user") 
 //	  @JoinColumn(name = "address_id") 
 	  private List<Address> addresses = new ArrayList<>();
 	 

@@ -14,8 +14,7 @@ import com.masai.beans.User;
 @Repository
 public interface AddressCrudRepo extends JpaRepository<Address, Integer>{
 	
-	public Optional<Address> findByPhoneNumber(Integer phoneNumber);
-	public Optional<Address> findByUserName(String userName);
+//	public Optional<Address> findByUserName(String userName);
 	public List<Address> findByUser(User user);
 	public List<Address> findByCity(String city);
 	public List<Address> findByState(String city);

@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.masai.beans.Address;
 import com.masai.beans.Customer;
@@ -18,6 +19,7 @@ import com.masai.exception.SellerNotFoundException;
 import com.masai.exception.UserNotFoundException;
 import com.masai.repository.AddressCrudRepo;
 
+@Service
 public class AddressService implements AddressServiceInterface {
 	
 	@Autowired
@@ -26,7 +28,7 @@ public class AddressService implements AddressServiceInterface {
 	@Override
 	public Address addAddress(Address address) {
 		// TODO Auto-generated method stub
-		Optional<Address> checkAddress = addressCrudRepo.findByUserName(address.getUser().getUserName());
+		Optional<Address> checkAddress = addressCrudRepo.findById(address.getUser().getUserId());
 		Address savedAddress = null;
 		
 		if (!checkAddress.isPresent()) {
