@@ -49,7 +49,7 @@ public class CustomerController {
 		return new ResponseEntity(customers, HttpStatus.OK);
 	}
 	
-	// Handle		 --> /ecommerce/customersPortal/customers/delete
+	// Handle		 --> /ecommerce/customersPortal/customer
 	// What is does? --> Deletes the user provided if the id and password matches
 	// Request Type? --> Post Request
 	// Input 		 --> UserDTO object which compromises of userName and userPassword
