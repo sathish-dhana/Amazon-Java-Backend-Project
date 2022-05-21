@@ -6373,3 +6373,18 @@ java.io.IOException: Stream closed
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-21 10:37:37.060
 !MESSAGE executing callback sts4.classpath.PfyOplHI SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-21 10:58:01.476
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-21 10:58:01.478
+!MESSAGE classpath=95 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-21 10:58:01.479
+!MESSAGE buffering callback sts4.classpath.PfyOplHI E-Commerce false 95
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-21 10:58:01.480
+!MESSAGE executing callback sts4.classpath.PfyOplHI 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-21 10:58:01.494
+!MESSAGE executing callback sts4.classpath.PfyOplHI SUCCESS [done]
