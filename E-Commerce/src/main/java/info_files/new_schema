@@ -2,7 +2,7 @@ Modules(updated)
 1) Login service (Jatin) --->  It will have
 					   Role of the user, user name, password
 					   
-2) Customer Service (Jatin) ---> It will be used to add more customers and 
+2) Customer Service (Jatin) --DONE BASIC CRUD ---> It will be used to add more customers and 
 						it will be the main portal for customers to view, edit, add 
 						and remove users.
 
@@ -36,6 +36,6 @@ Modules(updated)
 					//Ability to send actual text and email updates
 					//use library
 
-8) UserDTO validations ---> Update logic for Customers and sellers
+8) UserDTO validations (DONE) ---> Update logic for Customers and sellers
 							UserDTO --> Fields -- 
 		
