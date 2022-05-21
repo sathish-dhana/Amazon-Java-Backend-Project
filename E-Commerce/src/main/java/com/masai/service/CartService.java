@@ -1,24 +1,21 @@
 package com.masai.service;
 
+import com.masai.beans.Cart;
+import com.masai.beans.Item;
+
 public class CartService implements CartServiceInterface {
 
+	
 	@Override
-	public void calculateTotal() {
+	public Item saveCart(Cart cart) {
 		// TODO Auto-generated method stub
 		
+		return null;
 	}
 
-	@Override
-	public boolean addItemToCart() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
-	@Override
-	public boolean removeItemFromCart() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 		
 	
 }
