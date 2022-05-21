@@ -61,6 +61,10 @@ public class CustomerController {
 		return new ResponseEntity(status, HttpStatus.OK);
 	}
 	
+	// Handle		 --> /ecommerce/customersPortal/customer/{id}
+	// What is does? --> Updates the fields provided in the userInfo (any field except userId can be updated)
+	// Request Type? --> Put Request	
+	// Input 		 --> UserDTO object (All fields allowed) and Id in the path variable 
 	@PutMapping("/customer/{id}")
 	public ResponseEntity<String> updateCustomer(@RequestBody @Valid UserDTO userInfo, @PathVariable Integer id) {
 		Customer updatedCustomer = customerService.updateCustomer(userInfo, id);

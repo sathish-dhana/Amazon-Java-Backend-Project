@@ -10,4 +10,5 @@ public interface CustomerServiceInterface {
 	public String removeCustomer(UserDTO userInfo);
 	public List<Customer> viewAllCustomers();
 	public Customer updateCustomer(UserDTO userInfo, Integer id);
+	public Customer findByUsernameAndPassword(String username, String password);
 }

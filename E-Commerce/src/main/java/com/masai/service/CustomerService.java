@@ -104,7 +104,15 @@ public class CustomerService implements CustomerServiceInterface {
 		}
 
 	}
-	
-	//Todo
-	//Add methods to find customers by different parameters
+
+	@Override
+	public Customer findByUsernameAndPassword(String username, String password) {
+		Optional<Customer> customer = customerCrudRepo.findByUserNameAndUserPassword(username, password);
+		if(customer.isPresent()) {
+			return customer.get();
+		} else {
+			throw new CustomerNotFoundException("No such customer. Please check the provided details.");
+		}
+	}
+
 }
