@@ -26,12 +26,11 @@ public class Address {
 	private Integer addressId;
 	
 	private String city;
-	private String state;
-	private Integer phoneNumber;
+	private String state;	
 	private Integer pincode;
 		
 	@ManyToOne(cascade=CascadeType.ALL) 
-	private User customer;
+	private User user;
 	 
 }
 

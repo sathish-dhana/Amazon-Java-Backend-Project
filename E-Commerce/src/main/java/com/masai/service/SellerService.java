@@ -22,10 +22,9 @@ public class SellerService implements SellerServiceInterface {
 		// TODO Auto-generated method stub
 		
 		Optional<Seller> checkSeller = sellerCrudRepo.findByUserName(seller.getUserName());
-		Optional<Seller> checkSellerByPassword = sellerCrudRepo.findByUserPassword(seller.getUserPassword());
 		Seller savedSeller = null;
 		
-		if (!checkSeller.isPresent() && !checkSellerByPassword.isPresent()) {
+		if (!checkSeller.isPresent()) {
 			savedSeller = sellerCrudRepo.save(seller);
 		} else {
 			throw new SellerAlreadyExistException("Seller Already Exist, check name & password");
@@ -33,7 +32,7 @@ public class SellerService implements SellerServiceInterface {
 		
 		return savedSeller;
 	}
-
+	
 	@Override
 	public String removeSellerById(Integer sellerId) {
 		// TODO Auto-generated method stub
@@ -51,7 +50,25 @@ public class SellerService implements SellerServiceInterface {
 
 		return message;
 	}
-
+	
+	@Override
+	public String removeSellerByName(String sellerName) {
+		// TODO Auto-generated method stub
+		
+		//checking if seller exist or not
+		Optional<Seller> checkSeller = sellerCrudRepo.findByUserName(sellerName);
+		String message = "Not deleted";
+		
+		if (checkSeller.isPresent()) {
+			sellerCrudRepo.deleteById(checkSeller.get().getUserId());
+			message = "Deleted seller \nseller name : " + checkSeller.get().getUserName() + "\nId : " + checkSeller.get().getUserId();
+		} else {
+			throw new SellerNotFoundException("seller not found");
+		}
+		
+		return message;
+	}
+	
 	@Override
 	public List<Seller> viewAllSeller() {
 		// TODO Auto-generated method stub
@@ -60,11 +77,12 @@ public class SellerService implements SellerServiceInterface {
 		
 		//if no seller found in database
 		if (sellers.size() <= 0) {
-			throw new SellerNotFoundException("seller not found");
+			throw new SellerNotFoundException("No seller added");
 		}
 		
 		return sellers;
 	}
+	
 
 	@Override
 	public Seller updateSeller(Seller seller) {
@@ -80,8 +98,7 @@ public class SellerService implements SellerServiceInterface {
 		}else {
 			throw new SellerNotFoundException("sellar not found");
 		}
-		
 		return savedSeller;
 	}
-
+		
 }

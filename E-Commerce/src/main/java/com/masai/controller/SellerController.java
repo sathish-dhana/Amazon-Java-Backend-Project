@@ -25,7 +25,7 @@ public class SellerController {
 	@Autowired
 	private SellerService sellerService;
 	
-	//To Ad seller
+	//To Add seller
 	@PostMapping("/seller")
 	public ResponseEntity<Seller> addSeller(@RequestBody Seller seller) {
 		Seller addedSeller = sellerService.addSeller(seller);
