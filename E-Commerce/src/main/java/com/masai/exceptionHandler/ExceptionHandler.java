@@ -19,6 +19,7 @@ import com.masai.exception.AddressNotFoundException;
 import com.masai.exception.CustomerAlreadyExistsException;
 import com.masai.exception.CustomerNotFoundException;
 import com.masai.exception.ErrorDetails;
+import com.masai.exception.LoginFailedException;
 import com.masai.exception.ProductNotFoundException;
 import com.masai.exception.SellerAlreadyExistException;
 import com.masai.exception.SellerNotFoundException;
@@ -90,7 +91,9 @@ public class ExceptionHandler {
 		return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
 	}
 
-	//Product Exceptions
+	//-------------------------------------------------------------------------//
+	//									PRODUCT EXCEPTIONS
+	//-------------------------------------------------------------------------//
 	@org.springframework.web.bind.annotation.ExceptionHandler(ProductNotFoundException.class)
 	public ResponseEntity<ErrorDetails> productHandler(ProductNotFoundException error, WebRequest webRequest){
 		
@@ -116,6 +119,15 @@ public class ExceptionHandler {
 			
 		ErrorDetails errorDetail = new ErrorDetails(LocalDateTime.now(), HttpStatus.BAD_REQUEST.value(), "Bad Request", error.getMessage());
 			
+  //-------------------------------------------------------------------------//
+	//									LOGIN EXCEPTIONS
+	//-------------------------------------------------------------------------//
+	
+	@org.springframework.web.bind.annotation.ExceptionHandler(LoginFailedException.class)
+	public ResponseEntity<ErrorDetails> sellerHandler(LoginFailedException error, WebRequest webRequest) {
+		
+		ErrorDetails errorDetail = new ErrorDetails(LocalDateTime.now(), HttpStatus.BAD_REQUEST.value(), "Bad Request", error.getMessage());
+		
 		return new ResponseEntity<>(errorDetail, HttpStatus.BAD_REQUEST);
 	}
 }

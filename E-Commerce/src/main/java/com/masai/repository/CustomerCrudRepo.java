@@ -11,4 +11,5 @@ import com.masai.beans.Product;
 @Repository
 public interface CustomerCrudRepo extends JpaRepository<Customer, Integer> {
 	public Optional<Customer> findByUserName(String username);
+	public Optional<Customer> findByUserNameAndUserPassword(String userName, String password);
 }

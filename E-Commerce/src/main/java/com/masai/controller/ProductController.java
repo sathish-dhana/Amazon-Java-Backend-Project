@@ -4,6 +4,8 @@ package com.masai.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +29,7 @@ public class ProductController {
 	private ProductServiceInterface productServ;
 	
 	@PostMapping("/product")
-	public ResponseEntity<Product> addProduct(@RequestBody Product product){
+	public ResponseEntity<Product> addProduct(@Valid @RequestBody Product product){
 		
 		Product productSaved = productServ.addProduct(product);
 		return new ResponseEntity<>(productSaved,HttpStatus.CREATED);
