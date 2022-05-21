@@ -38,7 +38,7 @@ public class SellerController {
 		String deleteSeller = sellerService.removeSellerById(sellerId);
 		return new ResponseEntity(deleteSeller, HttpStatus.ACCEPTED);
 	}
-		
+	
 	//To list all user
 	@GetMapping("/seller")
 	public ResponseEntity<Seller> viewSellers() {

@@ -25,17 +25,19 @@ public class AddressService implements AddressServiceInterface {
 	@Autowired
 	private AddressCrudRepo addressCrudRepo;
 	
+	
+	//Need to disscuss about finding in database//
 	@Override
 	public Address addAddress(Address address) {
 		// TODO Auto-generated method stub
-		Optional<Address> checkAddress = addressCrudRepo.findById(address.getUser().getUserId());
+//		Optional<Address> checkAddress = addressCrudRepo.findById(address.getAddressId());
 		Address savedAddress = null;
 		
-		if (!checkAddress.isPresent()) {
+//		if (!checkAddress.isPresent()) {
 			savedAddress = addressCrudRepo.save(address);
-		} else {
-			throw new AddressAlreadyExistException("Address already availlable");
-		}
+//		} else {
+//			throw new AddressAlreadyExistException("Address already availlable");
+//		}
 		return savedAddress;
 	}
 	
@@ -47,7 +49,8 @@ public class AddressService implements AddressServiceInterface {
 		
 		if (checkAddress.isPresent()) {
 			addressCrudRepo.deleteById(addressId);
-			message = "Deleted address \nUser name : " + checkAddress.get().getUser().getUserName() + "\nId : " + checkAddress.get().getUser().getUserId();
+			message = "Address deleted";
+//			message = "Deleted address \nUser name : " + checkAddress.get().getUser().getUserName() + "\nId : " + checkAddress.get().getUser().getUserId();
 		} else {
 			throw new AddressNotFoundException("Address not availlable");
 		}
