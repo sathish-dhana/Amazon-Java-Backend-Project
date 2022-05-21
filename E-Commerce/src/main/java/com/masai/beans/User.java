@@ -46,15 +46,19 @@ public abstract class User {
 	private String userPassword;
 	
 	@NotNull
+	@Pattern(regexp="[a-z]{3,12}", message = "First Name must not contains numbers or special characters")
 	private String firstName;
 	
 	@NotNull
+	@Pattern(regexp="[a-z]{3,12}", message = "Last Name must not contains numbers or special characters")
 	private String lastName;
 	
 	@NotNull
+	@Pattern(regexp="[0-9]{10}", message = "Mobile number must have 10 digits")
 	private String mobileNumber;
 	
 	@Email
+	@NotNull
 	private String email;
 	
 	  @OneToMany(cascade = CascadeType.ALL, mappedBy="user") 

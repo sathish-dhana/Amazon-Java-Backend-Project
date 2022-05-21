@@ -60,9 +60,49 @@ public class CustomerService implements CustomerServiceInterface {
 	}
 
 	@Override
-	public Customer updateCustomer(Customer customer) {
-		// TODO Auto-generated method stub
-		return null;
+	public Customer updateCustomer(UserDTO customerInfo, Integer id) {
+		
+		Optional<Customer> opt = customerCrudRepo.findById(id);
+		
+		if(opt.isPresent()) {
+			Customer customer = opt.get();
+			
+			//Updating the email
+			if(customerInfo.getEmail() != null) {
+				customer.setEmail(customerInfo.getEmail());
+			}
+			
+			//Updating the First Name
+			if(customerInfo.getFirstName() != null) {
+				customer.setFirstName(customerInfo.getFirstName());
+			}
+			
+			//Updating the Last Name
+			if(customerInfo.getLastName() != null) {
+				customer.setLastName(customerInfo.getLastName());
+			}
+			
+			//Updating the Mobile Number
+			if(customerInfo.getMobileNumber() != null) {
+				customer.setMobileNumber(customerInfo.getMobileNumber());
+			}
+			
+			//Updating the User Name
+			if(customerInfo.getUserName() != null) {
+				customer.setUserName(customerInfo.getUserName());
+			}
+			
+			//Updating the User Password
+			if(customerInfo.getUserPassword() != null) {
+				customer.setUserPassword(customerInfo.getUserPassword());
+			}
+			
+			customerCrudRepo.save(customer);
+			return customer;
+		} else {
+			throw new CustomerNotFoundException("No customer exists with the given id!");
+		}
+
 	}
 	
 	//Todo

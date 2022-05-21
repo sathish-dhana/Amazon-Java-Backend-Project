@@ -9,5 +9,5 @@ public interface CustomerServiceInterface {
 	public Customer addCustomer(Customer customer);
 	public String removeCustomer(UserDTO userInfo);
 	public List<Customer> viewAllCustomers();
-	public Customer updateCustomer(Customer customer);
+	public Customer updateCustomer(UserDTO userInfo, Integer id);
 }
