@@ -60,6 +60,7 @@ public class CustomerController {
 	// What is does? --> Returns a list of all the customers
 	// Request Type? --> Get Request
 	// Input 		 --> None
+	// TODO MAKE THIS PROTECTED
 	@GetMapping("/customers")
 	public ResponseEntity<List<Customer>> viewCustomers() {
 		List<Customer> customers = customerService.viewAllCustomers();
@@ -70,6 +71,7 @@ public class CustomerController {
 	// What is does? --> Deletes the user provided if the id and password matches
 	// Request Type? --> Post Request
 	// Input 		 --> UserDTO object which compromises of userName and userPassword
+	// TODO MAKE THIS PROTECTED
 	@DeleteMapping("/customer")
 	public ResponseEntity<String> deleteCustomer(@RequestBody UserDTO userInfo) {
 		String status = customerService.removeCustomer(userInfo);
@@ -79,13 +81,7 @@ public class CustomerController {
 	// Handle		 --> /ecommerce/customersPortal/customer/{id}
 	// What is does? --> Updates the fields provided in the userInfo (any field except userId can be updated)
 	// Request Type? --> Put Request	
-	// Input 		 --> UserDTO object (All fields allowed) and Id in the path variable 
-	/*
-	 * @PutMapping("/customer/{id}") public ResponseEntity<String>
-	 * updateCustomer(@RequestBody @Valid UserDTO userInfo, @PathVariable Integer
-	 * id) { Customer updatedCustomer = customerService.updateCustomer(userInfo,
-	 * id); return new ResponseEntity(updatedCustomer, HttpStatus.OK); }
-	 */
+	// Input 		 --> UserDTO object (All fields allowed) and Id in the path param
 	
 	@PutMapping("/customer")
 	public ResponseEntity<String> updateCustomerUsingAPI(@RequestBody @Valid UserDTO userInfo, @RequestParam String key) {
@@ -98,9 +94,10 @@ public class CustomerController {
 	// What is does? --> Adds a new customer card details
 	// Request Type? --> POST Request
 	// Input 		 --> Card Object
-	@PostMapping("/customer/{customerId}")
-	public ResponseEntity<Customer> addCustomerCardDetails(@PathVariable("customerId") @Valid Integer customerId, @RequestBody Card card) {
-		Customer getCustomer = customerService.addCustomerAddress(customerId, card);		
+	@PostMapping("/customer/card")
+	public ResponseEntity<Customer> addCustomerCardDetails(@RequestParam String key, @RequestBody Card card) {
+		Login currentLogin = loginService.isTokenValid(key);
+		Customer getCustomer = customerService.addCustomerAddress(currentLogin.getUser().getUserId(), card);		
 		return new ResponseEntity(getCustomer, HttpStatus.CREATED);
 	}
 	
