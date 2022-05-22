@@ -1,29 +1,51 @@
 package com.masai.service;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.masai.beans.Customer;
+import com.masai.beans.Login;
+import com.masai.beans.LoginStatus;
 import com.masai.beans.User;
 import com.masai.beans.UserDTO;
 import com.masai.exception.CustomerNotFoundException;
+import com.masai.exception.InvalidLoginKeyException;
 import com.masai.exception.LoginFailedException;
+import com.masai.repository.LoginCrudRepo;
 
 @Service
 public class LoginService implements LoginServiceInterface {
 	
 	@Autowired
-	CustomerServiceInterface customerService;
+	CustomerService customerService;
 	
 	@Autowired
 	SellerServiceInterface sellerService;
+	
+	@Autowired
+	LoginCrudRepo loginRepo;
 
 	@Override
 	public User login(UserDTO loginInfo, String userType) {
 		if(userType.equalsIgnoreCase("customer")) {
 			try {
 				User customer = customerService.findByUsernameAndPassword(loginInfo.getUserName(), loginInfo.getUserPassword());
-				return customer;
+		
+				Login newLogin = null;
+				
+				if(customer.getLogin() == null) {
+					newLogin = new Login();
+				} else {
+					newLogin = customer.getLogin();
+					newLogin.newLogin();
+				}
+				
+				loginRepo.save(newLogin);
+				newLogin.setUser(customer);
+				return customerService.persistCustomer(customer.getUserId(), newLogin);
+
 			} catch (CustomerNotFoundException error) {
 				throw new LoginFailedException(error.getMessage());
 			}
@@ -35,15 +57,30 @@ public class LoginService implements LoginServiceInterface {
 		return null;
 	}
 	
-//	public boolean isTokenValid(String token, String userType) {
-//		if(userType.equalsIgnoreCase("customer")) {
-//			try {
-//				User customer = customerService.findByUsernameAndPassword(loginInfo.getUserName(), loginInfo.getUserPassword());
-//				return customer;
-//			} catch (CustomerNotFoundException error) {
-//				throw new LoginFailedException(error.getMessage());
-//			}
-//		}
-//	}
+	
+	@Override
+	public Login isTokenValid(String apiKey) {
+		
+		Optional<Login> opt = loginRepo.findByApiKey(apiKey);
+		
+		if(opt.isPresent()) {
+			
+			Login currentLogin = opt.get();
+			
+			LocalDateTime expiry = currentLogin.getKeyExpiryDate();
+			
+			if(currentLogin.getStatus() == LoginStatus.LOGGED_IN && LocalDateTime.now().isBefore(expiry)) {
+				return currentLogin;
+			} else {
+
+				currentLogin.revokeLogin();
+				loginRepo.save(currentLogin);
+				throw new InvalidLoginKeyException("Login Key has expired please login again to generate a new key!");
+			}
+			
+		} else {
+			throw new InvalidLoginKeyException("Invalid Login Key!");
+		}
+	}
 
 }

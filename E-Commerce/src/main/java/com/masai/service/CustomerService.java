@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.masai.beans.Customer;
+import com.masai.beans.Login;
 import com.masai.beans.UserDTO;
 import com.masai.exception.CustomerAlreadyExistsException;
 import com.masai.exception.CustomerNotFoundException;
@@ -113,6 +114,16 @@ public class CustomerService implements CustomerServiceInterface {
 		} else {
 			throw new CustomerNotFoundException("No such customer. Please check the provided details.");
 		}
+	}
+
+	@Override
+	public Customer persistCustomer(Integer customerID, Login login) {
+		// TODO Auto-generated method stub
+		Optional<Customer> temp = customerCrudRepo.findById(customerID);
+		Customer customer = temp.get();
+		customer.setLogin(login);
+		customerCrudRepo.save(customer);
+		return customer;
 	}
 
 }
