@@ -73,6 +73,7 @@ public class ProductController {
 	public ResponseEntity<List<Product>> getAllProducts(){
 		
 		List<Product> allProducts = productServ.getAllProdcuts();
+		
 		return new ResponseEntity<List<Product>>(allProducts,HttpStatus.ACCEPTED);
 	}
 	
