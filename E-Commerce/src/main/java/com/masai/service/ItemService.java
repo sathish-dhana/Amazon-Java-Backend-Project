@@ -23,14 +23,10 @@ public class ItemService implements ItemServiceInterface{
 	public Item addItem(Item item) {
 		
 		
-		if(item.getProduct().getQuantity()>=item.getQuantity()) {
+	
 			
 			Item itemSaved=itemCrudRepo.save(item);
 			return itemSaved;
-			
-		}
-	
-			throw new ProductNotFoundException("Product does not exist");
 		
 		
 	}

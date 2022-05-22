@@ -30,20 +30,20 @@ public class Item {
 
 	@OneToOne
 	@JsonIgnoreProperties(value={
-			"productName",
+			//"productName",
 			"rating",
-//			"quantity",
-//			"price",
+			"quantity",
+			"price",
 			"description",
 			"seller",
-			"category"
+			//"category"
 			
 	})
 	private Product product;
 	
 	@JsonIgnore
-	private Integer price;
+	private Integer itemPrice;
 	
 	
-	private Integer quantity;
+	private Integer requiredQuantity;
 }

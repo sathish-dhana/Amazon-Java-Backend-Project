@@ -29,17 +29,32 @@ public class ItemController {
 	@PostMapping(value = "/item")
 	public ResponseEntity<Item> addItem(@RequestBody Item item){
 		
-		Optional<Product> productCheck=productService.getProductRepo().findById(item.getProduct().getProductId());
+	//	Optional<Product> productCheck=productService.getProductRepo().findById(item.getProduct().getProductId());
 		
-		if(productCheck.isPresent()) {
+		Product productCheck=productService.getProductRepo().findByProductName(item.getProduct().getProductName());
+		//System.out.println("producr check-> "+productCheck.getProductName()+productCheck.getProductId());
+		if(productCheck != null) {
 			
-			//Setting the item Price
-			item.setPrice(item.getProduct().getPrice()*item.getQuantity());
+			if(productCheck.getQuantity()>=item.getRequiredQuantity()) {
+				
+				System.out.println((productCheck.getPrice()*item.getRequiredQuantity()));
+				
+				//Setting the item Price
+				item.setItemPrice(productCheck.getPrice()*item.getRequiredQuantity());
+				
+				item.setProduct(productCheck);
+				
+				//saving item to DB
+				Item newItem=itemService.addItem(item);
+				return new ResponseEntity<>(newItem,HttpStatus.ACCEPTED);
+			}
 			
+			else {
+				throw new ProductNotFoundException("Product quantity is not enough");
+			}
 			
-			Item newItem=itemService.addItem(item);
-			return new ResponseEntity<>(newItem,HttpStatus.ACCEPTED);
 		}
+		
 		else {
 			throw new ProductNotFoundException("Product does not exist");
 		}
