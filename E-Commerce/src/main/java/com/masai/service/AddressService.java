@@ -85,8 +85,15 @@ public class AddressService implements AddressServiceInterface {
 	
 	@Override
 	public Address showAddressById(Integer addressId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Optional<Address> checkAddress = addressCrudRepo.findById(addressId);
+		
+		if (checkAddress.isPresent()) {
+			return checkAddress.get();
+		} else {
+			throw new AddressNotFoundException("Address not availlable");
+		}
+
 	}
 	
 	@Override

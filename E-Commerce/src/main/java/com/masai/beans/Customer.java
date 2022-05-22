@@ -21,7 +21,7 @@ public class Customer extends User{
 	@OneToOne
 	private Cart cart;
 	
-	@Embedded
+	@OneToOne
 	private Card cardDetails;
 	
 }
