@@ -34,5 +34,16 @@ public class LoginService implements LoginServiceInterface {
 		}
 		return null;
 	}
+	
+//	public boolean isTokenValid(String token, String userType) {
+//		if(userType.equalsIgnoreCase("customer")) {
+//			try {
+//				User customer = customerService.findByUsernameAndPassword(loginInfo.getUserName(), loginInfo.getUserPassword());
+//				return customer;
+//			} catch (CustomerNotFoundException error) {
+//				throw new LoginFailedException(error.getMessage());
+//			}
+//		}
+//	}
 
 }
