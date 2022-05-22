@@ -16,6 +16,7 @@ public class ProductService implements ProductServiceInterface{
 	@Autowired
 	private ProductCrudRepo productRepo;
 	
+	//TO ADD PRODUCT
 	@Override
 	public Product addProduct(Product product) {
 		
@@ -24,6 +25,7 @@ public class ProductService implements ProductServiceInterface{
 		
 	}
 
+	//TO GET ALL PRODCUTS
 	@Override
 	public List<Product> getAllProdcuts() {
 	
@@ -34,6 +36,7 @@ public class ProductService implements ProductServiceInterface{
 		return allProducts;
 	}
 
+	// TO GET PRODUCT BY ID
 	@Override
 	public Product getProductById(Integer id) {
 		
@@ -43,6 +46,7 @@ public class ProductService implements ProductServiceInterface{
 		return product;
 	}
 
+	//TO GET ALL PRODUCTS BY CATEGORY
 	@Override
 	public List<Product> getProductsByCategory(ProductCategory cate) {
 		
@@ -50,5 +54,16 @@ public class ProductService implements ProductServiceInterface{
 		
 		return productsCategory;
 	}
+
+	//TO REDUCE QUANTITY AFTER PRODUCTS PURCHASED
+	@Override
+	public Product reduceQuantity(Integer id, int quantityToReduce) {
+		
+		Product updatedProduct = productRepo.findById(id).get();
+		updatedProduct.setQuantity(updatedProduct.getQuantity() - quantityToReduce);
+		return updatedProduct;
+	}
+	
+	
 	
 }
