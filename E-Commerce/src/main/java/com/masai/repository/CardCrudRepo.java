@@ -10,5 +10,5 @@ import com.masai.beans.Customer;
 
 public interface CardCrudRepo extends JpaRepository<Card, Integer>{
 	
-	public Optional<Card> findByCardNumber(Integer cardNumber);
+	public Optional<Card> findByCardNumber(String string);
 }

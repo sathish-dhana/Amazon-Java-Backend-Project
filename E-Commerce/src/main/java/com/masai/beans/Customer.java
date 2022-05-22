@@ -2,6 +2,7 @@ package com.masai.beans;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -22,6 +23,7 @@ public class Customer extends User{
 	private Cart cart;
 	
 	@OneToOne
+	@JoinColumn(name = "card_Number")
 	private Card cardDetails;
 	
 }
