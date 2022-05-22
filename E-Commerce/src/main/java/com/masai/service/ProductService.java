@@ -51,6 +51,8 @@ public class ProductService implements ProductServiceInterface{
 	public List<Product> getProductsByCategory(ProductCategory cate) {
 		
 		List<Product> productsCategory = productRepo.findByCategory(cate);
+		if(productsCategory.isEmpty())
+			throw new ProductNotFoundException("No product found in this category");
 		
 		return productsCategory;
 	}
