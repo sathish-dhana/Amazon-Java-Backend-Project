@@ -14,5 +14,6 @@ public interface ProductServiceInterface {
 	public Product getProductById(Integer id);
 
 	public List<Product> getProductsByCategory(ProductCategory cate);
-
+	
+	public Product reduceQuantity(Integer id, int quantityToReduce);
 }

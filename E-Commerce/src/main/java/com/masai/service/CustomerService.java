@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.masai.beans.Card;
 import com.masai.beans.Customer;
 import com.masai.beans.Login;
 import com.masai.beans.UserDTO;
@@ -18,6 +19,9 @@ public class CustomerService implements CustomerServiceInterface {
 	
 	@Autowired
 	private CustomerCrudRepo customerCrudRepo;
+	
+	@Autowired
+	private CardServiceInteface cardService;
 	
 	@Override
 	public Customer addCustomer(Customer customer) {
@@ -114,6 +118,34 @@ public class CustomerService implements CustomerServiceInterface {
 		} else {
 			throw new CustomerNotFoundException("No such customer. Please check the provided details.");
 		}
+	}
+	
+	@Override
+	public Customer getCustomerById(Integer customerId) {
+		
+		Optional<Customer> opt = customerCrudRepo.findById(customerId);
+		
+		if(!opt.isEmpty()) {
+			return opt.get();
+		} else {
+			throw new CustomerNotFoundException("No such customer. Please check the provided details.");
+		}
+	}
+
+	@Override
+	public Customer addCustomerAddress(Integer customerId, Card card) {
+		// TODO Auto-generated method stub
+		Optional<Customer> getCustomer = customerCrudRepo.findById(customerId);
+		
+		if (getCustomer.isPresent()) {
+			Card addCard = cardService.addCard(card);
+			getCustomer.get().setCardDetails(card);
+			Customer savedCustomer = customerCrudRepo.save(getCustomer.get());
+			return savedCustomer;
+		} else {
+			throw new CustomerAlreadyExistsException("Customer with the given username already exists.");
+		}
+		
 	}
 
 	@Override

@@ -20,7 +20,6 @@ public interface AddressServiceInterface {
 	public Address updateAddress(Address address);
 	public Address showAddressById(Integer addressId);
 	
-	
 	public Set<User> listAllUserByCity(String city);
 	public Set<User> listAllUserByState(String state);
 }
