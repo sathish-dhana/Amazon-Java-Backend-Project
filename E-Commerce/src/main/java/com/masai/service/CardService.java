@@ -3,6 +3,7 @@ package com.masai.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.masai.beans.Card;
 import com.masai.beans.Seller;
@@ -11,6 +12,7 @@ import com.masai.exception.CardDetailsNotFoundException;
 import com.masai.exception.SellerAlreadyExistException;
 import com.masai.repository.CardCrudRepo;
 
+@Service
 public class CardService implements CardServiceInteface {
 	
 	@Autowired

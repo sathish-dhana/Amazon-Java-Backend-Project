@@ -50,6 +50,7 @@ public class ProductController {
 			  
 			  Product savedProduct = productServ.addProduct(product); 
 			  
+
 			  sellerServ.addProducts(product.getSeller().getUserId(), product);
 		  
 			  return new ResponseEntity<>(savedProduct, HttpStatus.OK); 

@@ -17,8 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.masai.beans.Address;
+import com.masai.beans.Card;
 import com.masai.beans.Customer;
 import com.masai.beans.UserDTO;
+import com.masai.service.AddressServiceInterface;
+import com.masai.service.CardServiceInteface;
 import com.masai.service.CustomerServiceInterface;
 
 @RestController
@@ -27,6 +31,9 @@ public class CustomerController {
 	
 	@Autowired
 	private CustomerServiceInterface customerService;
+	
+	@Autowired
+	private AddressServiceInterface addressService;
 	
 	
 	// Handle		 --> /ecommerce/customersPortal/customer
@@ -69,6 +76,24 @@ public class CustomerController {
 	public ResponseEntity<String> updateCustomer(@RequestBody @Valid UserDTO userInfo, @PathVariable Integer id) {
 		Customer updatedCustomer = customerService.updateCustomer(userInfo, id);
 		return new ResponseEntity(updatedCustomer, HttpStatus.OK);
+	}
+	
+	// Handle		 --> /ecommerce/customersPortal/customer/{customerId}
+	// What is does? --> Adds a new customer card details
+	// Request Type? --> POST Request
+	// Input 		 --> Card Object
+	@PostMapping("/customer/{customerId}")
+	public ResponseEntity<Customer> addCustomerCardDetails(@PathVariable("customerId") @Valid Integer customerId, @RequestBody Card card) {
+		Customer getCustomer = customerService.addCustomerAddress(customerId, card);		
+		return new ResponseEntity(getCustomer, HttpStatus.CREATED);
+	}
+	
+	@PostMapping("/customer/addAddress/{customerId}")
+	public ResponseEntity<Customer> addCustomerAddress(@PathVariable("customerId") @Valid Integer customerId, @RequestBody Address address) {
+		Customer getCustomer = customerService.getCustomerById(customerId);
+		Address saveaddress = addressService.addAddress(address);
+		getCustomer.getAddresses().add(saveaddress);
+		return new ResponseEntity(getCustomer, HttpStatus.CREATED);
 	}
 
 }

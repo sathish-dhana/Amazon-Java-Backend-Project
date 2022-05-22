@@ -24,6 +24,6 @@ public class Shipment {
 	
 	private LocalDate expectedDate;
 	
-	private Address deliveryAddress;
+//	private Address deliveryAddress;
 	
 }

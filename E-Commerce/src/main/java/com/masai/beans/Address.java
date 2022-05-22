@@ -36,7 +36,7 @@ public class Address {
 	private String state;
 	
 	@NotNull
-	@Pattern(regexp="^[1-9]{1}[0-9]{2}\\\\s{0,1}[0-9]{3}$", message = "Only Valid for 6 digit indian pincode")
+	//@Pattern(regexp="^[1-9]{1}[0-9]{2}\\\\s{0,1}[0-9]{3}$", message = "Only Valid for 6 digit indian pincode")
 	private Integer pincode;
 		
 	@ManyToOne(cascade=CascadeType.ALL) 
