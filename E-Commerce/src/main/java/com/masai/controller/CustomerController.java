@@ -97,16 +97,14 @@ public class CustomerController {
 	@PostMapping("/customer/card")
 	public ResponseEntity<Customer> addCustomerCardDetails(@RequestParam String key, @RequestBody Card card) {
 		Login currentLogin = loginService.isTokenValid(key);
-		Customer getCustomer = customerService.addCustomerAddress(currentLogin.getUser().getUserId(), card);		
+		Customer getCustomer = customerService.addCustomerCard(currentLogin.getUser().getUserId(), card);		
 		return new ResponseEntity(getCustomer, HttpStatus.CREATED);
 	}
 	
 	@PostMapping("/customer/addAddress/{customerId}")
 	public ResponseEntity<Customer> addCustomerAddress(@PathVariable("customerId") @Valid Integer customerId, @RequestBody Address address) {
-		Customer getCustomer = customerService.getCustomerById(customerId);
-		Address saveaddress = addressService.addAddress(address);
-		getCustomer.getAddresses().add(saveaddress);
-		return new ResponseEntity(getCustomer, HttpStatus.CREATED);
+		Customer customer = customerService.addCustomerAddress(customerId, address);
+		return new ResponseEntity(customer, HttpStatus.CREATED);
 	}
 
 }
