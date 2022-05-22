@@ -43,6 +43,7 @@ public class Product {
 	@Min(value = 1, message = "Minimum quantity should be 1")
 	private int quantity;
 	
+	@NotNull(message = "Only ELECTRONICS, MOBILE, CLOTHES categories allowed")
 	private ProductCategory category;
 	
 	
