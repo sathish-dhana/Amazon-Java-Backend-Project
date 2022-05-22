@@ -15,15 +15,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.beans.Address;
 import com.masai.beans.Card;
 import com.masai.beans.Customer;
+import com.masai.beans.Login;
 import com.masai.beans.UserDTO;
 import com.masai.service.AddressServiceInterface;
 import com.masai.service.CardServiceInteface;
 import com.masai.service.CustomerServiceInterface;
+import com.masai.service.LoginServiceInterface;
 
 @RestController
 @RequestMapping("/ecommerce/customersPortal")
@@ -32,8 +35,13 @@ public class CustomerController {
 	@Autowired
 	private CustomerServiceInterface customerService;
 	
+
+	@Autowired 
+	private LoginServiceInterface loginService;
+
 	@Autowired
 	private AddressServiceInterface addressService;
+
 	
 	
 	// Handle		 --> /ecommerce/customersPortal/customer
@@ -72,9 +80,17 @@ public class CustomerController {
 	// What is does? --> Updates the fields provided in the userInfo (any field except userId can be updated)
 	// Request Type? --> Put Request	
 	// Input 		 --> UserDTO object (All fields allowed) and Id in the path variable 
-	@PutMapping("/customer/{id}")
-	public ResponseEntity<String> updateCustomer(@RequestBody @Valid UserDTO userInfo, @PathVariable Integer id) {
-		Customer updatedCustomer = customerService.updateCustomer(userInfo, id);
+	/*
+	 * @PutMapping("/customer/{id}") public ResponseEntity<String>
+	 * updateCustomer(@RequestBody @Valid UserDTO userInfo, @PathVariable Integer
+	 * id) { Customer updatedCustomer = customerService.updateCustomer(userInfo,
+	 * id); return new ResponseEntity(updatedCustomer, HttpStatus.OK); }
+	 */
+	
+	@PutMapping("/customer")
+	public ResponseEntity<String> updateCustomerUsingAPI(@RequestBody @Valid UserDTO userInfo, @RequestParam String key) {
+		Login currentLogin = loginService.isTokenValid(key);
+		Customer updatedCustomer = customerService.updateCustomer(userInfo, currentLogin.getUser().getUserId());
 		return new ResponseEntity(updatedCustomer, HttpStatus.OK);
 	}
 	

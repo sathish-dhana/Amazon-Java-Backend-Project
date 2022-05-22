@@ -7,6 +7,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +27,11 @@ public class Customer extends User{
 	@OneToOne
 	@JoinColumn(name = "card_Number")
 	private Card cardDetails;
+	
+	@JsonIgnore
+	public Card getCardDetails() {
+		return this.cardDetails;
+	}
 	
 }
 
