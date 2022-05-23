@@ -34,7 +34,6 @@ public class CustomerController {
 	
 	@Autowired
 	private CustomerServiceInterface customerService;
-	
 
 	@Autowired 
 	private LoginServiceInterface loginService;
@@ -98,6 +97,7 @@ public class CustomerController {
 		Customer getCustomer = customerService.addCustomerCard(currentLogin.getUser().getUserId(), card);		
 		return new ResponseEntity<Customer>(getCustomer, HttpStatus.CREATED);
 	}
+
 
 	// Handle		 --> /ecommerce/customersPortal/customer/addAddress?key=XXXXXX
 	// What is does? --> Adds a new address to the address list of the customer
