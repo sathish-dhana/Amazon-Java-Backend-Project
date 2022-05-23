@@ -15,6 +15,7 @@ Amazon is one of the most popular online marketplaces used by both individual as
 ## Built with 
 
 - JAVA
+- Spring
 - Spring Boot
 - Spring data JPA
 - Hibernate
