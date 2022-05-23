@@ -1,7 +1,9 @@
 package com.masai.beans;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,14 +12,18 @@ import lombok.Setter;
 @Setter
 public class OrderDTO {
 
-	List<Item> orderItems = new ArrayList<>();
+	private List<Item> orderItems = new ArrayList<>();
 	
-	int cost;
+	private double cost;
 	
-	int gst;
+	private double gst;
 	
-	int deliveryCost;
+	private int deliveryCost;
 	
-	int totalCost;
+	private double totalCost;
+	
+	//private Map<Product, Integer> productDetails = new HashMap<>();
+	
+	private List<Product> prodcuts = new ArrayList<>();
 	
 }
