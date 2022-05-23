@@ -39,11 +39,10 @@ public class Item {
 			"category"
 			
 	})
+	
 	private Product product;
 	
-	@JsonIgnore
 	private Double itemPrice;
-	
 	
 	private Integer requiredQuantity;
 }

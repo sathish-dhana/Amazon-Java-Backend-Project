@@ -41,20 +41,13 @@ public class CartController {
 	private ItemServiceInterface itemService;
 	
 	@PostMapping(value="/cart")
-	public ResponseEntity<Cart> addToCart(@RequestParam("token") String token,@RequestBody Item item) {
-		
-			Login loggedUser=loginService.isTokenValid(token);
+	public ResponseEntity<Cart> addToCart(@RequestParam String key, @RequestBody Item item) {
 			
-			try {
+			Login loggedUser=loginService.isTokenValid(key);
+		
 			Customer customer=customerCrudRepo.findByUserId(loggedUser.getUser().getUserId());
 			Item savedItem=itemService.addItem(item);
 			Cart savedCart=cartService.saveCart(customer, savedItem);
 			return new ResponseEntity<>(savedCart, HttpStatus.ACCEPTED);
-			}
-			catch(Exception e) {
-				throw new LoginFailedException("Invalid Token");
-			}
-
-		
 	}
 }
