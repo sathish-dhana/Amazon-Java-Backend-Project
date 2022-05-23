@@ -44,10 +44,11 @@ public class CartController {
 	public ResponseEntity<Cart> addToCart(@RequestParam String key, @RequestBody Item item) {
 			
 			Login loggedUser=loginService.isTokenValid(key);
-		
+
 			Customer customer=customerCrudRepo.findByUserId(loggedUser.getUser().getUserId());
 			Item savedItem=itemService.addItem(item);
 			Cart savedCart=cartService.saveCart(customer, savedItem);
 			return new ResponseEntity<>(savedCart, HttpStatus.ACCEPTED);
+
 	}
 }

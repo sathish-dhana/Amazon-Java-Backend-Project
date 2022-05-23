@@ -52,14 +52,9 @@ public class CartService implements CartServiceInterface {
 			Integer cartId=(customer.getCart()).getCartId();	
 			Cart cart=cartCrudRepo.findByCartId(cartId);
 			cart.getItems().add(item);
-			
-			if (cart.getCartTotal() == null) {
-				cart.setCartTotal(0.0);
-			} else {
-				cart.setCartTotal(cart.getCartTotal()+(double)item.getItemPrice());
-			}
-			
-			
+
+			cart.setCartTotal((cart.getCartTotal()==null) ? 0+(double)item.getItemPrice():cart.getCartTotal().doubleValue() +(double)item.getItemPrice());
+
 			return cartCrudRepo.save(cart);
 
 		
