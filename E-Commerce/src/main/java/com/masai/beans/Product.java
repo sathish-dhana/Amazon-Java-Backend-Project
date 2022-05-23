@@ -11,16 +11,17 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product {
@@ -49,6 +50,7 @@ public class Product {
 	
 	 @ManyToOne(cascade = CascadeType.ALL) 
 	 @JsonIgnoreProperties("products")
+	 @JsonIgnore
 	 private Seller seller;
 	 
 	

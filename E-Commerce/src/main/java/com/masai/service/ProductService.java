@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.masai.beans.Product;
 import com.masai.beans.ProductCategory;
+import com.masai.beans.Seller;
 import com.masai.exception.ProductNotFoundException;
 import com.masai.repository.ProductCrudRepo;
 
@@ -16,10 +17,21 @@ public class ProductService implements ProductServiceInterface{
 	@Autowired
 	private ProductCrudRepo productRepo;
 	
+	
+	//TO ADD PRODUCT
+		@Override
+		public Product addProduct(Product product) {
+			
+			Product savedProduct = productRepo.save(product);
+			return savedProduct;
+		}
+	
+	
 	//TO ADD PRODUCT
 	@Override
-	public Product addProduct(Product product) {
+	public Product addProduct(Seller seller, Product product) {
 		
+		product.setSeller(seller);
 		Product savedProduct = productRepo.save(product);
 		return savedProduct;
 		
