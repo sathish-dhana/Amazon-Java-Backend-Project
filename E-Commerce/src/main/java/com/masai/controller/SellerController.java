@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.masai.beans.Address;
 import com.masai.beans.Customer;
 import com.masai.beans.Login;
 import com.masai.beans.Product;
@@ -85,10 +86,33 @@ public class SellerController {
 	// Request Type? --> Post Request
 	// Input 		 --> Product Object
 	@PostMapping("/seller/addProduct")
-	public ResponseEntity<Seller> addSeller(@RequestParam String key, @RequestBody Product product) {
+	public ResponseEntity<Seller> addProduct(@RequestParam String key, @RequestBody Product product) {
 		Login currentLogin = loginService.isTokenValid(key);
 		Seller addedProduct = sellerService.addProducts(currentLogin.getUser().getUserId(), product);
 		return new ResponseEntity(addedProduct, HttpStatus.CREATED);
 	}
 	
+	
+	// Handle		 --> /ecommerce/sellerPortal/seller/addAddress?key=XXXXXX
+	// What is does? --> Adds a new address to the address list of the seller
+	// Request Type? --> POST Request
+	// Input 		 --> Address Object and Login key in the param
+	@PostMapping("/seller/addAddress")
+	public ResponseEntity<Seller> addSellerAddress(@RequestParam String key, @RequestBody Address address) {
+		Login currentLogin = loginService.isTokenValid(key);
+		Seller seller = sellerService.addSellerAddress(currentLogin.getUser().getUserId(), address);
+		return new ResponseEntity(seller, HttpStatus.CREATED);
+	}
+	
+	// Handle		 --> /ecommerce/sellerPortal/seller
+	// What is does? --> Adds product
+	// Request Type? --> Post Request
+	// Input 		 --> Product Object
+	@PostMapping("/seller/removeProduct")
+	public ResponseEntity<Seller> removeProduct(@RequestParam String key, @RequestBody Product product) {
+		Login currentLogin = loginService.isTokenValid(key);
+		Seller addedProduct = sellerService.addProducts(currentLogin.getUser().getUserId(), product);
+		return new ResponseEntity(addedProduct, HttpStatus.CREATED);
+	}
+		
 }

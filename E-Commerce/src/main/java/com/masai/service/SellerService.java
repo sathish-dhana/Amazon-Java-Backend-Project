@@ -6,11 +6,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.masai.beans.Address;
 import com.masai.beans.Customer;
 import com.masai.beans.Login;
 import com.masai.beans.Product;
 import com.masai.beans.Seller;
 import com.masai.beans.UserDTO;
+import com.masai.exception.CustomerAlreadyExistsException;
 import com.masai.exception.CustomerNotFoundException;
 import com.masai.exception.SellerAlreadyExistException;
 import com.masai.exception.SellerNotFoundException;
@@ -24,6 +26,12 @@ public class SellerService implements SellerServiceInterface {
 	
 	@Autowired
 	private SellerCrudRepo sellerCrudRepo;
+	
+	@Autowired
+	private ProductService productService;
+	
+	@Autowired
+	private AddressServiceInterface addressService;
 	
 	@Override
 	public Seller addSeller(Seller seller) {
@@ -154,7 +162,7 @@ public class SellerService implements SellerServiceInterface {
 			sellerCrudRepo.save(seller);
 			return seller;
 		} else {
-			throw new CustomerNotFoundException("No seller exists with the given id!");
+			throw new SellerNotFoundException("No seller exists with the given id!");
 		}
 	}
 
@@ -164,6 +172,8 @@ public class SellerService implements SellerServiceInterface {
 		Optional<Seller> checkSeller = sellerCrudRepo.findById(sellerId);
 		Seller updatedSeller = checkSeller.get();
 		updatedSeller.getProducts().add(product);
+		
+		productService.addProduct(updatedSeller, product);
 		
 		if (checkSeller.isPresent()) {
 			sellerCrudRepo.save(updatedSeller);
@@ -179,7 +189,7 @@ public class SellerService implements SellerServiceInterface {
 		if(seller.isPresent()) {
 			return seller.get();
 		} else {
-			throw new CustomerNotFoundException("No such customer. Please check the provided details.");
+			throw new SellerNotFoundException("No such customer. Please check the provided details.");
 		}
 	}
 	
@@ -192,4 +202,23 @@ public class SellerService implements SellerServiceInterface {
 		sellerCrudRepo.save(seller);
 		return seller;
 	}
+	
+	@Override
+	public Seller addSellerAddress(Integer sellerId, Address address) {
+		// TODO Auto-generated method stub
+		Optional<Seller> getSeller = sellerCrudRepo.findById(sellerId);
+		
+		if (getSeller.isPresent()) {
+			address.setUser(getSeller.get());
+			
+			Address savedAddress = addressService.addAddress(address);
+			
+			getSeller.get().getAddresses().add(address);
+			
+			return sellerCrudRepo.save(getSeller.get());
+		} else {
+			throw new SellerAlreadyExistException("Customer with the given username already exists.");
+		}
+	}
+	
 }

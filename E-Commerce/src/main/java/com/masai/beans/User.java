@@ -63,16 +63,13 @@ public abstract class User {
 	@Email
 	@NotNull
 	private String email;
-	
-//	@OneToOne(cascade = CascadeType.ALL)
-//	private Login login = new Login();
-	
+
 	@JsonIgnoreProperties("user")
 	@OneToOne(cascade = CascadeType.ALL)
 	private Login login;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="user") 
-	@JsonIgnoreProperties("addresses")
+	@JsonIgnoreProperties("user")
 	private List<Address> addresses = new ArrayList<>();
  
 }

@@ -2,6 +2,7 @@ package com.masai.service;
 
 import java.util.List;
 
+import com.masai.beans.Address;
 import com.masai.beans.Login;
 import com.masai.beans.Product;
 import com.masai.beans.Seller;
@@ -19,4 +20,6 @@ public interface SellerServiceInterface {
 	
 	public Seller findByUsernameAndPassword(String username, String password);
 	public Seller persistCustomer(Integer customerID, Login login);
+	
+	public Seller addSellerAddress(Integer sellerId, Address address);
 }

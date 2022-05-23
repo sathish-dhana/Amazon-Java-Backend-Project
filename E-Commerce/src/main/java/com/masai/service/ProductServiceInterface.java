@@ -4,11 +4,12 @@ import java.util.List;
 
 import com.masai.beans.Product;
 import com.masai.beans.ProductCategory;
+import com.masai.beans.Seller;
 
 public interface ProductServiceInterface {
 
+	public Product addProduct(Seller seller, Product product);
 	public Product addProduct(Product product);
-
 	public List<Product> getAllProdcuts();
 
 	public Product getProductById(Integer id);
