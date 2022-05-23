@@ -79,6 +79,36 @@ public class LoginService implements LoginServiceInterface {
 	}
 	
 	
+	//Method to logout user
+	public String logout(String key) {
+		
+		//Getting the Login object using the key
+		Optional<Login> opt = loginRepo.findByApiKey(key);
+		
+		if(opt.isPresent()) {
+			
+			//Getting the login object
+			Login currentLogin = opt.get();
+			
+			//If the status is already logged_out we return
+			if(currentLogin.getStatus() == LoginStatus.LOGGED_OUT) {
+				return "User is already logged out";
+			}
+			
+			//Calling the revoke login function as request by the user
+			currentLogin.revokeLogin();
+			
+			//Persisting in the database
+			loginRepo.save(currentLogin);
+		} else {
+			//Exception thrown if the key is not existing in the database
+			throw new InvalidLoginKeyException("Invalid Login Key!");
+		}
+		
+		//Message for successfull logout
+		return "User logged out successfully!";
+	}
+	
 	@Override
 	public Login isTokenValid(String apiKey) {
 		
