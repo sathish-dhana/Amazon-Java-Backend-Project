@@ -1,10 +1,12 @@
 package com.masai.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,21 +72,23 @@ public class CartController {
 				throw new ProductNotFoundException("Product with this Id does not exist");
 				}
 	}
-//	
-//	@GetMapping(value="/cart")
-//	public  ResponseEntity<List<Item>> getAllItems(@RequestParam String key){
-//		
-//		Login loggedUser=loginService.isTokenValid(key);
-//
-//		Customer customer=customerCrudRepo.findByUserId(loggedUser.getUser().getUserId());
-//		
-//		Optional<Cart> optloggedCustomerCart=cartCrudRepo.findById(customer.getCart().getCartId());
-//		
-//			
-//			Cart loggedCustomerCart=optloggedCustomerCart.get();
-//			//List<Item> items=loggedCustomerCart.
-//		
-//		
-//		
-//	}
+	
+	@GetMapping(value="/cart")
+	public  ResponseEntity<List<Item>> viewCart(@RequestParam String key){
+		
+		Login loggedUser=loginService.isTokenValid(key);
+
+		Customer customer=customerCrudRepo.findByUserId(loggedUser.getUser().getUserId());
+		
+		Optional<Cart> optloggedCustomerCart=cartCrudRepo.findById(customer.getCart().getCartId());
+		
+			
+			Cart loggedCustomerCart=optloggedCustomerCart.get();
+			List<Item> items=cartService.getAllItem(loggedCustomerCart);
+			
+			return  new ResponseEntity<>(items,HttpStatus.OK);
+		
+		
+		
+	}
 }

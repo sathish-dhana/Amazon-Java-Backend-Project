@@ -1,5 +1,8 @@
 package com.masai.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +34,15 @@ public class CartService implements CartServiceInterface {
 
 			return cartCrudRepo.save(cart);
 	
+	}
+
+
+	@Override
+	public List<Item> getAllItem(Cart cart) {
+		// TODO Auto-generated method stub
+		Optional<Cart> optCart=cartCrudRepo.findById(cart.getCartId());
+		
+		return optCart.get().getItems();	
 	}
 	
 	
