@@ -77,10 +77,10 @@ public class CustomerController {
 		return new ResponseEntity(status, HttpStatus.OK);
 	}
 	
-	// Handle		 --> /ecommerce/customersPortal/customer/{id}
+	// Handle		 --> /ecommerce/customersPortal/customer/update?key=XXXXXX
 	// What is does? --> Updates the fields provided in the userInfo (any field except userId can be updated)
 	// Request Type? --> Put Request	
-	// Input 		 --> UserDTO object (All fields allowed) and Id in the path param
+	// Input 		 --> UserDTO object (All fields allowed) and login key in the param
 	
 	@PutMapping("/customer")
 	public ResponseEntity<String> updateCustomerUsingAPI(@RequestBody @Valid UserDTO userInfo, @RequestParam String key) {
@@ -89,26 +89,28 @@ public class CustomerController {
 		return new ResponseEntity(updatedCustomer, HttpStatus.OK);
 	}
 	
-	// Handle		 --> /ecommerce/customersPortal/customer/{customerId}
+	// Handle		 --> /ecommerce/customersPortal/customer/card?key=XXXXXX
 	// What is does? --> Adds a new customer card details
 	// Request Type? --> POST Request
-	// Input 		 --> Card Object
+	// Input 		 --> Card Object and Login key in the param
 	@PostMapping("/customer/card")
 	public ResponseEntity<Customer> addCustomerCardDetails(@RequestParam String key, @RequestBody Card card) {
 		Login currentLogin = loginService.isTokenValid(key);
 		Customer getCustomer = customerService.addCustomerCard(currentLogin.getUser().getUserId(), card);		
-		return new ResponseEntity(getCustomer, HttpStatus.CREATED);
+		return new ResponseEntity<Customer>(getCustomer, HttpStatus.CREATED);
 	}
-	
-	
-	// Handle		 --> /customer/addAddress/{customerId}
-	// What is does? --> Adds address details
+
+
+	// Handle		 --> /ecommerce/customersPortal/customer/addAddress?key=XXXXXX
+	// What is does? --> Adds a new address to the address list of the customer
 	// Request Type? --> POST Request
-	// Input 		 --> Address object
-	@PostMapping("/customer/addAddress/{customerId}")
-	public ResponseEntity<Customer> addCustomerAddress(@PathVariable("customerId") @Valid Integer customerId, @RequestBody Address address) {
-		Customer customer = customerService.addCustomerAddress(customerId, address);
+	// Input 		 --> Address Object and Login key in the param
+	@PostMapping("/customer/addAddress")
+	public ResponseEntity<Customer> addCustomerAddress(@RequestParam String key, @RequestBody Address address) {
+		Login currentLogin = loginService.isTokenValid(key);
+		Customer customer = customerService.addCustomerAddress(currentLogin.getUser().getUserId(), address);
 		return new ResponseEntity(customer, HttpStatus.CREATED);
+
 	}
 
 }

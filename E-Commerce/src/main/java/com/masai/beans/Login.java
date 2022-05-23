@@ -40,7 +40,6 @@ public class Login {
 	public void newLogin() {
 		this.apiKey = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 6);
 		this.keyExpiryDate = LocalDateTime.now().plusHours(4);
-//		this.keyExpiryDate = LocalDateTime.now();
 		this.status = LoginStatus.LOGGED_IN;
 	}
 	
