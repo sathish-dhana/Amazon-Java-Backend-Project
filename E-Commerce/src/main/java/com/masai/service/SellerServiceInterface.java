@@ -22,4 +22,6 @@ public interface SellerServiceInterface {
 	public Seller persistCustomer(Integer customerID, Login login);
 	
 	public Seller addSellerAddress(Integer sellerId, Address address);
+	
+	public Seller removeProduct(Integer sellerId, Integer productId);
 }
