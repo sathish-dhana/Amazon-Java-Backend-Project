@@ -17,6 +17,7 @@ import com.masai.beans.Address;
 import com.masai.beans.Customer;
 import com.masai.beans.Login;
 import com.masai.beans.Product;
+import com.masai.beans.ProductDTO;
 import com.masai.beans.Seller;
 import com.masai.beans.UserDTO;
 import com.masai.service.LoginServiceInterface;
@@ -104,15 +105,37 @@ public class SellerController {
 		return new ResponseEntity(seller, HttpStatus.CREATED);
 	}
 	
-	// Handle		 --> /ecommerce/sellerPortal/seller
-	// What is does? --> Adds product
-	// Request Type? --> Post Request
-	// Input 		 --> Product Object
+	// Handle		 --> /ecommerce/sellerPortal/seller/removeAddress?key=XXXXXX
+	// What is does? --> Adds a new address to the address list of the seller
+	// Request Type? --> DELETE Request
+	// Input 		 --> Address Object and Login key in the param
+	@DeleteMapping("/seller/removeAddress")
+	public ResponseEntity<Seller> removeSellerAddress(@RequestParam String key, @RequestParam Integer addressId) {
+		Login currentLogin = loginService.isTokenValid(key);
+		Seller seller = sellerService.removeSellerAddress(currentLogin.getUser().getUserId(), addressId);
+		return new ResponseEntity(seller, HttpStatus.OK);
+	}
+	
+	// Handle		 --> /ecommerce/sellerPortal/seller/removeProduct?key=XXXXXX&productId=1
+	// What is does? --> deletes product
+	// Request Type? --> Delete Request
+	// Input 		 --> product id
 	@DeleteMapping("/seller/removeProduct")
 	public ResponseEntity<Seller> removeProduct(@RequestParam String key, @RequestParam Integer productId) {
 		Login currentLogin = loginService.isTokenValid(key);
 		Seller addedProduct = sellerService.removeProduct(currentLogin.getUser().getUserId(), productId);
-		return new ResponseEntity(addedProduct, HttpStatus.CREATED);
+		return new ResponseEntity(addedProduct, HttpStatus.OK);
 	}
+	
+	// Handle		 --> /ecommerce/sellerPortal/seller/updateProduct
+	// What is does? --> update product
+	// Request Type? --> put Request
+	// Input 		 --> Product Object
+	@PutMapping("/seller/updateProduct")
+	public ResponseEntity<Seller> updateProduct(@RequestParam String key, @RequestParam Integer productId, @RequestBody @Valid ProductDTO product) {
+		Login currentLogin = loginService.isTokenValid(key);
+		Seller addedProduct = sellerService.updateProducts(currentLogin.getUser().getUserId(), productId, product);
+		return new ResponseEntity(addedProduct, HttpStatus.ACCEPTED);
+		}
 		
 }

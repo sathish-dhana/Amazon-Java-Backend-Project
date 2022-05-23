@@ -10,6 +10,7 @@ import com.masai.beans.Address;
 import com.masai.beans.Customer;
 import com.masai.beans.Login;
 import com.masai.beans.Product;
+import com.masai.beans.ProductDTO;
 import com.masai.beans.Seller;
 import com.masai.beans.UserDTO;
 import com.masai.exception.CustomerAlreadyExistsException;
@@ -242,11 +243,83 @@ public class SellerService implements SellerServiceInterface {
 			
 			return sel;
 		} else {
-			throw new SellerAlreadyExistException("Customer with the given username already exists.");
+			throw new SellerNotFoundException("No such customer. Please check the provided details.");
 		}
 	}
+
+	@Override
+	public Seller updateProducts(Integer sellerId, Integer productId, ProductDTO product){
+		// TODO Auto-generated method stub
+		Optional<Seller> seller = sellerCrudRepo.findById(sellerId);
+		
+		boolean flag = false;
+		
+		if (seller.isPresent()) {
+			
+			for (int i = 0; i < seller.get().getProducts().size(); i++) {
+				if (seller.get().getProducts().get(i).getProductId() == productId) {
+					
+					//Updating the email
+					if(product.getProductName() != null) {
+						seller.get().getProducts().get(i).setProductName(product.getProductName());
+					}
+					
+					//Updating the First Name
+					if(product.getDescription() != null) {
+						seller.get().getProducts().get(i).setDescription(product.getDescription());
+					}
+					
+					//Updating the Last Name
+					if(product.getPrice() != null) {
+						seller.get().getProducts().get(i).setPrice(product.getPrice());
+					}
+					
+					//Updating the Mobile Number
+					if(product.getQuantity() != null) {
+						seller.get().getProducts().get(i).setQuantity(product.getQuantity());
+					}
+					
+					//Updating the Mobile Number
+					if(product.getCategory() != null) {
+						seller.get().getProducts().get(i).setCategory(product.getCategory());
+					}
+				}
+			}
+			
+			Seller sel = sellerCrudRepo.save(seller.get());
+			
+			productService.updateProduct(productId, product);
+			
+			return sel;
+		} else {
+			throw new SellerNotFoundException("No such customer. Please check the provided details.");
+		}
+
+	}
 	
-	
+	@Override
+	public Seller removeSellerAddress(Integer sellerId, Integer addressId) {
+		// TODO Auto-generated method stub
+		Optional<Seller> seller = sellerCrudRepo.findById(sellerId);
+		
+		boolean flag = false;
+		
+		if (seller.isPresent()) {
+			
+			for (int i = 0; i < seller.get().getAddresses().size(); i++) {
+				if (seller.get().getAddresses().get(i).getAddressId() == addressId)
+					seller.get().getAddresses().remove(i);
+			}
+			
+			Seller sel = sellerCrudRepo.save(seller.get());
+			
+			addressService.deleteAddress(addressId);
+			
+			return sel;
+		} else {
+			throw new SellerNotFoundException("No such customer. Please check the provided details.");
+		}
+	}
 	
 	
 }

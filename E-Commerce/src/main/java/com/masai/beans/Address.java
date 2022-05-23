@@ -37,6 +37,9 @@ public class Address {
 	private String state;
 	
 	@NotNull
+	private String address;
+	
+	@NotNull
 	@Pattern(regexp="[0-9]{6}", message = "Only Valid for 6 digit indian pincode")
 	private String pincode;
 
