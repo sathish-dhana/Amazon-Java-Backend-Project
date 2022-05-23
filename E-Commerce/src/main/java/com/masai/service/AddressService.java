@@ -30,7 +30,7 @@ public class AddressService implements AddressServiceInterface {
 	@Override
 	public Address addAddress(Address address) {
 		// TODO Auto-generated method stub
-//		Optional<Address> checkAddress = addressCrudRepo.findById(address.getAddressId());
+		//Optional<Address> checkAddress = addressCrudRepo.findById(address.getAddressId());
 		Address savedAddress = null;
 		
 //		if (!checkAddress.isPresent()) {
@@ -85,8 +85,15 @@ public class AddressService implements AddressServiceInterface {
 	
 	@Override
 	public Address showAddressById(Integer addressId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Optional<Address> checkAddress = addressCrudRepo.findById(addressId);
+		
+		if (checkAddress.isPresent()) {
+			return checkAddress.get();
+		} else {
+			throw new AddressNotFoundException("Address not availlable");
+		}
+
 	}
 	
 	@Override
@@ -119,6 +126,13 @@ public class AddressService implements AddressServiceInterface {
 			throw new AddressNotFoundException("No user Found in " + state);
 		}
 		return user;
+	}
+	
+	public Address persistCustomer(Customer customer, Address address) {
+		address.setUser(customer);
+		Address savedAddress = addressCrudRepo.save(address);
+		
+		return savedAddress;
 	}
 	
 

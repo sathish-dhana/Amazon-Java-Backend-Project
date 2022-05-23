@@ -11,12 +11,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -60,9 +63,13 @@ public abstract class User {
 	@Email
 	@NotNull
 	private String email;
+
+	@JsonIgnoreProperties("user")
+	@OneToOne(cascade = CascadeType.ALL)
+	private Login login;
 	
-	  @OneToMany(cascade = CascadeType.ALL, mappedBy="user") 
-//	  @JoinColumn(name = "address_id") 
-	  private List<Address> addresses = new ArrayList<>();
-	 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="user") 
+	@JsonIgnoreProperties("user")
+	private List<Address> addresses = new ArrayList<>();
+ 
 }

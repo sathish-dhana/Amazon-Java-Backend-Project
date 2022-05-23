@@ -11,16 +11,17 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product {
@@ -32,22 +33,24 @@ public class Product {
 	@NotNull(message = "Product name cannot be empty")
 	private String productName;
 	
-	
+	@NotNull(message = "Product should have discription")
 	private String description;
 	
 	@Min(value = 1, message = "Product price should not be 0")
-	private int price;
+	private Double price;
 	
 //	private Double rating;
 	
 	@Min(value = 1, message = "Minimum quantity should be 1")
-	private int quantity;
+	private Integer quantity;
 	
+//	@NotNull(message = "Only ELECTRONICS, MOBILE, CLOTHES categories allowed")
 	private ProductCategory category;
 	
 	
 	 @ManyToOne(cascade = CascadeType.ALL) 
 	 @JsonIgnoreProperties("products")
+	 @JsonIgnore
 	 private Seller seller;
 	 
 	
