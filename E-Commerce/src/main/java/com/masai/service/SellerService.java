@@ -14,6 +14,7 @@ import com.masai.beans.Seller;
 import com.masai.beans.UserDTO;
 import com.masai.exception.CustomerAlreadyExistsException;
 import com.masai.exception.CustomerNotFoundException;
+import com.masai.exception.ProductNotFoundException;
 import com.masai.exception.SellerAlreadyExistException;
 import com.masai.exception.SellerNotFoundException;
 import com.masai.repository.SellerCrudRepo;
@@ -220,5 +221,32 @@ public class SellerService implements SellerServiceInterface {
 			throw new SellerAlreadyExistException("Customer with the given username already exists.");
 		}
 	}
+
+	@Override
+	public Seller removeProduct(Integer sellerId, Integer productId) {
+		// TODO Auto-generated method stub
+		Optional<Seller> seller = sellerCrudRepo.findById(sellerId);
+		
+		boolean flag = false;
+		
+		if (seller.isPresent()) {
+			
+			for (int i = 0; i < seller.get().getProducts().size(); i++) {
+				if (seller.get().getProducts().get(i).getProductId() == productId)
+					seller.get().getProducts().remove(i);
+			}
+			
+			Seller sel = sellerCrudRepo.save(seller.get());
+			
+			productService.deleteProduct(productId);
+			
+			return sel;
+		} else {
+			throw new SellerAlreadyExistException("Customer with the given username already exists.");
+		}
+	}
+	
+	
+	
 	
 }

@@ -1,6 +1,7 @@
 package com.masai.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,6 +77,22 @@ public class ProductService implements ProductServiceInterface{
 		Product updatedProduct = productRepo.findById(id).get();
 		updatedProduct.setQuantity(updatedProduct.getQuantity() - quantityToReduce);
 		return updatedProduct;
+	}
+
+
+	@Override
+	public String deleteProduct(Integer productId) {
+		// TODO Auto-generated method stub
+		Optional<Product> findproduct = productRepo.findById(productId);
+		findproduct.get().setSeller(null);
+		
+		if (findproduct.isPresent()) {
+			productRepo.deleteById(productId);
+			return "product with ID : " + productId + " deleted.";
+		} else {
+			throw new ProductNotFoundException("No product found in the given id");
+		}
+		
 	}
 	
 	
