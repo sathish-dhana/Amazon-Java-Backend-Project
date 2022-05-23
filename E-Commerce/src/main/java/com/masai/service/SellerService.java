@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.masai.beans.Customer;
+import com.masai.beans.Login;
 import com.masai.beans.Product;
 import com.masai.beans.Seller;
 import com.masai.beans.UserDTO;
@@ -172,4 +173,23 @@ public class SellerService implements SellerServiceInterface {
 		return updatedSeller;
 	}
 			
+	@Override
+	public Seller findByUsernameAndPassword(String username, String password) {
+		Optional<Seller> seller = sellerCrudRepo.findByUserNameAndUserPassword(username, password);
+		if(seller.isPresent()) {
+			return seller.get();
+		} else {
+			throw new CustomerNotFoundException("No such customer. Please check the provided details.");
+		}
+	}
+	
+	@Override
+	public Seller persistCustomer(Integer customerID, Login login) {
+		// TODO Auto-generated method stub
+		Optional<Seller> temp = sellerCrudRepo.findById(customerID);
+		Seller seller = temp.get();
+		seller.setLogin(login);
+		sellerCrudRepo.save(seller);
+		return seller;
+	}
 }

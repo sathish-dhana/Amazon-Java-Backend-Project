@@ -34,7 +34,6 @@ public class CustomerController {
 	
 	@Autowired
 	private CustomerServiceInterface customerService;
-	
 
 	@Autowired 
 	private LoginServiceInterface loginService;
@@ -101,6 +100,11 @@ public class CustomerController {
 		return new ResponseEntity(getCustomer, HttpStatus.CREATED);
 	}
 	
+	
+	// Handle		 --> /customer/addAddress/{customerId}
+	// What is does? --> Adds address details
+	// Request Type? --> POST Request
+	// Input 		 --> Address object
 	@PostMapping("/customer/addAddress/{customerId}")
 	public ResponseEntity<Customer> addCustomerAddress(@PathVariable("customerId") @Valid Integer customerId, @RequestBody Address address) {
 		Customer customer = customerService.addCustomerAddress(customerId, address);
