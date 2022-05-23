@@ -101,10 +101,21 @@ public class CustomerController {
 		return new ResponseEntity(getCustomer, HttpStatus.CREATED);
 	}
 	
+
+	@PostMapping("/customer/addAddress")
+	public ResponseEntity<Customer> addCustomerAddress(@RequestParam String key, @RequestBody Address address) {
+		Login currentLogin = loginService.isTokenValid(key);
+		Customer getCustomer = customerService.getCustomerById(currentLogin.getUser().getUserId());
+		Address saveaddress = addressService.addAddress(address);
+		getCustomer.getAddresses().add(saveaddress);
+		return new ResponseEntity<>(getCustomer, HttpStatus.CREATED);
+	}
+
 	@PostMapping("/customer/addAddress/{customerId}")
 	public ResponseEntity<Customer> addCustomerAddress(@PathVariable("customerId") @Valid Integer customerId, @RequestBody Address address) {
 		Customer customer = customerService.addCustomerAddress(customerId, address);
 		return new ResponseEntity(customer, HttpStatus.CREATED);
+
 	}
 
 }
