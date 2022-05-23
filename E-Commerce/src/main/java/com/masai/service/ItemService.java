@@ -24,35 +24,38 @@ public class ItemService implements ItemServiceInterface{
 	@Override
 	public Item addItem(Item item) {
 		
-		
-	Product productCheck=productService.getProductRepo().findByProductId(item.getProduct().getProductId());
-		
-		if(productCheck != null) {
+	
+		Optional<Product> optProductCheck=productService.getProductRepo().findById(item.getProduct().getProductId());
+	
+		if(optProductCheck.isPresent()) {
 			
+			Product productCheck=optProductCheck.get();
 			if(productCheck.getQuantity()>=item.getRequiredQuantity()) {
 				
 				
 				//Setting the item Price
 				item.setItemPrice(productCheck.getPrice()*item.getRequiredQuantity());
-				
+					
 				//Setting the product
 				item.setProduct(productCheck);
-				
+					
 				//saving item to DB
 				Item itemSaved=itemCrudRepo.save(item);
 				return itemSaved;
-				
+					
 			}
-			
+				
 			else {
-				throw new ProductNotFoundException("Product quantity is not enough");
+					throw new ProductNotFoundException("Product quantity is not enough");
 			}
 			
 		}
-		
 		else {
 			throw new ProductNotFoundException("Product does not exist");
 		}
+	
+		
+
 	}
 			
 			
@@ -81,6 +84,21 @@ public class ItemService implements ItemServiceInterface{
 		// TODO Auto-generated method stub
 		
 		return null;
+	}
+
+
+
+
+	@Override
+	public Item addItem(Product product, int quantity) {
+		// TODO Auto-generated method stub
+		
+		Item item=new Item();
+		item.setItemPrice(product.getPrice()*quantity);
+		item.setProduct(product);
+		item.setRequiredQuantity(quantity);
+		
+		return addItem(item);
 	}
 
 	

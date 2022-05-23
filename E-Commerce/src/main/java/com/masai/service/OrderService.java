@@ -15,12 +15,12 @@ public class OrderService implements OrderServiceInterface{
 	@Override
 	public OrderDTO getAllOrders(Integer customerId) {
 		
-		Customer customer = customerServ.getCustomerById(customerId);
-		
-		OrderDTO order = new OrderDTO();
+//		Customer customer = customerServ.getCustomerById(customerId);
+//		
+//		OrderDTO order = new OrderDTO();
 		
 		//order.setOrderItems(customer.getCart()            //set up the list here
-		
+		return null;
 		
 		
 	}

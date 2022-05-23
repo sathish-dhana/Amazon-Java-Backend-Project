@@ -20,34 +20,8 @@ public class CartService implements CartServiceInterface {
 	private CustomerCrudRepo customerCrudRepo;
 	
 	@Override
-	public Cart saveCart(Cart cart) {
-	
-		
-		Cart newCart=cartCrudRepo.findByCartId(cart.getCartId());
-		
-		//newCart does not exist simply save to DB
-		if(newCart==null) {
-			Cart savedCart=cartCrudRepo.save(cart);
-			return savedCart;
-		}
-		else {
-			
-			for(Item itm : cart.getItems()) {
-				
-				newCart.getItems().add(itm);
-			}
-			
-			cartCrudRepo.save(newCart);
-			return newCart;
-		}
-	}
-
-	
 	public Cart saveCart(Customer customer,Item item) {
 		
-		
-		
-			//Customer customer=customerCrudRepo.findByUserId(customerId);
 		
 			Integer cartId=(customer.getCart()).getCartId();	
 			Cart cart=cartCrudRepo.findByCartId(cartId);
@@ -58,5 +32,7 @@ public class CartService implements CartServiceInterface {
 			return cartCrudRepo.save(cart);
 	
 	}
-
+	
+	
+	
 }

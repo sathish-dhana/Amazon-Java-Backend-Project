@@ -6,7 +6,6 @@ import com.masai.beans.Item;
 
 public interface CartServiceInterface {
 	
-	public Cart  saveCart(Cart cart);
 	public Cart  saveCart(Customer customer,Item item);
 	
 }
