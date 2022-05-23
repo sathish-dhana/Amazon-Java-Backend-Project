@@ -1,13 +1,18 @@
 package com.masai.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,11 +28,17 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer cartId;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	Customer customer;
 	
-	@OneToMany
-	private List<Item> items;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JsonIgnoreProperties(value= {
+			"product",
+			"itemPrice",
+			"requiredQuantity"
+	})
+	private List<Item> items=new ArrayList<>();
 	
-	private Double total;
+	@JsonIgnore
+	private Double cartTotal;
 }

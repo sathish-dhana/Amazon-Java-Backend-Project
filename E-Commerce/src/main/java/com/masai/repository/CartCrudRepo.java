@@ -7,5 +7,6 @@ import com.masai.beans.Cart;
 
 @Repository
 public interface CartCrudRepo extends JpaRepository<Cart, Integer>{
-
+	
+	public Cart findByCartId(int cartId);
 }

@@ -3,6 +3,8 @@ package com.masai.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.masai.beans.Item;
@@ -23,13 +25,36 @@ public class ItemService implements ItemServiceInterface{
 	public Item addItem(Item item) {
 		
 		
-	
+	Product productCheck=productService.getProductRepo().findByProductId(item.getProduct().getProductId());
+		
+		if(productCheck != null) {
 			
-			Item itemSaved=itemCrudRepo.save(item);
-			return itemSaved;
+			if(productCheck.getQuantity()>=item.getRequiredQuantity()) {
+				
+				
+				//Setting the item Price
+				item.setItemPrice(productCheck.getPrice()*item.getRequiredQuantity());
+				
+				item.setProduct(productCheck);
+				
+				//saving item to DB
+				Item itemSaved=itemCrudRepo.save(item);
+				return itemSaved;
+			}
+			
+			else {
+				throw new ProductNotFoundException("Product quantity is not enough");
+			}
+			
+		}
 		
-		
+		else {
+			throw new ProductNotFoundException("Product does not exist");
+		}
 	}
+			
+			
+	
 
 	@Override
 	public String removeItem(Item item) {

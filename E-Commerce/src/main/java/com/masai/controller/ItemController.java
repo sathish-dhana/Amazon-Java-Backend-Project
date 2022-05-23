@@ -29,10 +29,11 @@ public class ItemController {
 	@PostMapping(value = "/item")
 	public ResponseEntity<Item> addItem(@RequestBody Item item){
 		
-	//	Optional<Product> productCheck=productService.getProductRepo().findById(item.getProduct().getProductId());
+		Product productCheck=productService.getProductRepo().findByProductId(item.getProduct().getProductId());
 		
-		Product productCheck=productService.getProductRepo().findByProductName(item.getProduct().getProductName());
+		//Product productCheck=productService.getProductRepo().findByProductName(item.getProduct().getProductName());
 		//System.out.println("producr check-> "+productCheck.getProductName()+productCheck.getProductId());
+		
 		if(productCheck != null) {
 			
 			if(productCheck.getQuantity()>=item.getRequiredQuantity()) {

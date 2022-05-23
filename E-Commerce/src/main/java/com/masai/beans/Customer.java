@@ -1,5 +1,6 @@
 package com.masai.beans;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
@@ -18,7 +19,7 @@ import lombok.NoArgsConstructor;
 @PrimaryKeyJoinColumn(name = "customer_id")
 public class Customer extends User{
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Cart cart;
 	
 	@Embedded
