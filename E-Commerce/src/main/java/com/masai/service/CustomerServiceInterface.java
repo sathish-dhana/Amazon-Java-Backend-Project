@@ -2,6 +2,7 @@ package com.masai.service;
 
 import java.util.List;
 
+import com.masai.beans.Address;
 import com.masai.beans.Card;
 import com.masai.beans.Customer;
 import com.masai.beans.Login;
@@ -17,6 +18,6 @@ public interface CustomerServiceInterface {
 	public Customer persistCustomer(Integer customerID, Login login);
 
 	public Customer getCustomerById(Integer customerId);
-	public Customer addCustomerAddress(Integer customerId, Card card);
-
+	public Customer addCustomerCard(Integer customerId, Card card);
+	public Customer addCustomerAddress(Integer customerId, Address address);
 }

@@ -30,7 +30,7 @@ public class AddressService implements AddressServiceInterface {
 	@Override
 	public Address addAddress(Address address) {
 		// TODO Auto-generated method stub
-//		Optional<Address> checkAddress = addressCrudRepo.findById(address.getAddressId());
+		//Optional<Address> checkAddress = addressCrudRepo.findById(address.getAddressId());
 		Address savedAddress = null;
 		
 //		if (!checkAddress.isPresent()) {
@@ -126,6 +126,13 @@ public class AddressService implements AddressServiceInterface {
 			throw new AddressNotFoundException("No user Found in " + state);
 		}
 		return user;
+	}
+	
+	public Address persistCustomer(Customer customer, Address address) {
+		address.setUser(customer);
+		Address savedAddress = addressCrudRepo.save(address);
+		
+		return savedAddress;
 	}
 	
 

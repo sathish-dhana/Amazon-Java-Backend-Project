@@ -72,6 +72,7 @@ public abstract class User {
 	private Login login;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="user") 
+	@JsonIgnoreProperties("addresses")
 	private List<Address> addresses = new ArrayList<>();
  
 }

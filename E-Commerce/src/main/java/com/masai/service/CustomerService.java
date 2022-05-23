@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.masai.beans.Address;
 import com.masai.beans.Card;
 import com.masai.beans.Customer;
 import com.masai.beans.Login;
@@ -22,6 +23,9 @@ public class CustomerService implements CustomerServiceInterface {
 	
 	@Autowired
 	private CardServiceInteface cardService;
+	
+	@Autowired
+	private AddressServiceInterface addressService;
 	
 	@Override
 	public Customer addCustomer(Customer customer) {
@@ -133,7 +137,7 @@ public class CustomerService implements CustomerServiceInterface {
 	}
 
 	@Override
-	public Customer addCustomerAddress(Integer customerId, Card card) {
+	public Customer addCustomerCard(Integer customerId, Card card) {
 		// TODO Auto-generated method stub
 		Optional<Customer> getCustomer = customerCrudRepo.findById(customerId);
 		
@@ -142,6 +146,25 @@ public class CustomerService implements CustomerServiceInterface {
 			getCustomer.get().setCardDetails(card);
 			Customer savedCustomer = customerCrudRepo.save(getCustomer.get());
 			return savedCustomer;
+		} else {
+			throw new CustomerAlreadyExistsException("Customer with the given username already exists.");
+		}
+		
+	}
+	
+	@Override
+	public Customer addCustomerAddress(Integer customerId, Address address) {
+		// TODO Auto-generated method stub
+		Optional<Customer> getCustomer = customerCrudRepo.findById(customerId);
+		
+		if (getCustomer.isPresent()) {
+			address.setUser(getCustomer.get());
+			
+			Address savedAddress = addressService.addAddress(address);
+			
+			getCustomer.get().getAddresses().add(address);
+			
+			return customerCrudRepo.save(getCustomer.get());
 		} else {
 			throw new CustomerAlreadyExistsException("Customer with the given username already exists.");
 		}
