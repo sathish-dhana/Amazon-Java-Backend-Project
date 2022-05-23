@@ -108,10 +108,10 @@ public class SellerController {
 	// What is does? --> Adds product
 	// Request Type? --> Post Request
 	// Input 		 --> Product Object
-	@PostMapping("/seller/removeProduct")
-	public ResponseEntity<Seller> removeProduct(@RequestParam String key, @RequestBody Product product) {
+	@DeleteMapping("/seller/removeProduct")
+	public ResponseEntity<Seller> removeProduct(@RequestParam String key, @RequestParam Integer productId) {
 		Login currentLogin = loginService.isTokenValid(key);
-		Seller addedProduct = sellerService.addProducts(currentLogin.getUser().getUserId(), product);
+		Seller addedProduct = sellerService.removeProduct(currentLogin.getUser().getUserId(), productId);
 		return new ResponseEntity(addedProduct, HttpStatus.CREATED);
 	}
 		
