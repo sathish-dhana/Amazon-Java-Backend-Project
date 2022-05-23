@@ -45,15 +45,12 @@ public class CartController {
 		
 			Login loggedUser=loginService.isTokenValid(token);
 			
-			try {
+			
 			Customer customer=customerCrudRepo.findByUserId(loggedUser.getUser().getUserId());
 			Item savedItem=itemService.addItem(item);
 			Cart savedCart=cartService.saveCart(customer, savedItem);
 			return new ResponseEntity<>(savedCart, HttpStatus.ACCEPTED);
-			}
-			catch(Exception e) {
-				throw new LoginFailedException("Invalid Token");
-			}
+			
 
 		
 	}
