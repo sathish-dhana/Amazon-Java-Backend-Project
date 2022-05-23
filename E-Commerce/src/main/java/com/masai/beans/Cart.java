@@ -28,8 +28,8 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer cartId;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	Customer customer;
+//	@OneToOne(cascade = CascadeType.ALL)
+//	Customer customer;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JsonIgnoreProperties(value= {

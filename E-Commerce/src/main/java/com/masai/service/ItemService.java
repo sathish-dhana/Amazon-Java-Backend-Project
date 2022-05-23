@@ -35,11 +35,13 @@ public class ItemService implements ItemServiceInterface{
 				//Setting the item Price
 				item.setItemPrice(productCheck.getPrice()*item.getRequiredQuantity());
 				
+				//Setting the product
 				item.setProduct(productCheck);
 				
 				//saving item to DB
 				Item itemSaved=itemCrudRepo.save(item);
 				return itemSaved;
+				
 			}
 			
 			else {
@@ -66,10 +68,10 @@ public class ItemService implements ItemServiceInterface{
 			itemCrudRepo.deleteById(item.getItemId());
 		}
 		else {
-			throw new ProductNotFoundException("Product does not exist");
+			throw new ProductNotFoundException("Product does not exist in your cart");
 		}
 		
-		return "Product with "+item.getItemId()+" is deleted" ;
+		return "Product with "+item.getItemId()+" is deleted from your cart" ;
 	}
 
 	

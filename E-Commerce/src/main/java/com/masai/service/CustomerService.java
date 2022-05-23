@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.masai.beans.Address;
 import com.masai.beans.Card;
+import com.masai.beans.Cart;
 import com.masai.beans.Customer;
 import com.masai.beans.Login;
 import com.masai.beans.UserDTO;
@@ -32,6 +33,8 @@ public class CustomerService implements CustomerServiceInterface {
 		Optional<Customer> opt = customerCrudRepo.findByUserName(customer.getUserName());
 		
 		if(opt.isEmpty()) {
+			
+			customer.setCart(new Cart());
 			Customer savedCustomer = customerCrudRepo.save(customer);
 			return savedCustomer;
 		} else {
