@@ -12,4 +12,7 @@ import com.masai.beans.Product;
 public interface CustomerCrudRepo extends JpaRepository<Customer, Integer> {
 	public Optional<Customer> findByUserName(String username);
 	public Optional<Customer> findByUserNameAndUserPassword(String userName, String password);
+	
+	public Customer findByUserId(int customerId);
+	
 }

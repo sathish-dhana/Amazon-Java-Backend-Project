@@ -3,6 +3,7 @@ package com.masai.service;
 import java.util.List;
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,9 @@ import com.masai.beans.Seller;
 import com.masai.exception.ProductNotFoundException;
 import com.masai.repository.ProductCrudRepo;
 
+import lombok.Data;
+
+@Data
 @Service
 public class ProductService implements ProductServiceInterface{
 
