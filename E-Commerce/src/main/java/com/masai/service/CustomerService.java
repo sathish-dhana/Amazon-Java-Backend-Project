@@ -168,7 +168,6 @@ public class CustomerService implements CustomerServiceInterface {
 		} else {
 			throw new CustomerAlreadyExistsException("Customer with the given username already exists.");
 		}
-		
 	}
 
 	@Override
@@ -180,5 +179,7 @@ public class CustomerService implements CustomerServiceInterface {
 		customerCrudRepo.save(customer);
 		return customer;
 	}
+	
+	
 
 }

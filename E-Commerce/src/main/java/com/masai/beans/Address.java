@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -37,10 +38,12 @@ public class Address {
 	
 	@NotNull
 	@Pattern(regexp="[0-9]{6}", message = "Only Valid for 6 digit indian pincode")
-	private Integer pincode;
+	private String pincode;
+
 		
 	@ManyToOne(cascade=CascadeType.ALL) 
 	@JsonIgnoreProperties("addresses")
+	@JsonIgnore
 	private User user;
 	 
 }

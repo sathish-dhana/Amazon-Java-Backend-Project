@@ -19,13 +19,13 @@ import com.masai.repository.LoginCrudRepo;
 public class LoginService implements LoginServiceInterface {
 	
 	@Autowired
-	CustomerService customerService;
+	private CustomerService customerService;
 	
 	@Autowired
-	SellerServiceInterface sellerService;
+	private SellerServiceInterface sellerService;
 	
 	@Autowired
-	LoginCrudRepo loginRepo;
+	private LoginCrudRepo loginRepo;
 
 	@Override
 	public User login(UserDTO loginInfo, String userType) {
@@ -51,10 +51,31 @@ public class LoginService implements LoginServiceInterface {
 			}
 		} else if (userType.equalsIgnoreCase("seller")) {
 			//TODO COLLOBORATE WITH DHANA
+				try {
+				User seller = sellerService.findByUsernameAndPassword(loginInfo.getUserName(), loginInfo.getUserPassword());
+				
+				Login newLogin = null;
+				
+				if(seller.getLogin() == null) {
+					newLogin = new Login();
+				} else {
+					newLogin = seller.getLogin();
+					newLogin.newLogin();
+				}
+				
+				loginRepo.save(newLogin);
+				newLogin.setUser(seller);
+				return sellerService.persistCustomer(seller.getUserId(), newLogin);
+	
+			} catch (CustomerNotFoundException error) {
+				throw new LoginFailedException(error.getMessage());
+			}
+			
+			
+			
 		} else {
 			throw new LoginFailedException("Mention the correct path. Only ecommerce/login/customer and ecommerce/login/seller is allowed.");
 		}
-		return null;
 	}
 	
 	
