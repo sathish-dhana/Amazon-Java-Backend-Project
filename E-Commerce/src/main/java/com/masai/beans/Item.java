@@ -42,7 +42,7 @@ public class Item {
 	private Product product;
 	
 	@JsonIgnore
-	private Integer itemPrice;
+	private Double itemPrice;
 	
 	
 	private Integer requiredQuantity;

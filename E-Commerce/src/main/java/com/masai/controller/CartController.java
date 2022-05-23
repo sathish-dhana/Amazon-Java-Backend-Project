@@ -1,28 +1,38 @@
 package com.masai.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.beans.Cart;
 import com.masai.beans.Customer;
 import com.masai.beans.Item;
-import com.masai.exception.CustomerNotFoundException;
+import com.masai.beans.Login;
+import com.masai.beans.User;
+import com.masai.exception.LoginFailedException;
 import com.masai.repository.CustomerCrudRepo;
+import com.masai.repository.LoginCrudRepo;
 import com.masai.service.CartService;
 import com.masai.service.ItemServiceInterface;
+import com.masai.service.LoginService;
 
 @RestController
+@RequestMapping("/ecommerce/customersPortal")
 public class CartController {
 	
 	@Autowired
 	private CustomerCrudRepo customerCrudRepo;
+	
+	@Autowired
+	private LoginCrudRepo loginRepo;
+	
+	@Autowired
+	private LoginService loginService;
 	
 	@Autowired
 	private CartService cartService;
@@ -30,24 +40,21 @@ public class CartController {
 	@Autowired
 	private ItemServiceInterface itemService;
 	
-	@PostMapping(value="/{customerId}/cart")
-	public ResponseEntity<Cart> addToCart(@PathVariable int customerId,@RequestBody Item item) {
+	@PostMapping(value="/cart")
+	public ResponseEntity<Cart> addToCart(@RequestParam("token") String token,@RequestBody Item item) {
 		
-		Optional<Customer> optCustomer=customerCrudRepo.findById(customerId);
-		
-		if(optCustomer.isPresent()) {
-				
-				
-					
-					Item savedItem=itemService.addItem(item);
-					Cart savedCart=cartService.saveCart(customerId, savedItem);
-					return new ResponseEntity<>(savedCart, HttpStatus.ACCEPTED);
-				
-		}
-		else {
-		
-			throw new CustomerNotFoundException("Customer Does Not Exist");
-		}
+			Login loggedUser=loginService.isTokenValid(token);
+			
+			try {
+			Customer customer=customerCrudRepo.findByUserId(loggedUser.getUser().getUserId());
+			Item savedItem=itemService.addItem(item);
+			Cart savedCart=cartService.saveCart(customer, savedItem);
+			return new ResponseEntity<>(savedCart, HttpStatus.ACCEPTED);
+			}
+			catch(Exception e) {
+				throw new LoginFailedException("Invalid Token");
+			}
+
 		
 	}
 }
