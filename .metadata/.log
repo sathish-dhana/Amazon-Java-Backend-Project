@@ -9885,3 +9885,69 @@ org.eclipse.swt.SWTException: Widget is disposed
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:596)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1467)
 	at org.eclipse.equinox.launcher.Main.main(Main.java:1440)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 21:54:24.262
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.FZUOGgaZ
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 21:54:24.277
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.FZUOGgaZ
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 21:54:24.277
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 21:54:24.277
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.FZUOGgaZ => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 21:54:27.066
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 21:54:27.067
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@518648c[org.springframework.tooling.boot.ls:1.32.0.202203131529(id=560)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 21:54:27.067
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 21:54:29.299
+!MESSAGE Boot LS startup time from start to initialized: 2230ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 21:54:29.384
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.oyvrzolaisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 21:54:29.385
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 21:54:29.386
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 21:54:29.387
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 21:54:29.387
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 21:54:29.387
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.oyvrzola => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 21:54:29.411
+!MESSAGE classpath=95 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 21:54:29.412
+!MESSAGE buffering callback sts4.classpath.oyvrzola E-Commerce false 95
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 21:54:29.413
+!MESSAGE executing callback sts4.classpath.oyvrzola 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 21:54:29.788
+!MESSAGE executing callback sts4.classpath.oyvrzola SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 23:54:02.380
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.oyvrzola
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 23:54:02.409
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.oyvrzola
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 23:54:02.411
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 23:54:02.412
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.oyvrzola => OK

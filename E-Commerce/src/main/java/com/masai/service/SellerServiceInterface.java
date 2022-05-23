@@ -26,5 +26,6 @@ public interface SellerServiceInterface {
 	
 	public Seller updateProducts(Integer sellerId, Integer productId, ProductDTO product);
 	public Seller removeProduct(Integer sellerId, Integer productId);
+	public Seller removeSellerAddress(Integer sellerId, Integer addressId);
 //	public Seller updateProducts(Integer sellerId, Integer productId, Product product);
 }

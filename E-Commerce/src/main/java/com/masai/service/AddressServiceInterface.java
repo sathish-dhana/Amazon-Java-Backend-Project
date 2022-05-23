@@ -24,4 +24,5 @@ public interface AddressServiceInterface {
 	public Set<User> listAllUserByState(String state);
 	
 	public Address persistCustomer(Customer customer, Address address);
+	public String deleteAddress(Integer addressId);
 }

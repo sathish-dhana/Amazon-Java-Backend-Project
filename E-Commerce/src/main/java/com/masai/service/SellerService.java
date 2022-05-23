@@ -297,7 +297,29 @@ public class SellerService implements SellerServiceInterface {
 
 	}
 	
-	
+	@Override
+	public Seller removeSellerAddress(Integer sellerId, Integer addressId) {
+		// TODO Auto-generated method stub
+		Optional<Seller> seller = sellerCrudRepo.findById(sellerId);
+		
+		boolean flag = false;
+		
+		if (seller.isPresent()) {
+			
+			for (int i = 0; i < seller.get().getAddresses().size(); i++) {
+				if (seller.get().getAddresses().get(i).getAddressId() == addressId)
+					seller.get().getAddresses().remove(i);
+			}
+			
+			Seller sel = sellerCrudRepo.save(seller.get());
+			
+			addressService.deleteAddress(addressId);
+			
+			return sel;
+		} else {
+			throw new SellerNotFoundException("No such customer. Please check the provided details.");
+		}
+	}
 	
 	
 }
