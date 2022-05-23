@@ -40,7 +40,6 @@ public class Address {
 	@Pattern(regexp="[0-9]{6}", message = "Only Valid for 6 digit indian pincode")
 	private String pincode;
 
-		
 	@ManyToOne(cascade=CascadeType.ALL) 
 	@JsonIgnoreProperties("addresses")
 	@JsonIgnore

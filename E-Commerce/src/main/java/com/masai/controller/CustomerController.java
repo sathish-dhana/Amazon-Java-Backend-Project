@@ -41,8 +41,6 @@ public class CustomerController {
 	@Autowired
 	private AddressServiceInterface addressService;
 
-	
-	
 	// Handle		 --> /ecommerce/customersPortal/customer
 	// What is does? --> Adds a new customer
 	// Request Type? --> POST Request

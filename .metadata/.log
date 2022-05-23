@@ -9588,3 +9588,92 @@ org.eclipse.swt.SWTException: Widget is disposed
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 13:20:42.406
 !MESSAGE executing callback sts4.classpath.iuVdhfis SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 13:51:47.687
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 13:51:47.689
+!MESSAGE classpath=95 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 13:51:47.689
+!MESSAGE buffering callback sts4.classpath.iuVdhfis E-Commerce false 95
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 13:51:47.690
+!MESSAGE executing callback sts4.classpath.iuVdhfis 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 13:51:47.708
+!MESSAGE executing callback sts4.classpath.iuVdhfis SUCCESS [done]
+
+!ENTRY org.eclipse.egit.core 4 0 2022-05-23 13:55:25.484
+!MESSAGE Pulling 1 repository
+!SUBENTRY 1 org.eclipse.egit.core 4 0 2022-05-23 13:55:25.484
+!MESSAGE Cannot pull into a repository with state: MERGING
+!STACK 0
+org.eclipse.jgit.api.errors.WrongRepositoryStateException: Cannot pull into a repository with state: MERGING
+	at org.eclipse.jgit.api.PullCommand.call(PullCommand.java:220)
+	at org.eclipse.egit.core.op.PullOperation$PullJob.run(PullOperation.java:256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.egit.core 4 0 2022-05-23 13:55:44.444
+!MESSAGE Pulling 1 repository
+!SUBENTRY 1 org.eclipse.egit.core 4 0 2022-05-23 13:55:44.444
+!MESSAGE Cannot pull into a repository with state: MERGING
+!STACK 0
+org.eclipse.jgit.api.errors.WrongRepositoryStateException: Cannot pull into a repository with state: MERGING
+	at org.eclipse.jgit.api.PullCommand.call(PullCommand.java:220)
+	at org.eclipse.egit.core.op.PullOperation$PullJob.run(PullOperation.java:256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 13:56:36.347
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.iuVdhfis
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 13:56:36.348
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.iuVdhfis
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 13:56:36.348
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 13:56:36.349
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.iuVdhfis => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 14:02:52.847
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 14:02:52.847
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@518648c[org.springframework.tooling.boot.ls:1.32.0.202203131529(id=560)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 14:02:52.847
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 14:02:55.007
+!MESSAGE Boot LS startup time from start to initialized: 2159ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 14:02:55.087
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.FZUOGgaZisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 14:02:55.088
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 14:02:55.088
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 14:02:55.088
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 14:02:55.089
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 14:02:55.089
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.FZUOGgaZ => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 14:02:55.091
+!MESSAGE classpath=95 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 14:02:55.092
+!MESSAGE buffering callback sts4.classpath.FZUOGgaZ E-Commerce false 95
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 14:02:55.092
+!MESSAGE executing callback sts4.classpath.FZUOGgaZ 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-23 14:02:55.406
+!MESSAGE executing callback sts4.classpath.FZUOGgaZ SUCCESS [done]
