@@ -23,6 +23,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Item {
 	
+	@JsonIgnore
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer itemId;
@@ -30,13 +31,10 @@ public class Item {
 
 	@OneToOne
 	@JsonIgnoreProperties(value={
-			"productName",
 			"rating",
-			"quantity",
-			"price",
-			"description",
+			"productId",
 			"seller",
-			"category"
+			"quantity"
 			
 	})
 	
