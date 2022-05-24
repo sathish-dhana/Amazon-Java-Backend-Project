@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.masai.beans.Item;
 import com.masai.beans.Product;
+import com.masai.beans.ProductStatus;
 import com.masai.exception.ProductNotFoundException;
 import com.masai.repository.ItemCrudRepo;
 
@@ -30,8 +31,7 @@ public class ItemService implements ItemServiceInterface{
 		if(optProductCheck.isPresent()) {
 			
 			Product productCheck=optProductCheck.get();
-			if(productCheck.getQuantity()>=item.getRequiredQuantity()) {
-				
+			if(productCheck.getQuantity()>=item.getRequiredQuantity() && productCheck.getProductStatus() == ProductStatus.AVAILLABLE) {
 				
 				//Setting the item Price
 				item.setItemPrice(productCheck.getPrice()*item.getRequiredQuantity());
@@ -42,20 +42,14 @@ public class ItemService implements ItemServiceInterface{
 				//saving item to DB
 				Item itemSaved=itemCrudRepo.save(item);
 				return itemSaved;
-					
 			}
-				
 			else {
 					throw new ProductNotFoundException("Product quantity is not enough");
 			}
-			
 		}
 		else {
 			throw new ProductNotFoundException("Product does not exist");
 		}
-	
-		
-
 	}
 			
 			

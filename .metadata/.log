@@ -11779,3 +11779,111 @@ java.nio.file.DirectoryNotEmptyException: /media/ubuntupc/New Volume/Java-Backen
 !MESSAGE Could not delete: /media/ubuntupc/New Volume/Java-Backend Project/E-Commerce/target/classes/com/masai.
 !SUBENTRY 5 org.eclipse.core.filesystem 4 273 2022-05-25 00:27:09.019
 !MESSAGE Could not delete: /media/ubuntupc/New Volume/Java-Backend Project/E-Commerce/target/classes/com.
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 00:35:20.906
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.ZRTbHefm
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 00:35:20.910
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.ZRTbHefm
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 00:35:20.911
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 00:35:20.911
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.ZRTbHefm => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 00:35:22.948
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 00:35:22.949
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@13223c29[org.springframework.tooling.boot.ls:1.32.0.202203131529(id=560)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 00:35:22.949
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 00:35:25.060
+!MESSAGE Boot LS startup time from start to initialized: 2110ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 00:35:25.142
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.kUitrmHIisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 00:35:25.142
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 00:35:25.143
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 00:35:25.143
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 00:35:25.144
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 00:35:25.144
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.kUitrmHI => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 00:35:25.145
+!MESSAGE classpath=95 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 00:35:25.147
+!MESSAGE buffering callback sts4.classpath.kUitrmHI E-Commerce false 95
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 00:35:25.147
+!MESSAGE executing callback sts4.classpath.kUitrmHI 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 00:35:25.498
+!MESSAGE executing callback sts4.classpath.kUitrmHI SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 01:00:09.998
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.kUitrmHI
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 01:00:10.013
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.kUitrmHI
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 01:00:10.014
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 01:00:10.014
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.kUitrmHI => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 01:00:10.889
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 01:00:10.890
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@13223c29[org.springframework.tooling.boot.ls:1.32.0.202203131529(id=560)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 01:00:10.890
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 01:00:12.932
+!MESSAGE Boot LS startup time from start to initialized: 2040ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 01:00:13.018
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.BTdVKiSPisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 01:00:13.018
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 01:00:13.019
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 01:00:13.019
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 01:00:13.019
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 01:00:13.020
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.BTdVKiSP => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 01:00:13.041
+!MESSAGE classpath=95 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 01:00:13.042
+!MESSAGE buffering callback sts4.classpath.BTdVKiSP E-Commerce false 95
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 01:00:13.042
+!MESSAGE executing callback sts4.classpath.BTdVKiSP 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-25 01:00:13.473
+!MESSAGE executing callback sts4.classpath.BTdVKiSP SUCCESS [done]
