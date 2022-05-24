@@ -22,6 +22,7 @@ import com.masai.beans.Address;
 import com.masai.beans.Card;
 import com.masai.beans.Customer;
 import com.masai.beans.Login;
+import com.masai.beans.Seller;
 import com.masai.beans.UserDTO;
 import com.masai.service.AddressServiceInterface;
 import com.masai.service.CardServiceInteface;
@@ -108,6 +109,17 @@ public class CustomerController {
 		Customer customer = customerService.addCustomerAddress(currentLogin.getUser().getUserId(), address);
 		return new ResponseEntity(customer, HttpStatus.CREATED);
 
+	}
+	
+	// Handle		 --> /ecommerce/sellerPortal/customer/removeAddress?key=XXXXXX&addressId=1
+	// What is does? --> Adds a new address to the address list of the seller
+	// Request Type? --> DELETE Request
+	// Input 		 --> Address Object and Login key in the param
+	@DeleteMapping("/customer/removeAddress")
+	public ResponseEntity<Customer> removeCustomerAddress(@RequestParam String key, @RequestParam Integer addressId) {
+		Login currentLogin = loginService.isTokenValid(key);
+		Customer customer = customerService.removeCustomerAddress(currentLogin.getUser().getUserId(), addressId);
+		return new ResponseEntity(customer, HttpStatus.OK);
 	}
 
 }

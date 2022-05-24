@@ -20,4 +20,5 @@ public interface CustomerServiceInterface {
 	public Customer getCustomerById(Integer customerId);
 	public Customer addCustomerCard(Integer customerId, Card card);
 	public Customer addCustomerAddress(Integer customerId, Address address);
+	public Customer removeCustomerAddress(Integer customerId, Integer addressId);
 }

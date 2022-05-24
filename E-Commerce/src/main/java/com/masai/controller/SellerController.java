@@ -105,7 +105,7 @@ public class SellerController {
 		return new ResponseEntity(seller, HttpStatus.CREATED);
 	}
 	
-	// Handle		 --> /ecommerce/sellerPortal/seller/removeAddress?key=XXXXXX
+	// Handle		 --> /ecommerce/sellerPortal/seller/removeAddress?key=XXXXXX&addressId=1
 	// What is does? --> Adds a new address to the address list of the seller
 	// Request Type? --> DELETE Request
 	// Input 		 --> Address Object and Login key in the param

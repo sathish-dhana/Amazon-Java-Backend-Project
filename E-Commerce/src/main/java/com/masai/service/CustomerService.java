@@ -11,9 +11,11 @@ import com.masai.beans.Card;
 import com.masai.beans.Cart;
 import com.masai.beans.Customer;
 import com.masai.beans.Login;
+import com.masai.beans.Seller;
 import com.masai.beans.UserDTO;
 import com.masai.exception.CustomerAlreadyExistsException;
 import com.masai.exception.CustomerNotFoundException;
+import com.masai.exception.SellerNotFoundException;
 import com.masai.repository.CustomerCrudRepo;
 
 @Service
@@ -169,7 +171,7 @@ public class CustomerService implements CustomerServiceInterface {
 			
 			return customerCrudRepo.save(getCustomer.get());
 		} else {
-			throw new CustomerAlreadyExistsException("Customer with the given username already exists.");
+			throw new CustomerNotFoundException("No such customer. Please check the provided details.");
 		}
 	}
 
@@ -177,12 +179,40 @@ public class CustomerService implements CustomerServiceInterface {
 	public Customer persistCustomer(Integer customerID, Login login) {
 		// TODO Auto-generated method stub
 		Optional<Customer> temp = customerCrudRepo.findById(customerID);
-		Customer customer = temp.get();
-		customer.setLogin(login);
-		customerCrudRepo.save(customer);
-		return customer;
+		
+		if (temp.isPresent()) {
+			Customer customer = temp.get();
+			customer.setLogin(login);
+			customerCrudRepo.save(customer);
+			return customer;
+		} else {
+			throw new CustomerNotFoundException("No such customer. Please check the provided details.");
+		}
+		
 	}
 	
-	
+	@Override
+	public Customer removeCustomerAddress(Integer customerId, Integer addressId) {
+		// TODO Auto-generated method stub
+		Optional<Customer> customer = customerCrudRepo.findById(customerId);
+		
+		boolean flag = false;
+		
+		if (customer.isPresent()) {
+			
+			for (int i = 0; i < customer.get().getAddresses().size(); i++) {
+				if (customer.get().getAddresses().get(i).getAddressId() == addressId)
+					customer.get().getAddresses().remove(i);
+			}
+			
+			Customer savedcustomer = customerCrudRepo.save(customer.get());
+			
+			addressService.deleteAddress(addressId);
+			
+			return savedcustomer;
+		} else {
+			throw new CustomerNotFoundException("No such customer. Please check the provided details.");
+		}
+	}
 
 }
