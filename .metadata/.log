@@ -11045,3 +11045,87 @@ java.io.IOException: Stream closed
 	at org.eclipse.debug.internal.core.OutputStreamMonitor.internalRead(OutputStreamMonitor.java:252)
 	at org.eclipse.debug.internal.core.OutputStreamMonitor.read(OutputStreamMonitor.java:228)
 	at java.base/java.lang.Thread.run(Thread.java:833)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:03:39.006
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.zVYvfOQe
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:03:39.021
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.zVYvfOQe
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:03:39.021
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:03:39.021
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.zVYvfOQe => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:03:42.380
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:03:42.392
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@13223c29[org.springframework.tooling.boot.ls:1.32.0.202203131529(id=560)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:03:42.392
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:03:44.722
+!MESSAGE Boot LS startup time from start to initialized: 2328ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:03:44.810
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.zEFviCruisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:03:44.810
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:03:44.811
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:03:44.820
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:03:44.820
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:03:44.821
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.zEFviCru => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:03:44.862
+!MESSAGE classpath=95 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:03:44.862
+!MESSAGE buffering callback sts4.classpath.zEFviCru E-Commerce false 95
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:03:44.862
+!MESSAGE executing callback sts4.classpath.zEFviCru 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:03:45.218
+!MESSAGE executing callback sts4.classpath.zEFviCru SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:04:59.416
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:04:59.418
+!MESSAGE classpath=95 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:04:59.419
+!MESSAGE buffering callback sts4.classpath.zEFviCru E-Commerce false 95
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:04:59.420
+!MESSAGE executing callback sts4.classpath.zEFviCru 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:04:59.444
+!MESSAGE executing callback sts4.classpath.zEFviCru SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:05:46.956
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:05:46.958
+!MESSAGE classpath=95 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:05:46.962
+!MESSAGE buffering callback sts4.classpath.zEFviCru E-Commerce false 95
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:05:46.963
+!MESSAGE executing callback sts4.classpath.zEFviCru 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 20:05:47.013
+!MESSAGE executing callback sts4.classpath.zEFviCru SUCCESS [done]

@@ -27,8 +27,6 @@ public class AddressService implements AddressServiceInterface {
 	@Autowired
 	private AddressCrudRepo addressCrudRepo;
 	
-	
-	//Need to disscuss about finding in database//
 	@Override
 	public Address addAddress(Address address) {
 		// TODO Auto-generated method stub
@@ -44,23 +42,6 @@ public class AddressService implements AddressServiceInterface {
 	}
 	
 	@Override
-	public String removeAddressByAddressId(Integer addressId) {
-		// TODO Auto-generated method stub
-		Optional<Address> checkAddress = addressCrudRepo.findById(addressId);
-		String message = "Not deleted";
-		
-		if (checkAddress.isPresent()) {
-			addressCrudRepo.deleteById(addressId);
-			message = "Address deleted";
-//			message = "Deleted address \nUser name : " + checkAddress.get().getUser().getUserName() + "\nId : " + checkAddress.get().getUser().getUserId();
-		} else {
-			throw new AddressNotFoundException("Address not availlable");
-		}
-
-		return message;
-	}
-	
-	@Override
 	public String removeAllAddressOfUser(User user) {
 		// TODO Auto-generated method stub
 		List<Address> checkAddress = addressCrudRepo.findByUser(user);
@@ -71,19 +52,12 @@ public class AddressService implements AddressServiceInterface {
 				addressCrudRepo.deleteById(address.getAddressId());
 				message = "Deleted address \nUser name : " + address.getUser().getUserName() + "\nId : " + address.getUser().getUserId();
 			}
-			
 		} else {
 			throw new AddressNotFoundException("Address not availlable");
 		}
-
 		return message;
 	}
 	
-	@Override
-	public Address updateAddress(Address address) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	@Override
 	public Address showAddressById(Integer addressId) {
@@ -95,7 +69,6 @@ public class AddressService implements AddressServiceInterface {
 		} else {
 			throw new AddressNotFoundException("Address not availlable");
 		}
-
 	}
 	
 	@Override
@@ -147,6 +120,7 @@ public class AddressService implements AddressServiceInterface {
 	}
 	
 	public Address persistCustomer(Customer customer, Address address) {
+		
 		address.setUser(customer);
 		Address savedAddress = addressCrudRepo.save(address);
 		
