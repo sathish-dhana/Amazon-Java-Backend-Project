@@ -87,7 +87,7 @@ public class SellerController {
 	// Request Type? --> Post Request
 	// Input 		 --> Product Object
 	@PostMapping("/seller/addProduct")
-	public ResponseEntity<Seller> addProduct(@RequestParam String key, @RequestBody Product product) {
+	public ResponseEntity<Seller> addProduct(@RequestParam String key, @RequestBody @Valid Product product) {
 		Login currentLogin = loginService.isTokenValid(key);
 		Seller addedProduct = sellerService.addProducts(currentLogin.getUser().getUserId(), product);
 		return new ResponseEntity(addedProduct, HttpStatus.CREATED);

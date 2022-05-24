@@ -30,13 +30,13 @@ public class Address {
 	@Column(name = "address_id")
 	private Integer addressId;
 	
-	@NotNull
+	@NotNull(message = "city cannot be null")
 	private String city;
 	
-	@NotNull
+	@NotNull(message = "state cannot be null")
 	private String state;
 	
-	@NotNull
+	@NotNull(message = "address cannot be null")
 	private String address;
 	
 	@NotNull

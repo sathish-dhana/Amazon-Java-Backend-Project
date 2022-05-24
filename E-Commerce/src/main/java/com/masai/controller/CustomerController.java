@@ -104,7 +104,7 @@ public class CustomerController {
 	// Request Type? --> POST Request
 	// Input 		 --> Address Object and Login key in the param
 	@PostMapping("/customer/addAddress")
-	public ResponseEntity<Customer> addCustomerAddress(@RequestParam String key, @RequestBody Address address) {
+	public ResponseEntity<Customer> addCustomerAddress(@RequestParam String key, @RequestBody @Valid Address address) {
 		Login currentLogin = loginService.isTokenValid(key);
 		Customer customer = customerService.addCustomerAddress(currentLogin.getUser().getUserId(), address);
 		return new ResponseEntity(customer, HttpStatus.CREATED);
