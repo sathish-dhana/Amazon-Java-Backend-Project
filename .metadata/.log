@@ -10851,3 +10851,99 @@ java.util.concurrent.TimeoutException
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 11:46:21.216
 !MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.TQBtSjVk => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 11:49:40.390
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 11:49:40.390
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@13223c29[org.springframework.tooling.boot.ls:1.32.0.202203131529(id=560)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 11:49:40.391
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 11:49:42.467
+!MESSAGE Boot LS startup time from start to initialized: 2074ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 11:49:42.558
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.ernndWPTisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 11:49:42.559
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 11:49:42.559
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 11:49:42.560
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 11:49:42.560
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 11:49:42.560
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.ernndWPT => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 11:49:42.568
+!MESSAGE classpath=95 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 11:49:42.569
+!MESSAGE buffering callback sts4.classpath.ernndWPT E-Commerce false 95
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 11:49:42.569
+!MESSAGE executing callback sts4.classpath.ernndWPT 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 11:49:42.917
+!MESSAGE executing callback sts4.classpath.ernndWPT SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 12:02:00.264
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.ernndWPT
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 12:02:00.273
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.ernndWPT
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 12:02:00.273
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 12:02:00.273
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.ernndWPT => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 13:11:23.031
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 13:11:23.035
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@13223c29[org.springframework.tooling.boot.ls:1.32.0.202203131529(id=560)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 13:11:23.035
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 13:11:25.111
+!MESSAGE Boot LS startup time from start to initialized: 2068ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 13:11:25.186
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.SNOngLSzisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 13:11:25.186
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 13:11:25.187
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 13:11:25.187
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 13:11:25.187
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 13:11:25.188
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.SNOngLSz => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 13:11:25.233
+!MESSAGE classpath=95 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 13:11:25.234
+!MESSAGE buffering callback sts4.classpath.SNOngLSz E-Commerce false 95
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 13:11:25.235
+!MESSAGE executing callback sts4.classpath.SNOngLSz 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 13:11:25.670
+!MESSAGE executing callback sts4.classpath.SNOngLSz SUCCESS [done]

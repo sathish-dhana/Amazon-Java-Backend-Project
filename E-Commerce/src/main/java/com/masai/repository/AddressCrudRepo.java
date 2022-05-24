@@ -18,6 +18,7 @@ public interface AddressCrudRepo extends JpaRepository<Address, Integer>{
 	public List<Address> findByUser(User user);
 	public List<Address> findByCity(String city);
 	public List<Address> findByState(String city);
+	public List<Address> findByPincode(String pincode);
 	
 	public List<Address> deleteAllByUser(User user);
 	
