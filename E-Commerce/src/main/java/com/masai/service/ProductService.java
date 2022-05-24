@@ -82,7 +82,13 @@ public class ProductService implements ProductServiceInterface{
 	public synchronized Product reduceQuantity(Integer id, int quantityToReduce) {
 		
 		Product updatedProduct = productRepo.findById(id).get();
+		
 		updatedProduct.setQuantity(updatedProduct.getQuantity() - quantityToReduce);
+		
+		if(updatedProduct.getQuantity() == 0) {
+			updatedProduct.setProductStatus(ProductStatus.OUT_OF_STOCK);
+		}
+		
 		productRepo.save(updatedProduct);
 		return updatedProduct;
 	}
