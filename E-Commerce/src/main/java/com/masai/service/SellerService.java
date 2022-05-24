@@ -63,15 +63,10 @@ public class SellerService implements SellerServiceInterface {
 			sellerCrudRepo.delete(seller.get());
 			
 		} else {
-			
 			throw new SellerNotFoundException("username/password is wrong. Please provide the correct details to perform this operation");
-			
 		}
-		
 		return "Successfully deleted " + userInfo.getUserName() + "'s Account from the database";
-		
 	}
-	
 	
 	
 	@Override
@@ -92,24 +87,6 @@ public class SellerService implements SellerServiceInterface {
 		return message;
 	}
 
-//	@Override
-//	public String removeSellerByName(String sellerName) {
-//		// TODO Auto-generated method stub
-//		
-//		//checking if seller exist or not
-//		Optional<Seller> checkSeller = sellerCrudRepo.findByUserName(sellerName);
-//		String message = "Not deleted";
-//		
-//		if (checkSeller.isPresent()) {
-//			sellerCrudRepo.deleteById(checkSeller.get().getUserId());
-//			message = "Deleted seller \nseller name : " + checkSeller.get().getUserName() + "\nId : " + checkSeller.get().getUserId();
-//		} else {
-//			throw new SellerNotFoundException("seller not found");
-//		}
-//		
-//		return message;
-//	}
-	
 	@Override
 	public List<Seller> viewAllSeller() {
 		// TODO Auto-generated method stub
@@ -231,7 +208,7 @@ public class SellerService implements SellerServiceInterface {
 	}
 
 	@Override
-	public Seller removeProduct(Integer sellerId, Integer productId) {
+	public Seller updateProductStatus(Integer sellerId, Integer productId) {
 		// TODO Auto-generated method stub
 		Optional<Seller> seller = sellerCrudRepo.findById(sellerId);
 		
@@ -241,12 +218,12 @@ public class SellerService implements SellerServiceInterface {
 			
 			for (int i = 0; i < seller.get().getProducts().size(); i++) {
 				if (seller.get().getProducts().get(i).getProductId() == productId)
-					seller.get().getProducts().remove(i);
+					seller.get().getProducts().get(i).setProductStatus(ProductStatus.UNAVAILLABLE);
 			}
 			
 			Seller sel = sellerCrudRepo.save(seller.get());
 			
-			productService.deleteProduct(productId);
+			productService.updateProductStatus(productId);
 			
 			return sel;
 		} else {

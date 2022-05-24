@@ -116,14 +116,14 @@ public class SellerController {
 		return new ResponseEntity(seller, HttpStatus.OK);
 	}
 	
-	// Handle		 --> /ecommerce/sellerPortal/seller/removeProduct?key=XXXXXX&productId=1
-	// What is does? --> deletes product
-	// Request Type? --> Delete Request
+	// Handle		 --> /ecommerce/sellerPortal/seller/updateProductStatus?key=XXXXXX&productId=1
+	// What is does? --> updates product status
+	// Request Type? --> put Request
 	// Input 		 --> product id
-	@DeleteMapping("/seller/removeProduct")
-	public ResponseEntity<Seller> removeProduct(@RequestParam String key, @RequestParam Integer productId) {
+	@PutMapping("/seller/updateProductStatus")
+	public ResponseEntity<Seller> updateProductStatus(@RequestParam String key, @RequestParam Integer productId) {
 		Login currentLogin = loginService.isTokenValid(key);
-		Seller addedProduct = sellerService.removeProduct(currentLogin.getUser().getUserId(), productId);
+		Seller addedProduct = sellerService.updateProductStatus(currentLogin.getUser().getUserId(), productId);
 		return new ResponseEntity(addedProduct, HttpStatus.OK);
 	}
 	

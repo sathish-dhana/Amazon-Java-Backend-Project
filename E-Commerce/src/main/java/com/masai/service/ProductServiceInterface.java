@@ -19,7 +19,11 @@ public interface ProductServiceInterface {
 	
 	public Product reduceQuantity(Integer id, int quantityToReduce);
 	
-	public String deleteProduct(Integer productId);
+	public String updateProductStatus(Integer productId);
 	
 	public String updateProduct(Integer productId, ProductDTO product);
+	
+	public Product updateProductStatusToOutOfStock(Integer productId);
+	public Product updateProductStatusToUnAvaillable(Integer productId);
+	public Product updateProductStatusToAvaillable(Integer productId);
 }
