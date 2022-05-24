@@ -27,7 +27,7 @@ public class Customer extends User{
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cart_id")
-	@JsonIgnore
+//	@JsonIgnore
 	private Cart cart;
 	
 	@OneToMany(cascade=CascadeType.ALL)
