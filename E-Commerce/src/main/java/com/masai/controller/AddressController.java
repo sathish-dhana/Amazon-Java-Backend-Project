@@ -70,4 +70,6 @@ public class AddressController {
 			Set<User> listOfUser = addressService.listAllUserByState(state);
 			return new ResponseEntity(listOfUser, HttpStatus.OK);
 		}
+		
+		//ADD ENDPOINT TO GET ALL ADDRESSES OF THE USER
 }

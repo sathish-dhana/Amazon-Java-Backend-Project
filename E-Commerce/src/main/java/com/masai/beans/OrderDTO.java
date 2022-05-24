@@ -1,9 +1,9 @@
 package com.masai.beans;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,9 +21,5 @@ public class OrderDTO {
 	private int deliveryCost;
 	
 	private double totalCost;
-	
-	//private Map<Product, Integer> productDetails = new HashMap<>();
-	
-	private List<Product> prodcuts = new ArrayList<>();
 	
 }

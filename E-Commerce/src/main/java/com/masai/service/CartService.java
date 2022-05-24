@@ -57,6 +57,21 @@ public class CartService implements CartServiceInterface {
 	}
 
 
+	//WORKING FINE
+	//WHAT IT DOES IS..  IT REMOVES THE ITEM FROM THE USER CART BUT KEEPS IT IN THE 
+	//DATABASE.
+	//FOR NOW IT IS JUST USED FOR TESTING
+	//I WAS ABLE TO REMOVE FROM CART AND STILL KEEP THE DATA IN THE DATABASE
+	@Override
+	public Cart sendToOrder(int customerId, int itemId) {
+		Integer cartId = customerCrudRepo.findByUserId(customerId).getCart().getCartId();
+		Cart cart = cartCrudRepo.findByCartId(cartId);
+		cart.getItems().remove(0);
+		cartCrudRepo.save(cart);
+		return cart;
+	}
+
+
 //	@Override
 //	public Cart alterCart(Customer customer, Item item) {
 //		// TODO Auto-generated method stub

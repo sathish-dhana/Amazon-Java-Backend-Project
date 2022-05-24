@@ -19,17 +19,9 @@ public class OrderService implements OrderServiceInterface{
 	@Autowired
 	private CustomerService customerServ;
 	
-	
 	@Override
 	public OrderDTO getOrderStatus(Integer customerId) {
 		
-
-		//Customer customer = customerServ.getCustomerById(customerId);
-		
-		//OrderDTO order = new OrderDTO();
-		
-		//order.setOrderItems(customer.getCart()            //set up the list here
-//		return null;
 
 		//getting customer using customerID
 		Customer customer = customerServ.getCustomerById(customerId);
@@ -49,12 +41,7 @@ public class OrderService implements OrderServiceInterface{
 			ProductCategory category = element.getProduct().getCategory();
 			
 			Product product = element.getProduct();
-			
-			//adding all the product details in list to show it in api
-			List<Product> list = order.getProdcuts();
-			list.add(product);
-			order.setProdcuts(list);
-			
+				
 			//calculating gst for each categories
 			if(category == ProductCategory.ELECTRONICS) {
 				
@@ -72,11 +59,8 @@ public class OrderService implements OrderServiceInterface{
 				Double itemGST = element.getProduct().getPrice() * 0.05;
 				
 				order.setGst(order.getGst() + itemGST);
-			}
-			
-			
+			}		
 		}
-		
 		
 		//cost of all items excluding gst, delivery
 		double total = customer.getCart().getCartTotal();
@@ -84,14 +68,14 @@ public class OrderService implements OrderServiceInterface{
 		
 		//setting delivery cost
 		order.setDeliveryCost(40);
-		
-		
+	
 		//final cost paid by customer
 		order.setTotalCost(total + order.getGst() + order.getDeliveryCost());
-
 		
 		return order;
 		
 	}
+	
+	
 
 }

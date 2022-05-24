@@ -30,9 +30,7 @@ public class Cart {
 	private Integer cartId;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	@JsonIgnoreProperties(value= {
-			"itemId",
-	})
+
 	private List<Item> items=new ArrayList<>();
 	
 
