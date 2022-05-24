@@ -39,9 +39,11 @@ public class CartService implements CartServiceInterface {
 			//Checking id the cart has the same product ? if yes ? throw exception.
 			List<Item> listOfItems = getAllItem(customer.getCart());
 			
-			for (Item itemCheck : listOfItems) {
-				if (itemCheck.getProduct().getProductId() == item.getProduct().getProductId()) {
-					throw new ProductAlreadyFoundException("Product already present in card, please try to update quantity");
+			if (listOfItems != null) {
+				for (Item itemCheck : listOfItems) {
+					if (itemCheck.getProduct().getProductId() == item.getProduct().getProductId()) {
+						throw new ProductAlreadyFoundException("Product already present in card, please try to update quantity");
+					}
 				}
 			}
 			
