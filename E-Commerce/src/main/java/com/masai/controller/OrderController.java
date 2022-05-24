@@ -33,7 +33,7 @@ public class OrderController {
 		
 		Integer customerId = currentLogin.getUser().getUserId();
 		
-		OrderDTO order = orderServ.getAllOrders(customerId);
+		OrderDTO order = orderServ.getOrderStatus(customerId);
 		
 		return new ResponseEntity<OrderDTO>(order, HttpStatus.ACCEPTED);
 		

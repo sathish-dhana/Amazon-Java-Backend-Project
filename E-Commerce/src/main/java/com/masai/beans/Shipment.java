@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
+//@Entity
 @Getter
 @Setter
 public class Shipment {
@@ -20,10 +20,10 @@ public class Shipment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer shipmentTrackId;
 	
-	private LocalDateTime paidDate;
+	private Address shippedFrom;
+	
+	private Address shippedTo;
 	
 	private LocalDate expectedDate;
-	
-//	private Address deliveryAddress;
-	
+		
 }

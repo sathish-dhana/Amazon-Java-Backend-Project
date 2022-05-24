@@ -1,5 +1,6 @@
 package com.masai.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,6 +55,28 @@ public class CartService implements CartServiceInterface {
 	public Cart alterCart(Customer customer, Item item) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	//WORKING FINE
+	//WHAT IT DOES IS..  IT REMOVES THE ITEM FROM THE USER CART BUT KEEPS IT IN THE 
+	//DATABASE.
+	//FOR NOW IT IS JUST USED FOR TESTING
+	//I WAS ABLE TO REMOVE FROM CART AND STILL KEEP THE DATA IN THE DATABASE
+	@Override
+	public List<Item> sendToOrder(int customerId) {
+		
+		Integer cartId = customerCrudRepo.findByUserId(customerId).getCart().getCartId();
+		
+		Cart cart = cartCrudRepo.findByCartId(cartId);
+		
+		List<Item> orders = new ArrayList<>(cart.getItems());
+		
+		cart.getItems().clear();
+		
+		cartCrudRepo.save(cart);
+		
+		return orders;
 	}
 
 

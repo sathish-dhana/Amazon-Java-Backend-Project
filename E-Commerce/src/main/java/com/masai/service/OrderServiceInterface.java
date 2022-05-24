@@ -1,9 +1,10 @@
 package com.masai.service;
 
+import com.masai.beans.Ordered;
 import com.masai.beans.OrderDTO;
 
 public interface OrderServiceInterface {
 
-	OrderDTO getAllOrders(Integer customerId);
-
+	public OrderDTO getOrderStatus(Integer customerId);
+	public Ordered createOrder(int customerId, String lastFourDigitsOfCardUsed);
 }
