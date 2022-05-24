@@ -87,7 +87,7 @@ public class SellerController {
 	// Request Type? --> Post Request
 	// Input 		 --> Product Object
 	@PostMapping("/seller/addProduct")
-	public ResponseEntity<Seller> addProduct(@RequestParam String key, @RequestBody Product product) {
+	public ResponseEntity<Seller> addProduct(@RequestParam String key, @RequestBody @Valid Product product) {
 		Login currentLogin = loginService.isTokenValid(key);
 		Seller addedProduct = sellerService.addProducts(currentLogin.getUser().getUserId(), product);
 		return new ResponseEntity(addedProduct, HttpStatus.CREATED);
@@ -99,7 +99,7 @@ public class SellerController {
 	// Request Type? --> POST Request
 	// Input 		 --> Address Object and Login key in the param
 	@PostMapping("/seller/addAddress")
-	public ResponseEntity<Seller> addSellerAddress(@RequestParam String key, @RequestBody Address address) {
+	public ResponseEntity<Seller> addSellerAddress(@RequestParam String key, @Valid @RequestBody Address address) {
 		Login currentLogin = loginService.isTokenValid(key);
 		Seller seller = sellerService.addSellerAddress(currentLogin.getUser().getUserId(), address);
 		return new ResponseEntity(seller, HttpStatus.CREATED);

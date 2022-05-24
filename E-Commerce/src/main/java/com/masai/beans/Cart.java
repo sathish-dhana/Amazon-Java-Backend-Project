@@ -33,4 +33,10 @@ public class Cart {
 	private List<Item> items=new ArrayList<>();
 
 	private Double cartTotal;
+
+
+	public List<Item> getItems() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

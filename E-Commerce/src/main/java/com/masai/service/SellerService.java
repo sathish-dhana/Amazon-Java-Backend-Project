@@ -11,8 +11,10 @@ import com.masai.beans.Customer;
 import com.masai.beans.Login;
 import com.masai.beans.Product;
 import com.masai.beans.ProductDTO;
+import com.masai.beans.ProductStatus;
 import com.masai.beans.Seller;
 import com.masai.beans.UserDTO;
+import com.masai.exception.AddressNotFoundException;
 import com.masai.exception.CustomerAlreadyExistsException;
 import com.masai.exception.CustomerNotFoundException;
 import com.masai.exception.ProductNotFoundException;
@@ -171,8 +173,13 @@ public class SellerService implements SellerServiceInterface {
 	@Override
 	public Seller addProducts(Integer sellerId, Product product) {
 		// TODO Auto-generated method stub
+		product.setProductStatus(ProductStatus.AVAILLABLE);
 		Optional<Seller> checkSeller = sellerCrudRepo.findById(sellerId);
 		Seller updatedSeller = checkSeller.get();
+		
+		if(updatedSeller.getAddresses().isEmpty())
+			throw new AddressNotFoundException("Add the address first to add the products");
+		
 		updatedSeller.getProducts().add(product);
 		
 		productService.addProduct(updatedSeller, product);
