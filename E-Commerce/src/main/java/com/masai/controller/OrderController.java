@@ -1,10 +1,13 @@
 package com.masai.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.masai.beans.Login;
 import com.masai.beans.OrderDTO;
 import com.masai.beans.Ordered;
+import com.masai.beans.PlaceOrderDTO;
 import com.masai.service.LoginServiceInterface;
 import com.masai.service.OrderServiceInterface;
 
@@ -40,10 +44,10 @@ public class OrderController {
 	}
 	
 	@PostMapping("/placeOrder")
-	public ResponseEntity<Ordered> placeOrder(@RequestParam String key) {
+	public ResponseEntity<Ordered> placeOrder(@RequestParam String key, @RequestBody @Valid PlaceOrderDTO loginInfo) {
 		Login currentLogin = loginService.isTokenValid(key);
 		Integer customerId = currentLogin.getUser().getUserId();
-		Ordered order = orderServ.createOrder(customerId, "4569");
+		Ordered order = orderServ.placeOrder(customerId, loginInfo);
 		return new ResponseEntity<Ordered>(order, HttpStatus.ACCEPTED);
 	}
 	
