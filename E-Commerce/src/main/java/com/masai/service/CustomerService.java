@@ -33,6 +33,7 @@ public class CustomerService implements CustomerServiceInterface {
 		Optional<Customer> opt = customerCrudRepo.findByUserName(customer.getUserName());
 
 		if(opt.isEmpty()) {
+
 			customer.setCart(new Cart());
 			Customer savedCustomer = customerCrudRepo.save(customer);
 			

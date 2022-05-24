@@ -23,6 +23,8 @@ import lombok.NoArgsConstructor;
 public class Customer extends User{
 	
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "cart_id")
+
 	private Cart cart;
 	
 	@OneToOne

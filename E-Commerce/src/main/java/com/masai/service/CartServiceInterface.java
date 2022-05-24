@@ -1,9 +1,12 @@
 package com.masai.service;
 
+import com.masai.beans.Cart;
+import com.masai.beans.Customer;
+import com.masai.beans.Item;
+
 public interface CartServiceInterface {
 	
-	public void calculateTotal();
-	public boolean  addItemToCart();
-	public boolean removeItemFromCart();
+	public Cart  saveCart(Cart cart);
+	public Cart  saveCart(Customer customer,Item item);
 	
 }

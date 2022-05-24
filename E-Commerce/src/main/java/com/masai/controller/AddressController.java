@@ -23,7 +23,7 @@ import com.masai.beans.User;
 import com.masai.service.AddressService;
 
 @RestController
-@RequestMapping("/ecommerce/sellerPortal")
+@RequestMapping("/ecommerce/user")
 public class AddressController {
 	
 	@Autowired
@@ -53,8 +53,9 @@ public class AddressController {
 		// What is does? --> GET user with city
 		// Request Type? --> GET Request
 		// Input 		 --> String city
-		@GetMapping("/address/{city}")
+		@GetMapping("/city/{city}")
 		public ResponseEntity<Address> listAllUserByCity(@PathVariable("city") String city) {
+			city = city.toLowerCase();
 			Set<User> listOfUser = addressService.listAllUserByCity(city);
 			return new ResponseEntity(listOfUser, HttpStatus.OK);
 		}
@@ -63,8 +64,9 @@ public class AddressController {
 		// What is does? --> GET user with city
 		// Request Type? --> GET Request
 		// Input 		 --> String state
-		@GetMapping("/address/{state}")
+		@GetMapping("/state/{state}")
 		public ResponseEntity<Address> listAllUserByState(@PathVariable("state") String state) {
+			state = state.toLowerCase();
 			Set<User> listOfUser = addressService.listAllUserByState(state);
 			return new ResponseEntity(listOfUser, HttpStatus.OK);
 		}

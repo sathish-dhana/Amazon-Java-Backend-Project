@@ -14,5 +14,5 @@ public interface ProductCrudRepo extends JpaRepository<Product, Integer>{
 	
 	public List<Product> findByCategory(ProductCategory category);
 	
-	
+	public Product findByProductId(int productId);
 }
