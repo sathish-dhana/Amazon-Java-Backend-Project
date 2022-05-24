@@ -47,6 +47,7 @@ public class Product {
 //	@NotNull(message = "Only ELECTRONICS, MOBILE, CLOTHES categories allowed")
 	private ProductCategory category;
 	
+	private ProductStatus productStatus;
 	
 	 @ManyToOne(cascade = CascadeType.ALL) 
 	 @JsonIgnoreProperties("products")

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.masai.beans.Product;
 import com.masai.beans.ProductCategory;
 import com.masai.beans.ProductDTO;
+import com.masai.beans.ProductStatus;
 import com.masai.beans.Seller;
 import com.masai.exception.ProductNotFoundException;
 import com.masai.repository.ProductCrudRepo;
@@ -47,7 +48,8 @@ public class ProductService implements ProductServiceInterface{
 	@Override
 	public List<Product> getAllProdcuts() {
 	
-		List<Product> allProducts = productRepo.findAll();
+		List<Product> allProducts = productRepo.findAllByProductStatus(ProductStatus.AVAILLABLE);
+		
 		if(allProducts.isEmpty()) {
 			throw new ProductNotFoundException("No product available");
 		}
@@ -90,6 +92,8 @@ public class ProductService implements ProductServiceInterface{
 		// TODO Auto-generated method stub
 		Optional<Product> findproduct = productRepo.findById(productId);
 		findproduct.get().setSeller(null);
+		findproduct.get().setQuantity(0);
+		findproduct.get().setProductStatus(ProductStatus.OUT_OF_STOCK);
 		
 		if (findproduct.isPresent()) {
 			productRepo.deleteById(productId);
