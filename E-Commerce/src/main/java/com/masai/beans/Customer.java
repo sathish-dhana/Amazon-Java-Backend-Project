@@ -30,8 +30,8 @@ public class Customer extends User{
 	@JsonIgnore
 	private Cart cart;
 	
-//	@OneToMany(cascade=CascadeType.ALL)
-//	private List<Order> orders = new ArrayList<Order>();
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<Ordered> orders = new ArrayList<Ordered>();
 	
 	@OneToOne
 	@JoinColumn(name = "card_Number")

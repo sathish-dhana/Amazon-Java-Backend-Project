@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -21,7 +22,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Order {
+@Table(name = "Orders")
+public class Ordered {
 	
 	//WITH CUSTOMER
 	//Order has ManyToOne relation with customer
@@ -78,7 +80,7 @@ public class Order {
 	@Column(name = "payment_details")
 	private String cardUsedForPayment;
 	
-//	@Column(name = "order_date")
-//	private LocalDate orderDate;
+	@Column(name = "order_date")
+	private LocalDate orderDate;
 	
 }
