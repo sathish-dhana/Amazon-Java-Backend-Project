@@ -18,8 +18,9 @@ public class OrderService implements OrderServiceInterface{
 	@Autowired
 	private CustomerService customerServ;
 	
+	
 	@Override
-	public OrderDTO getAllOrders(Integer customerId) {
+	public OrderDTO getOrderStatus(Integer customerId) {
 		
 		//getting customer using customerID
 		Customer customer = customerServ.getCustomerById(customerId);
