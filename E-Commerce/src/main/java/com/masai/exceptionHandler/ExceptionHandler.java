@@ -5,7 +5,9 @@ import java.time.LocalDateTime;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 //import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.client.HttpServerErrorException;
@@ -14,6 +16,8 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.masai.exception.AddressAlreadyExistException;
 import com.masai.exception.AddressNotFoundException;
+import com.masai.exception.CardAlreadyExistException;
+import com.masai.exception.CardDetailsNotFoundException;
 import com.masai.exception.CustomerAlreadyExistsException;
 import com.masai.exception.CustomerNotFoundException;
 import com.masai.exception.ErrorDetails;
@@ -21,6 +25,7 @@ import com.masai.exception.InvalidLoginKeyException;
 import com.masai.exception.LoginFailedException;
 import com.masai.exception.NoProductFoundInCart;
 import com.masai.exception.ProductNotFoundException;
+import com.masai.exception.ProductQuantityNotEnoughException;
 import com.masai.exception.SellerAlreadyExistException;
 import com.masai.exception.SellerNotFoundException;
 
@@ -69,6 +74,30 @@ public class ExceptionHandler {
 	}
 	
 	
+	
+	//-------------------------------------------------------------------------//
+	//									CARD EXCEPTIONS
+	//-------------------------------------------------------------------------//
+	
+	
+	@org.springframework.web.bind.annotation.ExceptionHandler(CardAlreadyExistException.class)
+	public ResponseEntity<ErrorDetails> cardAlreadyExists(CardAlreadyExistException error, WebRequest webRequest) {
+		
+		ErrorDetails errorDetail = new ErrorDetails(LocalDateTime.now(), HttpStatus.BAD_REQUEST.value(), "Bad Request as card already exists with the customer", error.getMessage());
+		
+		return new ResponseEntity<>(errorDetail, HttpStatus.BAD_REQUEST);
+	}
+	
+	@org.springframework.web.bind.annotation.ExceptionHandler(CardDetailsNotFoundException.class)
+	public ResponseEntity<ErrorDetails> cardDetailsNotFound(CardDetailsNotFoundException error, WebRequest webRequest) {
+		
+		ErrorDetails errorDetail = new ErrorDetails(LocalDateTime.now(), HttpStatus.BAD_REQUEST.value(), "Bad Request as card details not found with the customer", error.getMessage());
+		
+		return new ResponseEntity<>(errorDetail, HttpStatus.BAD_REQUEST);
+	}
+	
+	
+	
 	//-------------------------------------------------------------------------//
 	//									VALIDATION EXCEPTIONS
 	//-------------------------------------------------------------------------//
@@ -89,6 +118,22 @@ public class ExceptionHandler {
 		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), HttpStatus.NOT_FOUND.value(), "NOT FOUND", "Not a Valid URL");
 		
 		return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+	}
+	
+	@org.springframework.web.bind.annotation.ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+	public ResponseEntity<ErrorDetails> httpRequestMethodException(HttpRequestMethodNotSupportedException exception){
+		
+		ErrorDetails errorDetail = new ErrorDetails(LocalDateTime.now(), HttpStatus.METHOD_NOT_ALLOWED.value(), "Check the http method", exception.getMessage());
+		
+		return new ResponseEntity<ErrorDetails>(errorDetail, HttpStatus.METHOD_NOT_ALLOWED);
+	}
+	
+	@org.springframework.web.bind.annotation.ExceptionHandler(MissingServletRequestParameterException.class)
+	public ResponseEntity<ErrorDetails> missingServletRequestParameterException(MissingServletRequestParameterException exception){
+		
+		ErrorDetails errorDetail = new ErrorDetails(LocalDateTime.now(), HttpStatus.METHOD_NOT_ALLOWED.value(), "comes from MissingServletRequestParameterException", exception.getMessage());
+		
+		return new ResponseEntity<ErrorDetails>(errorDetail, HttpStatus.METHOD_NOT_ALLOWED);
 	}
 
 	//-------------------------------------------------------------------------//
@@ -155,7 +200,13 @@ public class ExceptionHandler {
 		return new ResponseEntity<ErrorDetails>(errorDetail, HttpStatus.BAD_REQUEST );
 	}
 	
-	
+	@org.springframework.web.bind.annotation.ExceptionHandler(ProductQuantityNotEnoughException.class)
+	public ResponseEntity<ErrorDetails> quantityNotEnough(ProductQuantityNotEnoughException error, WebRequest webRequest){
+		
+		ErrorDetails errorDetail = new ErrorDetails(LocalDateTime.now(), HttpStatus.BAD_REQUEST.value(), "Bad Request", error.getMessage());
+		
+		return new ResponseEntity<ErrorDetails>(errorDetail, HttpStatus.BAD_REQUEST );
+	}
 	
 	
 	

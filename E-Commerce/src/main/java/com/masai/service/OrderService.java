@@ -98,11 +98,10 @@ public class OrderService implements OrderServiceInterface{
 		//Calling the order status method to get the details of the order cost
 		OrderDTO orderDetails = this.getOrderStatus(customerId);
 		
-		//Emptying the cart and getting the list that is to be added to the order
 		//TODO ADD CHECKING IF QUANTITY EXISTS TO PLACE ORDER
 		//ADD EXCEPTION HANDLING
+		
 		List<Item> itemsOrdered = cartService.sendToOrder(customerId);
-		System.out.println(itemsOrdered);
 		
 		//Creating the order using the cart of the user and the orderDetails
 		Ordered order = new Ordered();
@@ -114,14 +113,13 @@ public class OrderService implements OrderServiceInterface{
 		order.setItemsCost(orderDetails.getCost());
 		order.setOrderDate(LocalDate.now());
 		order.setTotalAmount(orderDetails.getTotalCost());
-//		order.setOrderedItems(itemsOrdered);
+		order.setOrderedItems(itemsOrdered);
 		
 		//Send the order to the customer to be added to the order list
 		customerServ.addCustomerOrder(customerId, order);
 		
 		return order;
 	}
-	
 	
 	//This method persists the order (Called internally only, part of order placement flow)
 	@Override 

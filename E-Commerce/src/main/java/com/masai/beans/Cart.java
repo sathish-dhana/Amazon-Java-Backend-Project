@@ -31,7 +31,6 @@ public class Cart {
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Item> items=new ArrayList<>();
-	
 
 	private Double cartTotal;
 

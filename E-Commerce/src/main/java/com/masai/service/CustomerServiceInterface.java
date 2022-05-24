@@ -15,9 +15,7 @@ public interface CustomerServiceInterface {
 	public List<Customer> viewAllCustomers();
 	public Customer updateCustomer(UserDTO userInfo, Integer id);
 	public Customer findByUsernameAndPassword(String username, String password);
-
 	public Customer persistCustomer(Integer customerID, Login login);
-
 	public Customer getCustomerById(Integer customerId);
 	public Customer addCustomerCard(Integer customerId, Card card);
 	public Customer addCustomerAddress(Integer customerId, Address address);

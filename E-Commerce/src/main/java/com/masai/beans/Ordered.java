@@ -58,8 +58,8 @@ public class Ordered {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer orderId;
 	
-//	@OneToMany(cascade=CascadeType.ALL)
-//	private List<Item> orderedItems;
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<Item> orderedItems;
 	
 	@Column(name = "items_cost")
 	private Double itemsCost;
