@@ -22,5 +22,6 @@ public class Shipment {
 	private String shippedTo;
 	
 	private LocalDate expectedDate;
+	
 		
 }

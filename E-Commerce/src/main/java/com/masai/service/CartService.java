@@ -38,6 +38,7 @@ public class CartService implements CartServiceInterface {
 			
 		Integer cartId=(customer.getCart()).getCartId();	
 			
+
 		//Checking id the cart has the same product ? if yes ? throw exception.
 		List<Item> listOfItems = getAllItem(customer.getCart());
 			
