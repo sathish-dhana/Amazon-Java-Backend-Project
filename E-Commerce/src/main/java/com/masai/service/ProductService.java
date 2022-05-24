@@ -48,12 +48,15 @@ public class ProductService implements ProductServiceInterface{
 	@Override
 	public List<Product> getAllProdcuts() {
 	
-		List<Product> allProducts = productRepo.findAllByProductStatus(ProductStatus.AVAILLABLE);
+		List<Product> allAvaillableProducts = productRepo.findAllByProductStatus(ProductStatus.AVAILLABLE);
+		List<Product> allOutOfStockProducts = productRepo.findAllByProductStatus(ProductStatus.OUT_OF_STOCK);
 		
-		if(allProducts.isEmpty()) {
+		allAvaillableProducts.addAll(allOutOfStockProducts);
+		
+		if(allAvaillableProducts.isEmpty()) {
 			throw new ProductNotFoundException("No product available");
 		}
-		return allProducts;
+		return allAvaillableProducts;
 	}
 
 	// TO GET PRODUCT BY ID
@@ -89,16 +92,16 @@ public class ProductService implements ProductServiceInterface{
 
 
 	@Override
-	public String deleteProduct(Integer productId) {
+	public String updateProductStatus(Integer productId) {
 		// TODO Auto-generated method stub
 		Optional<Product> findproduct = productRepo.findById(productId);
 		findproduct.get().setSeller(null);
 		findproduct.get().setQuantity(0);
-		findproduct.get().setProductStatus(ProductStatus.OUT_OF_STOCK);
+		findproduct.get().setProductStatus(ProductStatus.UNAVAILLABLE);
 		
 		if (findproduct.isPresent()) {
-			productRepo.deleteById(productId);
-			return "product with ID : " + productId + " deleted.";
+			productRepo.save(findproduct.get());
+			return "product with ID : " + productId + " product status updated.";
 		} else {
 			throw new ProductNotFoundException("No product found in the given id");
 		}
@@ -139,9 +142,52 @@ public class ProductService implements ProductServiceInterface{
 			productRepo.save(findproduct.get());
 			return "product with ID : " + productId + " updated.";
 		} else {
-			throw new ProductNotFoundException("No product found in the given id");
+			throw new ProductNotFoundException("No product found with the given id");
 		}
 	}
-	
-	
+
+
+	@Override
+	public Product updateProductStatusToOutOfStock(Integer productId) {
+		// TODO Auto-generated method stub
+		Optional<Product> product = productRepo.findById(productId);
+		
+		if(product.isPresent()) {
+			product.get().setProductStatus(ProductStatus.OUT_OF_STOCK);
+			return product.get();
+		} else {
+			throw new ProductNotFoundException("No product found with the given id");
+		}
+			
+		
+	}
+
+
+	@Override
+	public Product updateProductStatusToUnAvaillable(Integer productId) {
+		// TODO Auto-generated method stub
+		Optional<Product> product = productRepo.findById(productId);
+		
+		if(product.isPresent()) {
+			product.get().setProductStatus(ProductStatus.UNAVAILLABLE);
+			return product.get();
+		} else {
+			throw new ProductNotFoundException("No product found with the given id");
+		}
+	}
+
+
+	@Override
+	public Product updateProductStatusToAvaillable(Integer productId) {
+		// TODO Auto-generated method stub
+		Optional<Product> product = productRepo.findById(productId);
+		
+		if(product.isPresent()) {
+			product.get().setProductStatus(ProductStatus.AVAILLABLE);
+			return product.get();
+		} else {
+			throw new ProductNotFoundException("No product found with the given id");
+		}
+	}
+		
 }

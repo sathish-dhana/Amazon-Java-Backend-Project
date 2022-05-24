@@ -2,6 +2,6 @@ package com.masai.beans;
 
 public enum ProductStatus {
 	AVAILLABLE,
-	SOLD,
+	UNAVAILLABLE,
 	OUT_OF_STOCK
 }
