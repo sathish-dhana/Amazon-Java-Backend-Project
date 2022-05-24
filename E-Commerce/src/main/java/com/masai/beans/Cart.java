@@ -24,18 +24,17 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Cart {
 	
+	//@JsonIgnore
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer cartId;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JsonIgnoreProperties(value= {
-			"product",
-			"itemPrice",
-			"requiredQuantity"
+			"itemId",
 	})
 	private List<Item> items=new ArrayList<>();
 	
-	@JsonIgnore
+
 	private Double cartTotal;
 }
