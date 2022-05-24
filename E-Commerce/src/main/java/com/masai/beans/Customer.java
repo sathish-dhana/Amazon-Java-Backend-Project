@@ -1,9 +1,12 @@
 package com.masai.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -24,7 +27,11 @@ public class Customer extends User{
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cart_id")
+	@JsonIgnore
 	private Cart cart;
+	
+//	@OneToMany(cascade=CascadeType.ALL)
+//	private List<Order> orders = new ArrayList<Order>();
 	
 	@OneToOne
 	@JoinColumn(name = "card_Number")
@@ -34,6 +41,6 @@ public class Customer extends User{
 	public Card getCardDetails() {
 		return this.cardDetails;
 	}
-	
+		
 }
 

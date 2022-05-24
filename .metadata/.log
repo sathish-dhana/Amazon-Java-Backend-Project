@@ -10947,3 +10947,18 @@ java.util.concurrent.TimeoutException
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 13:11:25.670
 !MESSAGE executing callback sts4.classpath.SNOngLSz SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 17:33:07.270
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 17:33:07.272
+!MESSAGE classpath=95 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 17:33:07.273
+!MESSAGE buffering callback sts4.classpath.SNOngLSz E-Commerce false 95
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 17:33:07.274
+!MESSAGE executing callback sts4.classpath.SNOngLSz 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 17:33:07.297
+!MESSAGE executing callback sts4.classpath.SNOngLSz SUCCESS [done]

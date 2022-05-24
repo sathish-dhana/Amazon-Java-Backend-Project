@@ -97,9 +97,17 @@ public class CartController {
 		
 		Login loggedUser=loginService.isTokenValid(key);
 		Customer customer=customerCrudRepo.findByUserId(loggedUser.getUser().getUserId());
-		
-		
-		
+
 		return null;
+	}
+	
+	
+	//ENDPOINT FOR TESTING
+	@PostMapping(value="/cart/removeItem")
+	public ResponseEntity<List<Item>> removeItemFromCart(@RequestParam String key, @RequestParam String itemId) {
+		int itemIdd = Integer.valueOf(itemId);
+		Login loggedUser=loginService.isTokenValid(key);
+		List<Item> list = cartService.sendToOrder(loggedUser.getUser().getUserId());
+		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 }
