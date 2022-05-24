@@ -99,7 +99,7 @@ public class SellerController {
 	// Request Type? --> POST Request
 	// Input 		 --> Address Object and Login key in the param
 	@PostMapping("/seller/addAddress")
-	public ResponseEntity<Seller> addSellerAddress(@RequestParam String key, @RequestBody Address address) {
+	public ResponseEntity<Seller> addSellerAddress(@RequestParam String key, @Valid @RequestBody Address address) {
 		Login currentLogin = loginService.isTokenValid(key);
 		Seller seller = sellerService.addSellerAddress(currentLogin.getUser().getUserId(), address);
 		return new ResponseEntity(seller, HttpStatus.CREATED);
