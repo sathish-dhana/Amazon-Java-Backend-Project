@@ -21,14 +21,14 @@ public class OrderService implements OrderServiceInterface{
 	@Override
 	public OrderDTO getAllOrders(Integer customerId) {
 		
-<<<<<<< HEAD
-//		Customer customer = customerServ.getCustomerById(customerId);
-//		
-//		OrderDTO order = new OrderDTO();
+
+		//Customer customer = customerServ.getCustomerById(customerId);
+		
+		//OrderDTO order = new OrderDTO();
 		
 		//order.setOrderItems(customer.getCart()            //set up the list here
-		return null;
-=======
+//		return null;
+
 		//getting customer using customerID
 		Customer customer = customerServ.getCustomerById(customerId);
 		
@@ -83,7 +83,7 @@ public class OrderService implements OrderServiceInterface{
 		
 		//final cost paid by customer
 		order.setTotalCost(total + order.getGst() + order.getDeliveryCost());
->>>>>>> a275f359831912aacfbca65e58a356058a2e61a1
+
 		
 		return order;
 		
