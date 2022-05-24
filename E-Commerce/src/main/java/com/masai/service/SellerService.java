@@ -37,11 +37,14 @@ public class SellerService implements SellerServiceInterface {
 	@Autowired
 	private AddressServiceInterface addressService;
 	
+	
+	//Method for adding seller to database//
 	@Override
 	public Seller addSeller(Seller seller) {
 		// TODO Auto-generated method stub
 		
 		Optional<Seller> checkSeller = sellerCrudRepo.findByUserName(seller.getUserName());
+		
 		Seller savedSeller = null;
 		
 		if (!checkSeller.isPresent()) {
@@ -53,6 +56,8 @@ public class SellerService implements SellerServiceInterface {
 		return savedSeller;
 	}
 	
+	
+	//Method for removing the seller from database//
 	@Override
 	public String removeSeller(UserDTO userInfo) {
 		
@@ -69,24 +74,6 @@ public class SellerService implements SellerServiceInterface {
 	}
 	
 	
-	@Override
-	public String removeSellerById(Integer sellerId) {
-		// TODO Auto-generated method stub
-		
-		//checking if seller exist or not
-		Optional<Seller> checkSeller = sellerCrudRepo.findById(sellerId);
-		String message = "Not deleted";
-		
-		if (checkSeller.isPresent()) {
-			sellerCrudRepo.deleteById(sellerId);
-			message = "Deleted seller \nseller name : " + checkSeller.get().getUserName() + "\nId : " + checkSeller.get().getUserId();
-		} else {
-			throw new SellerNotFoundException("seller not found");
-		}
-
-		return message;
-	}
-
 	@Override
 	public List<Seller> viewAllSeller() {
 		// TODO Auto-generated method stub
