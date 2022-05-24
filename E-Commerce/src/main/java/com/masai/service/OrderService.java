@@ -11,6 +11,7 @@ import com.masai.beans.Item;
 import com.masai.beans.OrderDTO;
 import com.masai.beans.Product;
 import com.masai.beans.ProductCategory;
+import com.masai.exception.NoProductFoundInCart;
 
 @Service
 public class OrderService implements OrderServiceInterface{
@@ -28,6 +29,9 @@ public class OrderService implements OrderServiceInterface{
 		
 		//getting the cart list of that customer
 		List<Item> cartList = customer.getCart().getItems();
+		
+		if(cartList.isEmpty())
+			throw new NoProductFoundInCart("No Products are found in the cart to order");
 		
 		order.setOrderItems(cartList);         
 	

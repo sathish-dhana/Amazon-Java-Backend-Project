@@ -19,6 +19,7 @@ import com.masai.exception.CustomerNotFoundException;
 import com.masai.exception.ErrorDetails;
 import com.masai.exception.InvalidLoginKeyException;
 import com.masai.exception.LoginFailedException;
+import com.masai.exception.NoProductFoundInCart;
 import com.masai.exception.ProductNotFoundException;
 import com.masai.exception.SellerAlreadyExistException;
 import com.masai.exception.SellerNotFoundException;
@@ -140,4 +141,23 @@ public class ExceptionHandler {
 		
 		return new ResponseEntity<>(errorDetail, HttpStatus.BAD_REQUEST);
 	}
+	
+	
+	//-------------------------------------------------------------------------//
+    //									ORDER EXCEPTIONS
+	//-------------------------------------------------------------------------//
+	
+	@org.springframework.web.bind.annotation.ExceptionHandler(NoProductFoundInCart.class)
+	public ResponseEntity<ErrorDetails> orderHandler(NoProductFoundInCart error, WebRequest webRequest){
+		
+		ErrorDetails errorDetail = new ErrorDetails(LocalDateTime.now(), HttpStatus.BAD_REQUEST.value(), "Bad Request", error.getMessage());
+		
+		return new ResponseEntity<ErrorDetails>(errorDetail, HttpStatus.BAD_REQUEST );
+	}
+	
+	
+	
+	
+	
+	
 }
