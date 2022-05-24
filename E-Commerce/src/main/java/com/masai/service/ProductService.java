@@ -77,7 +77,7 @@ public class ProductService implements ProductServiceInterface{
 
 	//TO REDUCE QUANTITY AFTER PRODUCTS PURCHASED
 	@Override
-	public Product reduceQuantity(Integer id, int quantityToReduce) {
+	public synchronized Product reduceQuantity(Integer id, int quantityToReduce) {
 		
 		Product updatedProduct = productRepo.findById(id).get();
 		updatedProduct.setQuantity(updatedProduct.getQuantity() - quantityToReduce);
