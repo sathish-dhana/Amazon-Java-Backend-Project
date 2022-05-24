@@ -20,7 +20,6 @@ public class CardService implements CardServiceInteface {
 	
 	@Override
 	public Card addCard(Card card) {
-		// TODO Auto-generated method stub
 		Optional<Card> checkCard = cardCrudRepo.findByCardNumber(card.getCardNumber());
 		Card savedcard = null;
 		
@@ -35,7 +34,6 @@ public class CardService implements CardServiceInteface {
 
 	@Override
 	public String removeCard(Card card) {
-		// TODO Auto-generated method stub
 		Optional<Card> checkSeller = cardCrudRepo.findByCardNumber(card.getCardNumber());
 		
 		if (checkSeller.isPresent()) {
@@ -48,7 +46,6 @@ public class CardService implements CardServiceInteface {
 	
 	@Override
 	public Card updateCard(Card card, Card updatedCard) {
-		// TODO Auto-generated method stub
 		Optional<Card> checkSeller = cardCrudRepo.findByCardNumber(card.getCardNumber());
 		
 		if (checkSeller.isPresent()) {
