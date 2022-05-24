@@ -113,6 +113,7 @@ public class OrderService implements OrderServiceInterface{
 		//Creation of shipment
 		Shipment shipment = new Shipment();
 		shipment.setShippedTo(addressService.getAddressById(addressId).toString());
+		
 		shipment.setShippedFrom(itemsOrdered.get(0).getProduct().getSeller().getAddresses().get(0).toString());
 		shipment.setExpectedDate(LocalDate.now().plusDays(7));
 		
@@ -162,6 +163,4 @@ public class OrderService implements OrderServiceInterface{
 		return newOrder;
 	}
 	
-	
-
 }

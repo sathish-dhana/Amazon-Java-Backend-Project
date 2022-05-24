@@ -106,6 +106,8 @@ public class CartService implements CartServiceInterface {
 		
 		cart.getItems().clear();
 		
+		cart.setCartTotal(0.0);
+		
 		cartCrudRepo.save(cart);
 		
 		return orders;

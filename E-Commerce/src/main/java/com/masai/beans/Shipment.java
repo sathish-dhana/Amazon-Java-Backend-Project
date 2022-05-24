@@ -2,10 +2,8 @@ package com.masai.beans;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,5 +21,6 @@ public class Shipment {
 	
 	private LocalDate expectedDate;
 	
+	private DeliveryStatus deliveryStatus = DeliveryStatus.IN_TRANSIT;
 		
 }
