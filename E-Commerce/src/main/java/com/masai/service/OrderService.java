@@ -2,8 +2,6 @@ package com.masai.service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,10 +9,13 @@ import org.springframework.stereotype.Service;
 import com.masai.beans.Card;
 import com.masai.beans.Customer;
 import com.masai.beans.Item;
-import com.masai.beans.Ordered;
 import com.masai.beans.OrderDTO;
+import com.masai.beans.Ordered;
+import com.masai.beans.PlaceOrderDTO;
 import com.masai.beans.Product;
 import com.masai.beans.ProductCategory;
+import com.masai.exception.AddressNotFoundException;
+import com.masai.exception.CardDetailsNotFoundException;
 import com.masai.exception.NoProductFoundInCart;
 import com.masai.repository.OrderCrudRepo;
 
@@ -26,6 +27,9 @@ public class OrderService implements OrderServiceInterface{
 	
 	@Autowired
 	private CartService cartService;
+	
+	@Autowired
+	private AddressServiceInterface addressService;
 	
 	@Autowired 
 	private OrderCrudRepo orderCrudRepo;
@@ -98,8 +102,7 @@ public class OrderService implements OrderServiceInterface{
 		//Calling the order status method to get the details of the order cost
 		OrderDTO orderDetails = this.getOrderStatus(customerId);
 		
-		//TODO ADD CHECKING IF QUANTITY EXISTS TO PLACE ORDER
-		//ADD EXCEPTION HANDLING
+		//TODO ADD EXCEPTION HANDLING
 		
 		List<Item> itemsOrdered = cartService.sendToOrder(customerId);
 		
@@ -126,6 +129,29 @@ public class OrderService implements OrderServiceInterface{
 	public Ordered addOrder(Ordered order) {
 		Ordered placedOrder = orderCrudRepo.save(order);
 		return placedOrder;
+	}
+	
+	//Calling this method will trigger the order creation
+	@Override
+	public Ordered placeOrder(int customerId, PlaceOrderDTO paymentInfo) {
+		
+		int addressId = paymentInfo.getAddressId();
+		
+		//Checking if the addressId exists
+		if(!addressService.checkAddressId(addressId)) {
+			throw new AddressNotFoundException("No Address exists for this ID.");
+		}
+		
+		//Checking if the card is available
+		Card cardUsedForPayment = customerServ.getCustomerById(customerId).getCardDetails();
+		if(cardUsedForPayment == null) {
+			//TODO Date validation for card
+			throw new CardDetailsNotFoundException("Please add a card for payment before proceeding.");
+		}
+		
+		Ordered newOrder = this.createOrder(customerId, cardUsedForPayment.getCardNumber().substring(cardUsedForPayment.getCardNumber().length() - 4));
+		
+		return newOrder;
 	}
 	
 	

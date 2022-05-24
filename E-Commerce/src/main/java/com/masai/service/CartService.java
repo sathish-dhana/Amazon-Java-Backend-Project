@@ -64,6 +64,7 @@ public class CartService implements CartServiceInterface {
 	//WORKING FINE
 	//WHAT IT DOES IS..  IT REMOVES THE ITEM FROM THE USER CART BUT KEEPS IT IN THE 
 	//DATABASE.
+	//Returns the list of items deleted from the cart
 	//TODO CHECK QUANTITY BEFORE PLACING ORDER
 	@Override
 	public List<Item> sendToOrder(int customerId) throws ProductQuantityNotEnoughException{

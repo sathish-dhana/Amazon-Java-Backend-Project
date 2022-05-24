@@ -142,4 +142,10 @@ public class AddressService implements AddressServiceInterface {
 		
 	}
 
+	@Override
+	public boolean checkAddressId(int addressId) {
+		Optional<Address> opt = addressCrudRepo.findById(addressId);
+		return opt.isPresent();
+	}
+
 }
