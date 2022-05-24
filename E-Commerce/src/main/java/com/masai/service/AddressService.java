@@ -148,4 +148,15 @@ public class AddressService implements AddressServiceInterface {
 		return opt.isPresent();
 	}
 
+	@Override
+	public Address getAddressById(int addressId) {
+		Optional<Address> address = addressCrudRepo.findById(addressId);
+		if(address.isEmpty()) {
+			throw new AddressNotFoundException("Invalid address ID");
+		}
+		return address.get();
+	}
+	
+	
+
 }

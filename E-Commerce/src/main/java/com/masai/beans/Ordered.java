@@ -3,16 +3,17 @@ package com.masai.beans;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -56,12 +57,14 @@ public class Ordered {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "order_id")
 	private Integer orderId;
 	
 	@OneToMany(cascade=CascadeType.ALL)
+	@Column(name = "items")
 	private List<Item> orderedItems;
 	
-	@Column(name = "items_cost")
+	@Column(name = "products_cost")
 	private Double itemsCost;
 	
 	@Column(name = "gst")
@@ -70,14 +73,19 @@ public class Ordered {
 	@Column(name = "delivery_charge")
 	private Double deliveryCharge;
 	
-	@Column(name = "total")
+	@Column(name = "total_amount")
 	private Double totalAmount;
 	
-//	@OneToOne(cascade = CascadeType.ALL)
-//	private Shipment shipment;
+	@Embedded
+	@AttributeOverrides({
+		  @AttributeOverride( name = "shippedFrom", column = @Column(name = "shipped_from_address")),
+		  @AttributeOverride( name = "shippedTo", column = @Column(name = "shipped_to_address")),
+		  @AttributeOverride( name = "expectedDate", column = @Column(name = "expected_delivery_date"))
+		})
+	private Shipment shipment;
 
 	//Last 4 digits of card used to make the payment
-	@Column(name = "payment_details")
+	@Column(name = "card_used_for_payment")
 	private String cardUsedForPayment;
 	
 	@Column(name = "order_date")

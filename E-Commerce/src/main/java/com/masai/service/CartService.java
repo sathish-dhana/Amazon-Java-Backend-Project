@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import com.masai.beans.Cart;
 import com.masai.beans.Customer;
 import com.masai.beans.Item;
+import com.masai.beans.ProductStatus;
 import com.masai.exception.ProductAlreadyFoundException;
+import com.masai.exception.ProductNotAvailableException;
 import com.masai.exception.ProductQuantityNotEnoughException;
 import com.masai.repository.CartCrudRepo;
 import com.masai.repository.CustomerCrudRepo;
@@ -33,26 +35,26 @@ public class CartService implements CartServiceInterface {
 	
 	@Override
 	public Cart saveCart(Customer customer,Item item) {
-		
-			Integer cartId=(customer.getCart()).getCartId();	
 			
-			//Checking id the cart has the same product ? if yes ? throw exception.
-			List<Item> listOfItems = getAllItem(customer.getCart());
+		Integer cartId=(customer.getCart()).getCartId();	
 			
-			if (listOfItems != null) {
-				for (Item itemCheck : listOfItems) {
-					if (itemCheck.getProduct().getProductId() == item.getProduct().getProductId()) {
-						throw new ProductAlreadyFoundException("Product already present in card, please try to update quantity");
-					}
-				}
+
+		//Checking id the cart has the same product ? if yes ? throw exception.
+		List<Item> listOfItems = getAllItem(customer.getCart());
+			
+		for (Item itemCheck : listOfItems) {
+			if (itemCheck.getProduct().getProductId() == item.getProduct().getProductId()) {
+				throw new ProductAlreadyFoundException("Product already present in cart, please try to update quantity");
 			}
+		}
 			
-			Cart cart=cartCrudRepo.findByCartId(cartId);
-			cart.getItems().add(item);
+		Cart cart=cartCrudRepo.findByCartId(cartId);
+		cart.getItems().add(item);
 
-			cart.setCartTotal((cart.getCartTotal()==null) ? 0+(double)item.getItemPrice():cart.getCartTotal().doubleValue() +(double)item.getItemPrice());
+		cart.setCartTotal((cart.getCartTotal()==null) ? 0+(double)item.getItemPrice():cart.getCartTotal().doubleValue() +(double)item.getItemPrice());
 
-			return cartCrudRepo.save(cart);
+
+		return cartCrudRepo.save(cart);
 	}
 
 
@@ -76,9 +78,8 @@ public class CartService implements CartServiceInterface {
 	//WHAT IT DOES IS..  IT REMOVES THE ITEM FROM THE USER CART BUT KEEPS IT IN THE 
 	//DATABASE.
 	//Returns the list of items deleted from the cart
-	//TODO CHECK QUANTITY BEFORE PLACING ORDER
 	@Override
-	public List<Item> sendToOrder(int customerId) throws ProductQuantityNotEnoughException{
+	public List<Item> sendToOrder(int customerId) throws ProductQuantityNotEnoughException, ProductNotAvailableException{
 		
 		Integer cartId = customerCrudRepo.findByUserId(customerId).getCart().getCartId();
 		
@@ -92,6 +93,10 @@ public class CartService implements CartServiceInterface {
 			if(item.getProduct().getQuantity() < item.getRequiredQuantity()) {
 				throw new ProductQuantityNotEnoughException("Only " + item.getProduct().getQuantity() + " units of " + item.getProduct().getProductName() + " are available. Required quantity is: " + item.getRequiredQuantity() + ". Cannot Proceed with purchase.");
 			} 
+			
+			if(item.getProduct().getProductStatus() != ProductStatus.AVAILLABLE) {
+				throw new ProductNotAvailableException("Product " + item.getProduct().getProductName() + " is not available any more.");
+			}
 		}
 		
 		//If the quantity if enough, we reduce the quantity
@@ -100,6 +105,8 @@ public class CartService implements CartServiceInterface {
 		}
 		
 		cart.getItems().clear();
+		
+		cart.setCartTotal(0.0);
 		
 		cartCrudRepo.save(cart);
 		

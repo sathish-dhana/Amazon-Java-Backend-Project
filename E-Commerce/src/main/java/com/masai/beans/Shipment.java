@@ -1,29 +1,26 @@
 package com.masai.beans;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-//@Entity
-@Getter
-@Setter
+@Embeddable
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Shipment {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer shipmentTrackId;
 	
-	private Address shippedFrom;
+	private String shippedFrom;
 	
-	private Address shippedTo;
+	private String shippedTo;
 	
 	private LocalDate expectedDate;
+	
+	private DeliveryStatus deliveryStatus = DeliveryStatus.IN_TRANSIT;
 		
 }

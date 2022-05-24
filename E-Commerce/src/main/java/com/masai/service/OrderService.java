@@ -14,6 +14,7 @@ import com.masai.beans.Ordered;
 import com.masai.beans.PlaceOrderDTO;
 import com.masai.beans.Product;
 import com.masai.beans.ProductCategory;
+import com.masai.beans.Shipment;
 import com.masai.exception.AddressNotFoundException;
 import com.masai.exception.CardDetailsNotFoundException;
 import com.masai.exception.NoProductFoundInCart;
@@ -97,7 +98,7 @@ public class OrderService implements OrderServiceInterface{
 	//Part of flow as shown below
 	//(ENDPOINT) this.placeOrder() --> this.getOrderStatus() --> cartService.sendToOrder() --> customerServ.addCustomerOrder()
 	@Override
-	public Ordered createOrder(int customerId, String lastFourDigitsOfCardUsed) {
+	public Ordered createOrder(int customerId, String lastFourDigitsOfCardUsed, int addressId) {
 		
 		//Calling the order status method to get the details of the order cost
 		OrderDTO orderDetails = this.getOrderStatus(customerId);
@@ -109,6 +110,13 @@ public class OrderService implements OrderServiceInterface{
 		//Creating the order using the cart of the user and the orderDetails
 		Ordered order = new Ordered();
 		
+		//Creation of shipment
+		Shipment shipment = new Shipment();
+		shipment.setShippedTo(addressService.getAddressById(addressId).toString());
+		
+		shipment.setShippedFrom(itemsOrdered.get(0).getProduct().getSeller().getAddresses().get(0).toString());
+		shipment.setExpectedDate(LocalDate.now().plusDays(7));
+		
 		//Creation of order
 		order.setCardUsedForPayment("XXXXXXXX".concat(lastFourDigitsOfCardUsed));
 		order.setDeliveryCharge(orderDetails.getDeliveryCost());
@@ -117,6 +125,7 @@ public class OrderService implements OrderServiceInterface{
 		order.setOrderDate(LocalDate.now());
 		order.setTotalAmount(orderDetails.getTotalCost());
 		order.setOrderedItems(itemsOrdered);
+		order.setShipment(shipment);
 		
 		//Send the order to the customer to be added to the order list
 		customerServ.addCustomerOrder(customerId, order);
@@ -149,11 +158,9 @@ public class OrderService implements OrderServiceInterface{
 			throw new CardDetailsNotFoundException("Please add a card for payment before proceeding.");
 		}
 		
-		Ordered newOrder = this.createOrder(customerId, cardUsedForPayment.getCardNumber().substring(cardUsedForPayment.getCardNumber().length() - 4));
+		Ordered newOrder = this.createOrder(customerId, cardUsedForPayment.getCardNumber().substring(cardUsedForPayment.getCardNumber().length() - 4), addressId);
 		
 		return newOrder;
 	}
 	
-	
-
 }
