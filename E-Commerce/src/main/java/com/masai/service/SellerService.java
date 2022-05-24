@@ -191,7 +191,7 @@ public class SellerService implements SellerServiceInterface {
 		if(seller.isPresent()) {
 			return seller.get();
 		} else {
-			throw new SellerNotFoundException("No such customer. Please check the provided details.");
+			throw new SellerNotFoundException("No such seller. Please check the provided details.");
 		}
 	}
 	
@@ -219,7 +219,7 @@ public class SellerService implements SellerServiceInterface {
 			
 			return sellerCrudRepo.save(getSeller.get());
 		} else {
-			throw new SellerAlreadyExistException("Customer with the given username already exists.");
+			throw new SellerAlreadyExistException("Seller with the given username already exists.");
 		}
 	}
 
@@ -243,7 +243,7 @@ public class SellerService implements SellerServiceInterface {
 			
 			return sel;
 		} else {
-			throw new SellerNotFoundException("No such customer. Please check the provided details.");
+			throw new SellerNotFoundException("No such seller. Please check the provided details.");
 		}
 	}
 
@@ -292,7 +292,7 @@ public class SellerService implements SellerServiceInterface {
 			
 			return sel;
 		} else {
-			throw new SellerNotFoundException("No such customer. Please check the provided details.");
+			throw new SellerNotFoundException("No such seller. Please check the provided details.");
 		}
 
 	}
@@ -317,7 +317,20 @@ public class SellerService implements SellerServiceInterface {
 			
 			return sel;
 		} else {
-			throw new SellerNotFoundException("No such customer. Please check the provided details.");
+			throw new SellerNotFoundException("No such seller. Please check the provided details.");
+		}
+	}
+
+	@Override
+	public List<Product> viewAllProductsBySeller(Integer sellerId) {
+		
+		Optional<Seller> seller = sellerCrudRepo.findById(sellerId);
+		
+		if (seller.isPresent()) {
+			
+			return seller.get().getProducts();
+		} else {
+			throw new SellerNotFoundException("No such seller. Please check the provided details.");
 		}
 	}
 	
