@@ -22,6 +22,7 @@ public interface AddressServiceInterface {
 	
 	public Set<User> listAllUserByCity(String city);
 	public Set<User> listAllUserByState(String state);
+	public Set<User> listAllUserByPincode(String pincode);
 	
 	public Address persistCustomer(Customer customer, Address address);
 	public String deleteAddress(Integer addressId);

@@ -130,6 +130,22 @@ public class AddressService implements AddressServiceInterface {
 		return user;
 	}
 	
+	@Override
+	public Set<User> listAllUserByPincode(String pincode) {
+		// TODO Auto-generated method stub
+		List<Address> listAddress = addressCrudRepo.findByPincode(pincode);
+		Set<User> user = new HashSet();
+		
+		if (listAddress.size() > 0) {
+			for (Address address : listAddress) {
+				user.add(address.getUser());
+			}
+		} else {
+			throw new AddressNotFoundException("No user Found in " + pincode);
+		}
+		return user;
+	}
+	
 	public Address persistCustomer(Customer customer, Address address) {
 		address.setUser(customer);
 		Address savedAddress = addressCrudRepo.save(address);
