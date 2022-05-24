@@ -11,6 +11,7 @@ import com.masai.beans.Card;
 import com.masai.beans.Cart;
 import com.masai.beans.Customer;
 import com.masai.beans.Login;
+import com.masai.beans.Ordered;
 import com.masai.beans.Seller;
 import com.masai.beans.UserDTO;
 import com.masai.exception.CustomerAlreadyExistsException;
@@ -29,6 +30,9 @@ public class CustomerService implements CustomerServiceInterface {
 	
 	@Autowired
 	private AddressServiceInterface addressService;
+	
+	@Autowired
+	private OrderServiceInterface orderService;
 	
 	@Override
 	public Customer addCustomer(Customer customer) {
@@ -214,6 +218,22 @@ public class CustomerService implements CustomerServiceInterface {
 		} else {
 			throw new CustomerNotFoundException("No such customer. Please check the provided details.");
 		}
+	}
+	
+	@Override
+	public Customer addCustomerOrder(Integer customerId, Ordered order) {
+
+		Optional<Customer> getCustomer = customerCrudRepo.findById(customerId);
+		
+		if (getCustomer.isPresent()) {
+			Ordered addOrder = orderService.addOrder(order);
+			getCustomer.get().getOrders().add(addOrder);
+			Customer savedCustomer = customerCrudRepo.save(getCustomer.get());
+			return savedCustomer;
+		} else {
+			throw new CustomerAlreadyExistsException("Wrong customer ID, check your login key");
+		}
+		
 	}
 
 }

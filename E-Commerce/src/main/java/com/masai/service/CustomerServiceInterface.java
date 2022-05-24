@@ -6,6 +6,7 @@ import com.masai.beans.Address;
 import com.masai.beans.Card;
 import com.masai.beans.Customer;
 import com.masai.beans.Login;
+import com.masai.beans.Ordered;
 import com.masai.beans.UserDTO;
 
 public interface CustomerServiceInterface {
@@ -21,4 +22,5 @@ public interface CustomerServiceInterface {
 	public Customer addCustomerCard(Integer customerId, Card card);
 	public Customer addCustomerAddress(Integer customerId, Address address);
 	public Customer removeCustomerAddress(Integer customerId, Integer addressId);
+	public Customer addCustomerOrder(Integer customerId, Ordered order);
 }

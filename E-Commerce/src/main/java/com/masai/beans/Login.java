@@ -35,7 +35,7 @@ public class Login {
 	
 	@JsonIgnoreProperties("login")
 	@OneToOne(cascade = CascadeType.ALL)
-	User user;
+	private User user;
 	
 	public void newLogin() {
 		this.apiKey = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 6);

@@ -92,12 +92,12 @@ public class AddressController {
 		// What is does? --> GET user with city
 		// Request Type? --> GET Request
 		// Input 		 --> String state
-		@GetMapping("/state/{state}")
-		public ResponseEntity<Address> listAllUserByState(@PathVariable("state") String state) {
-			state = state.toLowerCase();
-			Set<User> listOfUser = addressService.listAllUserByState(state);
-			return new ResponseEntity(listOfUser, HttpStatus.OK);
-		}
+//		@GetMapping("/state/{state}")
+//		public ResponseEntity<Address> listAllUserByState(@PathVariable("state") String state) {
+//			state = state.toLowerCase();
+//			Set<User> listOfUser = addressService.listAllUserByState(state);
+//			return new ResponseEntity(listOfUser, HttpStatus.OK);
+//		}
 		
 		//ADD ENDPOINT TO GET ALL ADDRESSES OF THE USER
 

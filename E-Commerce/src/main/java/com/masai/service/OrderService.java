@@ -3,6 +3,7 @@ package com.masai.service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import com.masai.beans.OrderDTO;
 import com.masai.beans.Product;
 import com.masai.beans.ProductCategory;
 import com.masai.exception.NoProductFoundInCart;
+import com.masai.repository.OrderCrudRepo;
 
 @Service
 public class OrderService implements OrderServiceInterface{
@@ -24,6 +26,9 @@ public class OrderService implements OrderServiceInterface{
 	
 	@Autowired
 	private CartService cartService;
+	
+	@Autowired 
+	private OrderCrudRepo orderCrudRepo;
 	
 	@Override
 	public OrderDTO getOrderStatus(Integer customerId) {
@@ -82,7 +87,11 @@ public class OrderService implements OrderServiceInterface{
 		
 	}
 	
-	//Create endpoint for this and it will call the empty cart method
+	//This method creates the order as the name suggests
+	//It is never exposed publically. 
+	//Called internally by the placeOrder method.
+	//Part of flow as shown below
+	//(ENDPOINT) PlaceOrder() --> getOrderStatus() --> cartService.sendToOrder() --> 
 	@Override
 	public Ordered createOrder(int customerId, String lastFourDigitsOfCardUsed) {
 		
@@ -91,23 +100,32 @@ public class OrderService implements OrderServiceInterface{
 		
 		//Emptying the cart and getting the list that is to be added to the order
 		List<Item> itemsOrdered = cartService.sendToOrder(customerId);
+		System.out.println(itemsOrdered);
 		
 		//Creating the order using the cart of the user and the orderDetails
-//		Order order = new Order();
-//		
-//		//Creation of order
-//		order.setCardUsedForPayment("XXXXXXXX".concat(lastFourDigitsOfCardUsed));
-//		order.setDeliveryCharge(orderDetails.getDeliveryCost());
-//		order.setGst(orderDetails.getGst());
-//		order.setItemsCost(orderDetails.getCost());
-////		order.setOrderDate(LocalDate.now());
-////		order.setOrderedItems(itemsOrdered);
-//		order.setTotalAmount(orderDetails.getTotalCost());
+		Ordered order = new Ordered();
 		
+		//Creation of order
+		order.setCardUsedForPayment("XXXXXXXX".concat(lastFourDigitsOfCardUsed));
+		order.setDeliveryCharge(orderDetails.getDeliveryCost());
+		order.setGst(orderDetails.getGst());
+		order.setItemsCost(orderDetails.getCost());
+		order.setOrderDate(LocalDate.now());
+		order.setTotalAmount(orderDetails.getTotalCost());
+//		order.setOrderedItems(itemsOrdered);
 		
 		//Send the order to the customer to be added to the order list
+		customerServ.addCustomerOrder(customerId, order);
 		
-		return null;
+		return order;
+	}
+	
+	
+	//This method persists the order (Called internally only, part of order placement flow)
+	@Override 
+	public Ordered addOrder(Ordered order) {
+		Ordered placedOrder = orderCrudRepo.save(order);
+		return placedOrder;
 	}
 	
 	
