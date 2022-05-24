@@ -91,7 +91,7 @@ public class OrderService implements OrderServiceInterface{
 	//It is never exposed publically. 
 	//Called internally by the placeOrder method.
 	//Part of flow as shown below
-	//(ENDPOINT) PlaceOrder() --> getOrderStatus() --> cartService.sendToOrder() --> 
+	//(ENDPOINT) this.placeOrder() --> this.getOrderStatus() --> cartService.sendToOrder() --> customerServ.addCustomerOrder()
 	@Override
 	public Ordered createOrder(int customerId, String lastFourDigitsOfCardUsed) {
 		
@@ -99,6 +99,8 @@ public class OrderService implements OrderServiceInterface{
 		OrderDTO orderDetails = this.getOrderStatus(customerId);
 		
 		//Emptying the cart and getting the list that is to be added to the order
+		//TODO ADD CHECKING IF QUANTITY EXISTS TO PLACE ORDER
+		//ADD EXCEPTION HANDLING
 		List<Item> itemsOrdered = cartService.sendToOrder(customerId);
 		System.out.println(itemsOrdered);
 		

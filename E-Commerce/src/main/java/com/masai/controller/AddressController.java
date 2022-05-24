@@ -62,6 +62,7 @@ public class AddressController {
 				Set<User> listOfUser = addressService.listAllUserByPincode(pincode);
 				return new ResponseEntity(listOfUser, HttpStatus.OK);
 			}
+}
 	
 		//xxxxxxxxxxxxxxxxx Un-used endpoint xxxxxxxxxxxxxxxxxxxxxxxxxx
  			
@@ -88,6 +89,7 @@ public class AddressController {
 		
 		
 
+
 		// Handle		 --> /ecommerce/sellerPortal/address/{city}
 		// What is does? --> GET user with city
 		// Request Type? --> GET Request
@@ -102,4 +104,3 @@ public class AddressController {
 		//ADD ENDPOINT TO GET ALL ADDRESSES OF THE USER
 
 
-}
