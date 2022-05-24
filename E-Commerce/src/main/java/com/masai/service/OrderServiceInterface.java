@@ -7,4 +7,5 @@ public interface OrderServiceInterface {
 
 	public OrderDTO getOrderStatus(Integer customerId);
 	public Ordered createOrder(int customerId, String lastFourDigitsOfCardUsed);
+	public Ordered addOrder(Ordered order);
 }
