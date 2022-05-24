@@ -32,15 +32,17 @@ public class CartService implements CartServiceInterface {
 	
 	@Override
 	public Cart saveCart(Customer customer,Item item) {
+			
 		
 		
-			Integer cartId=(customer.getCart()).getCartId();	
-			Cart cart=cartCrudRepo.findByCartId(cartId);
-			cart.getItems().add(item);
+		Integer cartId=(customer.getCart()).getCartId();	
+		Cart cart=cartCrudRepo.findByCartId(cartId);
+		
+		cart.getItems().add(item);
 
-			cart.setCartTotal((cart.getCartTotal()==null) ? 0+(double)item.getItemPrice():cart.getCartTotal().doubleValue() +(double)item.getItemPrice());
+		cart.setCartTotal((cart.getCartTotal()==null) ? 0+(double)item.getItemPrice():cart.getCartTotal().doubleValue() +(double)item.getItemPrice());
 
-			return cartCrudRepo.save(cart);
+		return cartCrudRepo.save(cart);
 	
 	}
 

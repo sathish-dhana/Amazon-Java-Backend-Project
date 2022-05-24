@@ -73,8 +73,8 @@ public class Ordered {
 	@Column(name = "total")
 	private Double totalAmount;
 	
-//	@OneToOne(cascade = CascadeType.ALL)
-//	private Shipment shipment;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Shipment shipment;
 
 	//Last 4 digits of card used to make the payment
 	@Column(name = "payment_details")

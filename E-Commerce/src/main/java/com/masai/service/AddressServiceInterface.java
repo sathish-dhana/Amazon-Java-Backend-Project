@@ -22,4 +22,5 @@ public interface AddressServiceInterface {
 	public String deleteAddress(Integer addressId);
 	
 	public boolean checkAddressId(int userId);
+	public Address getAddressById(int addressId);
 }
