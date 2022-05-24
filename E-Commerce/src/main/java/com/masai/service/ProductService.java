@@ -81,6 +81,7 @@ public class ProductService implements ProductServiceInterface{
 		
 		Product updatedProduct = productRepo.findById(id).get();
 		updatedProduct.setQuantity(updatedProduct.getQuantity() - quantityToReduce);
+		productRepo.save(updatedProduct);
 		return updatedProduct;
 	}
 
@@ -137,7 +138,6 @@ public class ProductService implements ProductServiceInterface{
 			throw new ProductNotFoundException("No product found in the given id");
 		}
 	}
-	
 	
 	
 }

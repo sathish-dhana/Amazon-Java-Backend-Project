@@ -21,6 +21,7 @@ import com.masai.exception.InvalidLoginKeyException;
 import com.masai.exception.LoginFailedException;
 import com.masai.exception.NoProductFoundInCart;
 import com.masai.exception.ProductNotFoundException;
+import com.masai.exception.ProductQuantityNotEnoughException;
 import com.masai.exception.SellerAlreadyExistException;
 import com.masai.exception.SellerNotFoundException;
 
@@ -155,7 +156,13 @@ public class ExceptionHandler {
 		return new ResponseEntity<ErrorDetails>(errorDetail, HttpStatus.BAD_REQUEST );
 	}
 	
-	
+	@org.springframework.web.bind.annotation.ExceptionHandler(ProductQuantityNotEnoughException.class)
+	public ResponseEntity<ErrorDetails> quantityNotEnough(ProductQuantityNotEnoughException error, WebRequest webRequest){
+		
+		ErrorDetails errorDetail = new ErrorDetails(LocalDateTime.now(), HttpStatus.BAD_REQUEST.value(), "Bad Request", error.getMessage());
+		
+		return new ResponseEntity<ErrorDetails>(errorDetail, HttpStatus.BAD_REQUEST );
+	}
 	
 	
 	
