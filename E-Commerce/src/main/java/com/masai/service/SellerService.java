@@ -320,6 +320,19 @@ public class SellerService implements SellerServiceInterface {
 			throw new SellerNotFoundException("No such seller. Please check the provided details.");
 		}
 	}
+
+	@Override
+	public List<Product> viewAllProductsBySeller(Integer sellerId) {
+		
+		Optional<Seller> seller = sellerCrudRepo.findById(sellerId);
+		
+		if (seller.isPresent()) {
+			
+			return seller.get().getProducts();
+		} else {
+			throw new SellerNotFoundException("No such seller. Please check the provided details.");
+		}
+	}
 	
 	
 }

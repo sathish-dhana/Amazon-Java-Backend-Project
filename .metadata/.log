@@ -10839,3 +10839,15 @@ java.util.concurrent.TimeoutException
 	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655)
 	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622)
 	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 11:46:21.207
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.TQBtSjVk
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 11:46:21.215
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.TQBtSjVk
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 11:46:21.215
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-05-24 11:46:21.216
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.TQBtSjVk => OK

@@ -136,6 +136,17 @@ public class SellerController {
 		Login currentLogin = loginService.isTokenValid(key);
 		Seller addedProduct = sellerService.updateProducts(currentLogin.getUser().getUserId(), productId, product);
 		return new ResponseEntity(addedProduct, HttpStatus.ACCEPTED);
-		}
+	}
+	
+	// Handle		 --> /ecommerce/sellerPortal/seller/products
+	// What is does? --> View all products added by seller
+	// Request Type? --> view Request
+	// Input 		 --> uuid
+	@GetMapping("/seller/products")
+	public ResponseEntity<Seller> viewSellers(@RequestParam String key) {
+		Login currentLogin = loginService.isTokenValid(key);
+		List<Product> productList = sellerService.viewAllProductsBySeller(currentLogin.getUser().getUserId());
+		return new ResponseEntity(productList, HttpStatus.FOUND);
+	}
 		
 }
