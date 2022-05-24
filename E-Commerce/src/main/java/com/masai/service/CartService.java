@@ -1,5 +1,6 @@
 package com.masai.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,12 +64,19 @@ public class CartService implements CartServiceInterface {
 	//FOR NOW IT IS JUST USED FOR TESTING
 	//I WAS ABLE TO REMOVE FROM CART AND STILL KEEP THE DATA IN THE DATABASE
 	@Override
-	public Cart sendToOrder(int customerId, int itemId) {
+	public List<Item> sendToOrder(int customerId) {
+		
 		Integer cartId = customerCrudRepo.findByUserId(customerId).getCart().getCartId();
+		
 		Cart cart = cartCrudRepo.findByCartId(cartId);
-		cart.getItems().remove(0);
+		
+		List<Item> orders = new ArrayList<>(cart.getItems());
+		
+		cart.getItems().clear();
+		
 		cartCrudRepo.save(cart);
-		return cart;
+		
+		return orders;
 	}
 
 

@@ -18,7 +18,7 @@ public class OrderDTO {
 	
 	private double gst;
 	
-	private int deliveryCost;
+	private double deliveryCost;
 	
 	private double totalCost;
 	

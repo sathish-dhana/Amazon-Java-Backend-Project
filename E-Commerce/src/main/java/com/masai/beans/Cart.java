@@ -30,7 +30,6 @@ public class Cart {
 	private Integer cartId;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-
 	private List<Item> items=new ArrayList<>();
 	
 

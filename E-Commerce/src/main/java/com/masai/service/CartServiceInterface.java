@@ -13,5 +13,5 @@ public interface CartServiceInterface {
 	public Cart alterCart(Customer customer, Item item);
 	
 	//Test
-	public Cart sendToOrder(int customerId, int itemId);
+	public List<Item> sendToOrder(int customerId);
 }

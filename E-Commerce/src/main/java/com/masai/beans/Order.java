@@ -17,14 +17,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//@Entity
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class Order {
 	
 	//WITH CUSTOMER
-	//Order has ManyToOne relation with user
+	//Order has ManyToOne relation with customer
 	//One order can have one customer
 	//One user can have multiple orders
 	//Unidirectional from customer
@@ -54,33 +54,31 @@ public class Order {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(updatable = false)
-	private int orderId;
+	private Integer orderId;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	private List<Item> orderedItems;
+//	@OneToMany(cascade=CascadeType.ALL)
+//	private List<Item> orderedItems;
 	
 	@Column(name = "items_cost")
-	private int itemsCost;
+	private Double itemsCost;
 	
 	@Column(name = "gst")
-	private int gst;
+	private Double gst;
 	
 	@Column(name = "delivery_charge")
-	private int deliveryCharge;
+	private Double deliveryCharge;
 	
 	@Column(name = "total")
-	@NotNull
-	private int totalAmount;
+	private Double totalAmount;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	private Shipment shipment;
-	
+//	@OneToOne(cascade = CascadeType.ALL)
+//	private Shipment shipment;
+
 	//Last 4 digits of card used to make the payment
 	@Column(name = "payment_details")
 	private String cardUsedForPayment;
 	
-	@Column(name = "order_date")
-	private LocalDate orderDate;
+//	@Column(name = "order_date")
+//	private LocalDate orderDate;
 	
 }
