@@ -41,7 +41,7 @@ public class Product {
 	
 //	private Double rating;
 	
-	@Min(value = 1, message = "Minimum quantity should be 1")
+	@Min(value = 0, message = "Minimum quantity should be 1")
 	private Integer quantity;
 	
 //	@NotNull(message = "Only ELECTRONICS, MOBILE, CLOTHES categories allowed")

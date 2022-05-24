@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 import com.masai.beans.Cart;
 import com.masai.beans.Customer;
 import com.masai.beans.Item;
-import com.masai.beans.User;
-import com.masai.exception.ProductNotFoundException;
+import com.masai.exception.ProductQuantityNotEnoughException;
 import com.masai.repository.CartCrudRepo;
 import com.masai.repository.CustomerCrudRepo;
 import com.masai.repository.ItemCrudRepo;
@@ -27,6 +26,10 @@ public class CartService implements CartServiceInterface {
 	
 	@Autowired
 	private ItemCrudRepo itemCrudRepo;
+	
+	@Autowired
+	private ProductServiceInterface productService;
+	
 	@Override
 	public Cart saveCart(Customer customer,Item item) {
 		
@@ -61,16 +64,28 @@ public class CartService implements CartServiceInterface {
 	//WORKING FINE
 	//WHAT IT DOES IS..  IT REMOVES THE ITEM FROM THE USER CART BUT KEEPS IT IN THE 
 	//DATABASE.
-	//FOR NOW IT IS JUST USED FOR TESTING
-	//I WAS ABLE TO REMOVE FROM CART AND STILL KEEP THE DATA IN THE DATABASE
+	//TODO CHECK QUANTITY BEFORE PLACING ORDER
 	@Override
-	public List<Item> sendToOrder(int customerId) {
+	public List<Item> sendToOrder(int customerId) throws ProductQuantityNotEnoughException{
 		
 		Integer cartId = customerCrudRepo.findByUserId(customerId).getCart().getCartId();
 		
 		Cart cart = cartCrudRepo.findByCartId(cartId);
 		
 		List<Item> orders = new ArrayList<>(cart.getItems());
+		
+		//Checking if the quantity of ALL the products is enough to proceed.
+		//If not, throw Not enough quantity exception with proper message.
+		for(Item item: orders) {
+			if(item.getProduct().getQuantity() < item.getRequiredQuantity()) {
+				throw new ProductQuantityNotEnoughException("Only " + item.getProduct().getQuantity() + " units of " + item.getProduct().getProductName() + " are available. Required quantity is: " + item.getRequiredQuantity() + ". Cannot Proceed with purchase.");
+			} 
+		}
+		
+		//If the quantity if enough, we reduce the quantity
+		for(Item item: orders) {
+			productService.reduceQuantity(item.getProduct().getProductId(), item.getRequiredQuantity());
+		}
 		
 		cart.getItems().clear();
 		
