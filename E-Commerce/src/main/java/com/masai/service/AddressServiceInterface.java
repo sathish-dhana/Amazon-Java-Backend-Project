@@ -20,4 +20,6 @@ public interface AddressServiceInterface {
 	
 	public Address persistCustomer(Customer customer, Address address);
 	public String deleteAddress(Integer addressId);
+	
+	public boolean checkAddressId(int userId);
 }
