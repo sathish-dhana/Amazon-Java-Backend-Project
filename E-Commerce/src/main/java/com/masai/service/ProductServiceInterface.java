@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.masai.beans.Product;
 import com.masai.beans.ProductCategory;
+import com.masai.beans.ProductDTO;
 import com.masai.beans.Seller;
 
 public interface ProductServiceInterface {
@@ -19,4 +20,6 @@ public interface ProductServiceInterface {
 	public Product reduceQuantity(Integer id, int quantityToReduce);
 	
 	public String deleteProduct(Integer productId);
+	
+	public String updateProduct(Integer productId, ProductDTO product);
 }

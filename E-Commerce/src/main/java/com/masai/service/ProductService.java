@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.masai.beans.Product;
 import com.masai.beans.ProductCategory;
+import com.masai.beans.ProductDTO;
 import com.masai.beans.Seller;
 import com.masai.exception.ProductNotFoundException;
 import com.masai.repository.ProductCrudRepo;
@@ -97,6 +98,44 @@ public class ProductService implements ProductServiceInterface{
 			throw new ProductNotFoundException("No product found in the given id");
 		}
 		
+	}
+
+
+	@Override
+	public String updateProduct(Integer productId, ProductDTO product) {
+		// TODO Auto-generated method stub
+		Optional<Product> findproduct = productRepo.findById(productId);
+		
+		if(product.getProductName() != null) {
+			findproduct.get().setProductName(product.getProductName());
+		}
+		
+		//Updating the First Name
+		if(product.getDescription() != null) {
+			findproduct.get().setDescription(product.getDescription());
+		}
+		
+		//Updating the Last Name
+		if(product.getPrice() != null) {
+			findproduct.get().setPrice(product.getPrice());
+		}
+		
+		//Updating the Mobile Number
+		if(product.getQuantity() != null) {
+			findproduct.get().setQuantity(product.getQuantity());
+		}
+		
+		//Updating the Mobile Number
+		if(product.getCategory() != null) {
+			findproduct.get().setCategory(product.getCategory());
+		}
+		
+		if (findproduct.isPresent()) {
+			productRepo.save(findproduct.get());
+			return "product with ID : " + productId + " updated.";
+		} else {
+			throw new ProductNotFoundException("No product found in the given id");
+		}
 	}
 	
 	

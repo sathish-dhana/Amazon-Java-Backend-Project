@@ -91,4 +91,15 @@ public class CartController {
 		
 		
 	}
+	
+	@PostMapping(value="/cart/alter")
+	public ResponseEntity<Cart> alterCart(@RequestParam String key,ItemDTO item){
+		
+		Login loggedUser=loginService.isTokenValid(key);
+		Customer customer=customerCrudRepo.findByUserId(loggedUser.getUser().getUserId());
+		
+		
+		
+		return null;
+	}
 }

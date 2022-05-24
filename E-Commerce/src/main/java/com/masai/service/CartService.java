@@ -10,8 +10,10 @@ import com.masai.beans.Cart;
 import com.masai.beans.Customer;
 import com.masai.beans.Item;
 import com.masai.beans.User;
+import com.masai.exception.ProductNotFoundException;
 import com.masai.repository.CartCrudRepo;
 import com.masai.repository.CustomerCrudRepo;
+import com.masai.repository.ItemCrudRepo;
 
 @Service
 public class CartService implements CartServiceInterface {
@@ -22,6 +24,8 @@ public class CartService implements CartServiceInterface {
 	@Autowired
 	private CustomerCrudRepo customerCrudRepo;
 	
+	@Autowired
+	private ItemCrudRepo itemCrudRepo;
 	@Override
 	public Cart saveCart(Customer customer,Item item) {
 		
@@ -44,6 +48,28 @@ public class CartService implements CartServiceInterface {
 		
 		return optCart.get().getItems();	
 	}
+
+
+	@Override
+	public Cart alterCart(Customer customer, Item item) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+//	@Override
+//	public Cart alterCart(Customer customer, Item item) {
+//		// TODO Auto-generated method stub
+//		
+//		Optional<Item> optItem=itemCrudRepo.findById(item.getItemId());
+//		
+//		if(optItem.isPresent()) {
+//			
+//		}
+//		else {
+//			throw new ProductNotFoundException("Product Does not found in your cart");
+//		}
+//	}
 	
 	
 	

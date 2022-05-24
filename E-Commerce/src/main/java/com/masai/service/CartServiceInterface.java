@@ -10,5 +10,6 @@ public interface CartServiceInterface {
 	
 	public Cart  saveCart(Customer customer,Item item);
 	public List<Item> getAllItem(Cart cart);
+	public Cart alterCart(Customer customer, Item item);
 	
 }

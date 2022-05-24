@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 
 import com.masai.beans.Address;
 import com.masai.beans.Customer;
+import com.masai.beans.Product;
 import com.masai.beans.Seller;
 import com.masai.beans.User;
 import com.masai.exception.AddressAlreadyExistException;
 import com.masai.exception.AddressNotFoundException;
+import com.masai.exception.ProductNotFoundException;
 import com.masai.exception.SellerAlreadyExistException;
 import com.masai.exception.SellerNotFoundException;
 import com.masai.exception.UserNotFoundException;
@@ -135,5 +137,19 @@ public class AddressService implements AddressServiceInterface {
 		return savedAddress;
 	}
 	
+	@Override
+	public String deleteAddress(Integer addressId) {
+		// TODO Auto-generated method stub
+		Optional<Address> findAddress = addressCrudRepo.findById(addressId);
+		findAddress.get().setUser(null);
+		
+		if (findAddress.isPresent()) {
+			addressCrudRepo.deleteById(addressId);
+			return "Address with ID : " + addressId + " deleted.";
+		} else {
+			throw new AddressNotFoundException("No Address Found");
+		}
+		
+	}
 
 }
