@@ -49,6 +49,11 @@ public class CartController {
 	@Autowired
 	private ProductCrudRepo productCrudRepo;
 	
+	
+	// Handle		 --> /ecommerce/customersPortal/cart
+	// What is does? --> Adds the given product to the cart with the specified quantity
+	// Request Type? --> POST request
+	// Input 		 --> API key as request parameter, and item with valid product id and quantity
 	@PostMapping(value="/cart")
 	public ResponseEntity<Cart> addToCart(@RequestParam String key, @RequestBody ItemDTO item) {
 			
@@ -73,7 +78,11 @@ public class CartController {
 				}
 	}
 	
-	@GetMapping(value="/cart")
+	// Handle		 --> /ecommerce/customersPortal/cart/view
+	// What is does? --> Shows all the products with quantity in the cart
+	// Request Type? --> POST request
+	// Input 		 --> API key as request parameter, and item with valid product id and quantity
+	@GetMapping(value="/cart/view")
 	public  ResponseEntity<List<Item>> viewCart(@RequestParam String key){
 		
 		Login loggedUser=loginService.isTokenValid(key);

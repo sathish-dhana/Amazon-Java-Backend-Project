@@ -34,34 +34,37 @@ public class AddressController {
 			// What is does? --> GET user with city
 			// Request Type? --> GET Request
 			// Input 		 --> String city
-			@GetMapping("/city/{city}")
-			public ResponseEntity<Address> listAllUserByCity(@PathVariable("city") String city) {
-				city = city.toLowerCase();
-				Set<User> listOfUser = addressService.listAllUserByCity(city);
-				return new ResponseEntity(listOfUser, HttpStatus.OK);
-			}
+			/*
+			 * @GetMapping("/city/{city}") public ResponseEntity<Address>
+			 * listAllUserByCity(@PathVariable("city") String city) { city =
+			 * city.toLowerCase(); Set<User> listOfUser =
+			 * addressService.listAllUserByCity(city); return new ResponseEntity(listOfUser,
+			 * HttpStatus.OK); }
+			 */
 			
 			// Handle		 --> /ecommerce/sellerPortal/state/{state}
 			// What is does? --> GET user with city
 			// Request Type? --> GET Request
 			// Input 		 --> String state
-			@GetMapping("/state/{state}")
-			public ResponseEntity<Address> listAllUserByState(@PathVariable("state") String state) {
-				state = state.toLowerCase();
-				Set<User> listOfUser = addressService.listAllUserByState(state);
-				return new ResponseEntity(listOfUser, HttpStatus.OK);
-			}
+			//@GetMapping("/state/{state}")
+			/*
+			 * public ResponseEntity<Address> listAllUserByState(@PathVariable("state")
+			 * String state) { state = state.toLowerCase(); Set<User> listOfUser =
+			 * addressService.listAllUserByState(state); return new
+			 * ResponseEntity(listOfUser, HttpStatus.OK); }
+			 */
 			
 			
 			// Handle		 --> /ecommerce/sellerPortal/pincode/{pincode}
 			// What is does? --> GET user with city
 			// Request Type? --> GET Request
 			// Input 		 --> String state
-			@GetMapping("/pincode/{pincode}")
-			public ResponseEntity<Address> listAllUserByPincode(@PathVariable("pincode") String pincode) {
-				Set<User> listOfUser = addressService.listAllUserByPincode(pincode);
-				return new ResponseEntity(listOfUser, HttpStatus.OK);
-			}
+			/*
+			 * @GetMapping("/pincode/{pincode}") public ResponseEntity<Address>
+			 * listAllUserByPincode(@PathVariable("pincode") String pincode) { Set<User>
+			 * listOfUser = addressService.listAllUserByPincode(pincode); return new
+			 * ResponseEntity(listOfUser, HttpStatus.OK); }
+			 */
 }
 	
 		//xxxxxxxxxxxxxxxxx Un-used endpoint xxxxxxxxxxxxxxxxxxxxxxxxxx
