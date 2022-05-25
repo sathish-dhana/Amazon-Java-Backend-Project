@@ -38,7 +38,10 @@ public class SellerService implements SellerServiceInterface {
 	private AddressServiceInterface addressService;
 	
 	
-	//Method for adding seller to database//
+	
+	//-------------------------------------------------------------------------//
+	//	Adding seller into the database
+	//-------------------------------------------------------------------------//
 	@Override
 	public Seller addSeller(Seller seller) {
 		// TODO Auto-generated method stub
@@ -57,23 +60,31 @@ public class SellerService implements SellerServiceInterface {
 	}
 	
 	
-	//Method for removing the seller from database//
+	//-------------------------------------------------------------------------//
+	//	1. Passing user details as a DTO
+	//	2. Validating the user DTO fields
+	//	3. remove the seller if validation is successfull (or) throw SellerNotFoundException
+	//-------------------------------------------------------------------------//
 	@Override
 	public String removeSeller(UserDTO userInfo) {
 		
 		Optional<Seller> seller = sellerCrudRepo.findByUserName(userInfo.getUserName());
 		
+		//checing the username & password
 		if(seller.isPresent() && seller.get().getUserPassword().equals(userInfo.getUserPassword())) {
-			
 			sellerCrudRepo.delete(seller.get());
-			
 		} else {
 			throw new SellerNotFoundException("username/password is wrong. Please provide the correct details to perform this operation");
 		}
+		
 		return "Successfully deleted " + userInfo.getUserName() + "'s Account from the database";
 	}
 	
 	
+	//-------------------------------------------------------------------------//
+	//	1. View All seller in the system
+	//	2. if not seller is added before, throw SellerNotFoundException
+	//-------------------------------------------------------------------------//
 	@Override
 	public List<Seller> viewAllSeller() {
 		// TODO Auto-generated method stub
@@ -89,10 +100,15 @@ public class SellerService implements SellerServiceInterface {
 	}
 	
 	
+	//-------------------------------------------------------------------------//
+	//	1. TO update the seller detials
+	// 	2. Get the seller info as a DTO with sellerId
+	//	3. checking & updating the sellerInfo only if the DTO fields are not null
+	//-------------------------------------------------------------------------//
 	@Override
-	public Seller updateSeller(UserDTO sellerInfo, Integer id) {
+	public Seller updateSeller(UserDTO sellerInfo, Integer sellerId) {
 		
-		Optional<Seller> opt = sellerCrudRepo.findById(id);
+		Optional<Seller> opt = sellerCrudRepo.findById(sellerId);
 		
 		if(opt.isPresent()) {
 			Seller seller = opt.get();
@@ -134,18 +150,31 @@ public class SellerService implements SellerServiceInterface {
 		}
 	}
 
+	
+	
+	//-------------------------------------------------------------------------//
+	//	1. Add product method with sellerId & 
+	// 	2. Get the seller info as a DTO with sellerId
+	//	3. checking if the updating the sellerInfo only if the DTO fields are not null
+	//-------------------------------------------------------------------------//
 	@Override
 	public Seller addProducts(Integer sellerId, Product product) {
 		// TODO Auto-generated method stub
+		
+		//We only accept product if it has quantity > 1, so changing the status to AVAILLABLE
 		product.setProductStatus(ProductStatus.AVAILLABLE);
+		
 		Optional<Seller> checkSeller = sellerCrudRepo.findById(sellerId);
 		Seller updatedSeller = checkSeller.get();
 		
+		//we will need to let customer to add address only if he provides address
 		if(updatedSeller.getAddresses().isEmpty())
 			throw new AddressNotFoundException("Add the address first to add the products");
 		
+		//adds product in seller list
 		updatedSeller.getProducts().add(product);
 		
+		//provides bi-directional relationship
 		productService.addProduct(updatedSeller, product);
 		
 		if (checkSeller.isPresent()) {
@@ -153,12 +182,20 @@ public class SellerService implements SellerServiceInterface {
 		} else {
 			throw new SellerNotFoundException("seller not found");
 		}
+		
 		return updatedSeller;
 	}
 			
+	
+	
+	//-------------------------------------------------------------------------//
+	//	1. To find the seller by username & password
+	//-------------------------------------------------------------------------//
 	@Override
 	public Seller findByUsernameAndPassword(String username, String password) {
+		
 		Optional<Seller> seller = sellerCrudRepo.findByUserNameAndUserPassword(username, password);
+		
 		if(seller.isPresent()) {
 			return seller.get();
 		} else {
@@ -166,26 +203,41 @@ public class SellerService implements SellerServiceInterface {
 		}
 	}
 	
+	
+	
+	//-------------------------------------------------------------------------//
+	//	1. Used in login module to persist seller
+	//-------------------------------------------------------------------------//
 	@Override
-	public Seller persistCustomer(Integer customerID, Login login) {
+	public Seller persistSeller(Integer sellerId, Login login) {
 		// TODO Auto-generated method stub
-		Optional<Seller> temp = sellerCrudRepo.findById(customerID);
+		
+		Optional<Seller> temp = sellerCrudRepo.findById(sellerId);
 		Seller seller = temp.get();
 		seller.setLogin(login);
 		sellerCrudRepo.save(seller);
 		return seller;
 	}
 	
+	
+	
+	//-------------------------------------------------------------------------//
+	//	1. Add address to the given sellerId
+	// 	2. Adding address bi-directionally.
+	//-------------------------------------------------------------------------//
 	@Override
 	public Seller addSellerAddress(Integer sellerId, Address address) {
 		// TODO Auto-generated method stub
 		Optional<Seller> getSeller = sellerCrudRepo.findById(sellerId);
 		
 		if (getSeller.isPresent()) {
+			//setting the referece of seller in his address
 			address.setUser(getSeller.get());
 			
+			//saving the address with seller reference
 			Address savedAddress = addressService.addAddress(address);
 			
+			//adding the address in seller address to get bi-directional relationship
 			getSeller.get().getAddresses().add(address);
 			
 			return sellerCrudRepo.save(getSeller.get());
@@ -193,7 +245,12 @@ public class SellerService implements SellerServiceInterface {
 			throw new SellerAlreadyExistException("Seller with the given username already exists.");
 		}
 	}
-
+	
+	
+	
+	//-------------------------------------------------------------------------//
+	//	1. Updating the product status.
+	//-------------------------------------------------------------------------//
 	@Override
 	public Seller updateProductStatus(Integer sellerId, Integer productId) {
 		// TODO Auto-generated method stub
@@ -203,21 +260,30 @@ public class SellerService implements SellerServiceInterface {
 		
 		if (seller.isPresent()) {
 			
+			//if we find the product with given Id we are making the product status UNAVAILLABLE
 			for (int i = 0; i < seller.get().getProducts().size(); i++) {
 				if (seller.get().getProducts().get(i).getProductId() == productId)
 					seller.get().getProducts().get(i).setProductStatus(ProductStatus.UNAVAILLABLE);
 			}
 			
-			Seller sel = sellerCrudRepo.save(seller.get());
+			//To persist the seller in database
+			Seller saveSeller = sellerCrudRepo.save(seller.get());
 			
 			productService.updateProductStatus(productId);
 			
-			return sel;
+			return saveSeller;
 		} else {
 			throw new SellerNotFoundException("No such seller. Please check the provided details.");
 		}
 	}
 
+	
+	
+	//-------------------------------------------------------------------------//
+	//	1. TO update the seller product details
+	// 	2. Get the product info as a DTO with sellerId & productId
+	//	3. Updating the seller product Info only if the DTO fields are not null
+	//-------------------------------------------------------------------------//
 	@Override
 	public Seller updateProducts(Integer sellerId, Integer productId, ProductDTO product){
 		// TODO Auto-generated method stub
@@ -257,17 +323,23 @@ public class SellerService implements SellerServiceInterface {
 				}
 			}
 			
-			Seller sel = sellerCrudRepo.save(seller.get());
+			Seller saveSeller = sellerCrudRepo.save(seller.get());
 			
 			productService.updateProduct(productId, product);
 			
-			return sel;
+			return saveSeller;
 		} else {
 			throw new SellerNotFoundException("No such seller. Please check the provided details.");
 		}
 
 	}
 	
+	
+	
+	//-------------------------------------------------------------------------//
+	//	1. TO remove the seller address
+	// 	2. Get the seller Id & address Id that should be deleted
+	//-------------------------------------------------------------------------//
 	@Override
 	public Seller removeSellerAddress(Integer sellerId, Integer addressId) {
 		// TODO Auto-generated method stub
@@ -277,21 +349,33 @@ public class SellerService implements SellerServiceInterface {
 		
 		if (seller.isPresent()) {
 			
+			//check if the seller address is same as provided address Id
 			for (int i = 0; i < seller.get().getAddresses().size(); i++) {
-				if (seller.get().getAddresses().get(i).getAddressId() == addressId)
+				if (seller.get().getAddresses().get(i).getAddressId() == addressId) {
 					seller.get().getAddresses().remove(i);
+					flag = true;
+				}
 			}
 			
-			Seller sel = sellerCrudRepo.save(seller.get());
+			//if the address Id is not present throw exception
+			if (!flag) {
+				throw new AddressNotFoundException("Address Not Found");
+			}
+			
+			Seller saveSeller = sellerCrudRepo.save(seller.get());
 			
 			addressService.deleteAddress(addressId);
 			
-			return sel;
+			return saveSeller;
 		} else {
 			throw new SellerNotFoundException("No such seller. Please check the provided details.");
 		}
 	}
-
+	
+	
+	//-------------------------------------------------------------------------//
+	//	1. TO view all the products in posted by the seller
+	//-------------------------------------------------------------------------//
 	@Override
 	public List<Product> viewAllProductsBySeller(Integer sellerId) {
 		

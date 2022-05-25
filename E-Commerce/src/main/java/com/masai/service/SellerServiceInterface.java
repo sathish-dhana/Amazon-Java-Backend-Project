@@ -15,12 +15,9 @@ public interface SellerServiceInterface {
 	public List<Seller> viewAllSeller();
 	public Seller updateSeller(UserDTO sellerInfo, Integer id);
 	public Seller addProducts(Integer sellerId, Product product);
-	
 	public Seller findByUsernameAndPassword(String username, String password);
-	public Seller persistCustomer(Integer customerID, Login login);
-	
+	public Seller persistSeller(Integer sellerId, Login login);
 	public Seller addSellerAddress(Integer sellerId, Address address);
-	
 	public Seller updateProducts(Integer sellerId, Integer productId, ProductDTO product);
 	public Seller updateProductStatus(Integer sellerId, Integer productId);
 	public Seller removeSellerAddress(Integer sellerId, Integer addressId);

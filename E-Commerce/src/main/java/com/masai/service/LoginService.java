@@ -65,7 +65,7 @@ public class LoginService implements LoginServiceInterface {
 				
 				loginRepo.save(newLogin);
 				newLogin.setUser(seller);
-				return sellerService.persistCustomer(seller.getUserId(), newLogin);
+				return sellerService.persistSeller(seller.getUserId(), newLogin);
 	
 			} catch (CustomerNotFoundException error) {
 				throw new LoginFailedException(error.getMessage());
