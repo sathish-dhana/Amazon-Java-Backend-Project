@@ -48,7 +48,7 @@ public class ProductService implements ProductServiceInterface{
 	@Override
 	public List<Product> getAllProdcuts() {
 	
-		List<Product> allAvaillableProducts = productRepo.findAllByProductStatus(ProductStatus.AVAILLABLE);
+		List<Product> allAvaillableProducts = productRepo.findAllByProductStatus(ProductStatus.AVAILABLE);
 		List<Product> allOutOfStockProducts = productRepo.findAllByProductStatus(ProductStatus.OUT_OF_STOCK);
 		
 		allAvaillableProducts.addAll(allOutOfStockProducts);
@@ -110,7 +110,7 @@ public class ProductService implements ProductServiceInterface{
 			
 			//checked if the product exist and change its status
 			findproduct.get().setQuantity(0);
-			findproduct.get().setProductStatus(ProductStatus.UNAVAILLABLE);
+			findproduct.get().setProductStatus(ProductStatus.UNAVAILABLE);
 			productRepo.save(findproduct.get());
 			
 			return "product with ID : " + productId + " product status updated.";
@@ -184,7 +184,7 @@ public class ProductService implements ProductServiceInterface{
 		Optional<Product> product = productRepo.findById(productId);
 		
 		if(product.isPresent()) {
-			product.get().setProductStatus(ProductStatus.UNAVAILLABLE);
+			product.get().setProductStatus(ProductStatus.UNAVAILABLE);
 			return product.get();
 		} else {
 			throw new ProductNotFoundException("No product found with the given id");
@@ -199,7 +199,7 @@ public class ProductService implements ProductServiceInterface{
 		Optional<Product> product = productRepo.findById(productId);
 		
 		if(product.isPresent()) {
-			product.get().setProductStatus(ProductStatus.AVAILLABLE);
+			product.get().setProductStatus(ProductStatus.AVAILABLE);
 			return product.get();
 		} else {
 			throw new ProductNotFoundException("No product found with the given id");

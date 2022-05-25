@@ -92,7 +92,7 @@ public class CartService implements CartServiceInterface {
 				throw new ProductQuantityNotEnoughException("Only " + item.getProduct().getQuantity() + " units of " + item.getProduct().getProductName() + " are available. Required quantity is: " + item.getRequiredQuantity() + ". Cannot Proceed with purchase.");
 			} 
 			
-			if(item.getProduct().getProductStatus() != ProductStatus.AVAILLABLE) {
+			if(item.getProduct().getProductStatus() != ProductStatus.AVAILABLE) {
 				throw new ProductNotAvailableException("Product " + item.getProduct().getProductName() + " is not available any more.");
 			}
 		}

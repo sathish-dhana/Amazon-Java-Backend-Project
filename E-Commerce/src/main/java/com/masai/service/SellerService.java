@@ -162,7 +162,7 @@ public class SellerService implements SellerServiceInterface {
 		// TODO Auto-generated method stub
 		
 		//We only accept product if it has quantity > 1, so changing the status to AVAILLABLE
-		product.setProductStatus(ProductStatus.AVAILLABLE);
+		product.setProductStatus(ProductStatus.AVAILABLE);
 		
 		Optional<Seller> checkSeller = sellerCrudRepo.findById(sellerId);
 		Seller updatedSeller = checkSeller.get();
@@ -263,7 +263,7 @@ public class SellerService implements SellerServiceInterface {
 			//if we find the product with given Id we are making the product status UNAVAILLABLE
 			for (int i = 0; i < seller.get().getProducts().size(); i++) {
 				if (seller.get().getProducts().get(i).getProductId() == productId)
-					seller.get().getProducts().get(i).setProductStatus(ProductStatus.UNAVAILLABLE);
+					seller.get().getProducts().get(i).setProductStatus(ProductStatus.UNAVAILABLE);
 			}
 			
 			//To persist the seller in database
