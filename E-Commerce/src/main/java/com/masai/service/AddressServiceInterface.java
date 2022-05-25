@@ -11,16 +11,18 @@ import com.masai.beans.User;
 public interface AddressServiceInterface {
 	
 	public Address addAddress(Address address);
-	public String removeAllAddressOfUser(User user);
-	public Address showAddressById(Integer addressId);
 	
 	public Set<User> listAllUserByCity(String city);
+	
 	public Set<User> listAllUserByState(String state);
+	
 	public Set<User> listAllUserByPincode(String pincode);
 	
 	public Address persistCustomer(Customer customer, Address address);
+	
 	public String deleteAddress(Integer addressId);
 	
 	public boolean checkAddressId(int userId);
+	
 	public Address getAddressById(int addressId);
 }
