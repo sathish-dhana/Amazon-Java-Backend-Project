@@ -34,13 +34,22 @@ public class CustomerService implements CustomerServiceInterface {
 	@Autowired
 	private OrderServiceInterface orderService;
 	
+	
+	
+	//-------------------------------------------------------------------------//
+	//	1. TO add customer details
+	// 	2. Get the seller Id & address Id that should be deleted
+	//-------------------------------------------------------------------------//
 	@Override
 	public Customer addCustomer(Customer customer) {
+		
 		Optional<Customer> opt = customerCrudRepo.findByUserName(customer.getUserName());
 
 		if(opt.isEmpty()) {
-
+			
+			//setting the cart
 			customer.setCart(new Cart());
+			
 			Customer savedCustomer = customerCrudRepo.save(customer);
 			
 			return savedCustomer;
@@ -49,28 +58,36 @@ public class CustomerService implements CustomerServiceInterface {
 		}
 	}
 
+	
+	//-------------------------------------------------------------------------//
+	//	1. TO remove the Customer
+	//-------------------------------------------------------------------------//
 	@Override
 	public String removeCustomer(UserDTO userInfo) {
 		
 		Optional<Customer> customer = customerCrudRepo.findByUserName(userInfo.getUserName());
 		
+		//if the customer is present & login detials match we delete the customer
 		if(customer.isPresent() && customer.get().getUserPassword().equals(userInfo.getUserPassword())) {
-			
 			customerCrudRepo.delete(customer.get());
-			
 		} else {
-			
 			throw new CustomerNotFoundException("username/password is wrong. Please provide the correct details to perform this operation");
-			
 		}
 		
 		return "Successfully deleted " + userInfo.getUserName() + "'s Account from the database";
 		
 	}
-
+	
+	
+	//-------------------------------------------------------------------------//
+	//	1. TO View all the customers in the table
+	//-------------------------------------------------------------------------//
 	@Override
 	public List<Customer> viewAllCustomers() {
+		
 		List<Customer> customers = customerCrudRepo.findAll();
+		
+		//If no customer found throw the exception
 		if(customers.size() == 0) {
 			throw new CustomerNotFoundException("No Customers registered on the portal!");
 		}
@@ -78,6 +95,12 @@ public class CustomerService implements CustomerServiceInterface {
 		return customers;
 	}
 
+	
+	//-------------------------------------------------------------------------//
+	//	1. TO update the customers in the table
+	//	2. Get the DTO of customer details & customer Id
+	//	3. check the fields and update the customer if the fields are not null
+	//-------------------------------------------------------------------------//
 	@Override
 	public Customer updateCustomer(UserDTO customerInfo, Integer id) {
 		
