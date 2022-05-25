@@ -89,12 +89,17 @@ public class CartController {
 			return  new ResponseEntity<>(items,HttpStatus.OK);
 	}
 	
+	
+	
 	@PostMapping(value="/cart/alter")
-	public ResponseEntity<Cart> alterCart(@RequestParam String key,ItemDTO item){
+	public ResponseEntity<Cart> alterCart(@RequestParam String key,@RequestBody ItemDTO item){
 		
 		Login loggedUser=loginService.isTokenValid(key);
+		
 		Customer customer=customerCrudRepo.findByUserId(loggedUser.getUser().getUserId());
-
-		return null;
+		
+		Cart cart = cartService.alterCart(customer, item);
+		
+		return new ResponseEntity<Cart>(cart, HttpStatus.ACCEPTED) ;
 	}
 }
