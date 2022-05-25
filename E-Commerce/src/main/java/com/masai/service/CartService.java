@@ -10,9 +10,12 @@ import org.springframework.stereotype.Service;
 import com.masai.beans.Cart;
 import com.masai.beans.Customer;
 import com.masai.beans.Item;
+import com.masai.beans.ItemDTO;
+import com.masai.beans.Product;
 import com.masai.beans.ProductStatus;
 import com.masai.exception.ProductAlreadyFoundException;
 import com.masai.exception.ProductNotAvailableException;
+import com.masai.exception.ProductNotFoundException;
 import com.masai.exception.ProductQuantityNotEnoughException;
 import com.masai.repository.CartCrudRepo;
 import com.masai.repository.CustomerCrudRepo;
@@ -67,11 +70,6 @@ public class CartService implements CartServiceInterface {
 	}
 
 
-	@Override
-	public Cart alterCart(Customer customer, Item item) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 	//WORKING FINE
@@ -114,19 +112,59 @@ public class CartService implements CartServiceInterface {
 	}
 
 
-//	@Override
-//	public Cart alterCart(Customer customer, Item item) {
-//		// TODO Auto-generated method stub
-//		
-//		Optional<Item> optItem=itemCrudRepo.findById(item.getItemId());
-//		
-//		if(optItem.isPresent()) {
-//			
-//		}
-//		else {
-//			throw new ProductNotFoundException("Product Does not found in your cart");
-//		}
-//	}
+	@Override
+	public Cart alterCart(Customer customer, ItemDTO newItem) {
+		// TODO Auto-generated method stub
+		
+		List<Item> items = customer.getCart().getItems();
+		
+		Cart customerCart = customer.getCart();
+		
+		Product product = null;
+		
+		if(!items.isEmpty()) {
+			
+			for(Item element : items) {
+				
+				if(element.getProduct().getProductId() == newItem.getProductId()) {
+					
+					product = element.getProduct();
+					
+					if(newItem.getRequiredQuantity() <= product.getQuantity()) {
+						
+						double priceDecrease = element.getItemPrice() - (product.getPrice() * element.getRequiredQuantity());
+						customerCart.setCartTotal(customerCart.getCartTotal() - element.getItemPrice());
+						element.setItemPrice(priceDecrease);	
+						
+
+						element.setRequiredQuantity(newItem.getRequiredQuantity()); 
+						
+						
+						double priceIncrease = element.getItemPrice() + (product.getPrice() * element.getRequiredQuantity());
+						element.setItemPrice(priceIncrease);
+						customerCart.setCartTotal(customerCart.getCartTotal() + element.getItemPrice());
+						
+					}else {
+						throw new ProductQuantityNotEnoughException("Required quantity of specified product not available at the moment");
+					}
+					
+					break;
+				}
+				
+			}
+			
+			
+			if(product == null)
+				throw new ProductNotFoundException("No product with the given id is present in this cart");
+			
+		}else {
+			throw new ProductNotFoundException("Product Does not found in your cart");
+		}
+		
+		
+		return cartCrudRepo.save(customer.getCart());
+		
+	}
 	
 	
 	
