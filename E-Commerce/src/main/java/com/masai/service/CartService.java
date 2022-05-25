@@ -158,7 +158,7 @@ public class CartService implements CartServiceInterface {
 				throw new ProductNotFoundException("No product with the given id is present in this cart");
 			
 		}else {
-			throw new ProductNotFoundException("Product Does not found in your cart");
+			throw new ProductNotFoundException("Product not found in your cart");
 		}
 		
 		
