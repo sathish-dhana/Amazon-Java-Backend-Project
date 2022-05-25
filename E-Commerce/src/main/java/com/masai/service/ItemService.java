@@ -31,7 +31,7 @@ public class ItemService implements ItemServiceInterface{
 		if(optProductCheck.isPresent()) {
 			
 			Product productCheck=optProductCheck.get();
-			if(productCheck.getQuantity()>=item.getRequiredQuantity() && productCheck.getProductStatus() == ProductStatus.AVAILLABLE) {
+			if(productCheck.getQuantity()>=item.getRequiredQuantity() && productCheck.getProductStatus() == ProductStatus.AVAILABLE) {
 				
 				//Setting the item Price
 				item.setItemPrice(productCheck.getPrice()*item.getRequiredQuantity());

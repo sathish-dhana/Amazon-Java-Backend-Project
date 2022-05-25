@@ -10,7 +10,7 @@ import com.masai.beans.User;
 
 public interface AddressServiceInterface {
 	
-	public Address addAddress(Address address);
+	public Address addAddress(Address address);	
 	
 	public Set<User> listAllUserByCity(String city);
 	
