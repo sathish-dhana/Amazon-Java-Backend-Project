@@ -10,12 +10,10 @@ import com.masai.beans.Seller;
 public interface ProductServiceInterface {
 
 	public Product addProduct(Seller seller, Product product);
+	
 	public Product addProduct(Product product);
-	public List<Product> getAllProdcuts();
-
+	
 	public Product getProductById(Integer id);
-
-	public List<Product> getProductsByCategory(ProductCategory cate);
 	
 	public Product reduceQuantity(Integer id, int quantityToReduce);
 	
@@ -24,6 +22,13 @@ public interface ProductServiceInterface {
 	public String updateProduct(Integer productId, ProductDTO product);
 	
 	public Product updateProductStatusToOutOfStock(Integer productId);
+	
 	public Product updateProductStatusToUnAvaillable(Integer productId);
+	
 	public Product updateProductStatusToAvaillable(Integer productId);
+	
+	public List<Product> getAllProdcuts();
+	
+	public List<Product> getProductsByCategory(ProductCategory cate);
+	
 }

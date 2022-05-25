@@ -59,6 +59,7 @@ public class ProductService implements ProductServiceInterface{
 		return allAvaillableProducts;
 	}
 
+	
 	// TO GET PRODUCT BY ID
 	@Override
 	public Product getProductById(Integer id) {
@@ -69,6 +70,7 @@ public class ProductService implements ProductServiceInterface{
 		return product;
 	}
 
+	
 	//TO GET ALL PRODUCTS BY CATEGORY
 	@Override
 	public List<Product> getProductsByCategory(ProductCategory cate) {
@@ -80,6 +82,7 @@ public class ProductService implements ProductServiceInterface{
 		return productsCategory;
 	}
 
+	
 	//TO REDUCE QUANTITY AFTER PRODUCTS PURCHASED
 	@Override
 	public synchronized Product reduceQuantity(Integer id, int quantityToReduce) {
@@ -96,16 +99,20 @@ public class ProductService implements ProductServiceInterface{
 		return updatedProduct;
 	}
 
-
+	
+	//TO update the product status if the seller dont want to post
 	@Override
 	public String updateProductStatus(Integer productId) {
 		// TODO Auto-generated method stub
 		Optional<Product> findproduct = productRepo.findById(productId);
-		findproduct.get().setQuantity(0);
-		findproduct.get().setProductStatus(ProductStatus.UNAVAILLABLE);
 		
 		if (findproduct.isPresent()) {
+			
+			//checked if the product exist and change its status
+			findproduct.get().setQuantity(0);
+			findproduct.get().setProductStatus(ProductStatus.UNAVAILLABLE);
 			productRepo.save(findproduct.get());
+			
 			return "product with ID : " + productId + " product status updated.";
 		} else {
 			throw new ProductNotFoundException("No product found in the given id");
@@ -113,7 +120,8 @@ public class ProductService implements ProductServiceInterface{
 		
 	}
 
-
+	
+	//update the product detail here to maintain bi-directional mapping
 	@Override
 	public String updateProduct(Integer productId, ProductDTO product) {
 		// TODO Auto-generated method stub
@@ -151,7 +159,8 @@ public class ProductService implements ProductServiceInterface{
 		}
 	}
 
-
+	
+	//To update the product status to Out Of Stock
 	@Override
 	public Product updateProductStatusToOutOfStock(Integer productId) {
 		// TODO Auto-generated method stub
@@ -167,7 +176,8 @@ public class ProductService implements ProductServiceInterface{
 		
 	}
 
-
+	
+	//To update the product status to Un-Availlable
 	@Override
 	public Product updateProductStatusToUnAvaillable(Integer productId) {
 		// TODO Auto-generated method stub
@@ -181,7 +191,8 @@ public class ProductService implements ProductServiceInterface{
 		}
 	}
 
-
+	
+	//To update the product status to Availlable
 	@Override
 	public Product updateProductStatusToAvaillable(Integer productId) {
 		// TODO Auto-generated method stub
