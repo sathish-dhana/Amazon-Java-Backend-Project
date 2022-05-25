@@ -101,7 +101,6 @@ public class ProductService implements ProductServiceInterface{
 	public String updateProductStatus(Integer productId) {
 		// TODO Auto-generated method stub
 		Optional<Product> findproduct = productRepo.findById(productId);
-		findproduct.get().setSeller(null);
 		findproduct.get().setQuantity(0);
 		findproduct.get().setProductStatus(ProductStatus.UNAVAILLABLE);
 		
