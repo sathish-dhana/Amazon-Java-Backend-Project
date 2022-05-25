@@ -14,10 +14,12 @@ import com.masai.beans.User;
 @Repository
 public interface AddressCrudRepo extends JpaRepository<Address, Integer>{
 	
-//	public Optional<Address> findByUserName(String userName);
 	public List<Address> findByUser(User user);
+	
 	public List<Address> findByCity(String city);
+	
 	public List<Address> findByState(String city);
+	
 	public List<Address> findByPincode(String pincode);
 	
 	public List<Address> deleteAllByUser(User user);

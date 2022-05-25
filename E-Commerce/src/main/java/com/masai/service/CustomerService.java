@@ -14,6 +14,7 @@ import com.masai.beans.Login;
 import com.masai.beans.Ordered;
 import com.masai.beans.Seller;
 import com.masai.beans.UserDTO;
+import com.masai.exception.AddressNotFoundException;
 import com.masai.exception.CustomerAlreadyExistsException;
 import com.masai.exception.CustomerNotFoundException;
 import com.masai.exception.SellerNotFoundException;
@@ -146,17 +147,31 @@ public class CustomerService implements CustomerServiceInterface {
 		}
 
 	}
-
+	
+	
+	
+	//-------------------------------------------------------------------------//
+	//	1. To find the customer
+	//	2. Get the username & password to check
+	//-------------------------------------------------------------------------//
 	@Override
 	public Customer findByUsernameAndPassword(String username, String password) {
+		
 		Optional<Customer> customer = customerCrudRepo.findByUserNameAndUserPassword(username, password);
+		
+		//check if present return
 		if(customer.isPresent()) {
 			return customer.get();
 		} else {
 			throw new CustomerNotFoundException("No such customer. Please check the provided details.");
 		}
+		
 	}
 	
+	
+	//-------------------------------------------------------------------------//
+	//	1. To find the customer by the Id
+	//-------------------------------------------------------------------------//
 	@Override
 	public Customer getCustomerById(Integer customerId) {
 		
@@ -169,15 +184,28 @@ public class CustomerService implements CustomerServiceInterface {
 		}
 	}
 
+	
+	//-------------------------------------------------------------------------//
+	//	1. To add customer card details
+	//	2. Get the customer Id & Card details
+	//	3. provide Uni-directional mapping
+	//-------------------------------------------------------------------------//
 	@Override
 	public Customer addCustomerCard(Integer customerId, Card card) {
 		// TODO Auto-generated method stub
 		Optional<Customer> getCustomer = customerCrudRepo.findById(customerId);
 		
 		if (getCustomer.isPresent()) {
+			
+			//save the card
 			Card addCard = cardService.addCard(card);
+			
+			//set this card with the customer Id provided
 			getCustomer.get().setCardDetails(card);
+			
+			//save the customer
 			Customer savedCustomer = customerCrudRepo.save(getCustomer.get());
+			
 			return savedCustomer;
 		} else {
 			throw new CustomerAlreadyExistsException("Customer with the given username already exists.");
@@ -185,16 +213,26 @@ public class CustomerService implements CustomerServiceInterface {
 		
 	}
 	
+	
+	//-------------------------------------------------------------------------//
+	//	1. To add customer address details
+	//	2. Get the customer Id & address details
+	//	3. provide Bi-directional mapping
+	//-------------------------------------------------------------------------//
 	@Override
 	public Customer addCustomerAddress(Integer customerId, Address address) {
 		// TODO Auto-generated method stub
 		Optional<Customer> getCustomer = customerCrudRepo.findById(customerId);
 		
 		if (getCustomer.isPresent()) {
+			
+			//get the customer
 			address.setUser(getCustomer.get());
 			
+			//save the address to database
 			Address savedAddress = addressService.addAddress(address);
 			
+			//Add the address to the customers list of address
 			getCustomer.get().getAddresses().add(address);
 			
 			return customerCrudRepo.save(getCustomer.get());
@@ -202,16 +240,27 @@ public class CustomerService implements CustomerServiceInterface {
 			throw new CustomerNotFoundException("No such customer. Please check the provided details.");
 		}
 	}
-
+	
+	
+	//-------------------------------------------------------------------------//
+	//	1. To add Login the customer 
+	//	2. Get the customer Id & Login details
+	//-------------------------------------------------------------------------//
 	@Override
 	public Customer persistCustomer(Integer customerID, Login login) {
 		// TODO Auto-generated method stub
 		Optional<Customer> temp = customerCrudRepo.findById(customerID);
 		
 		if (temp.isPresent()) {
+			
 			Customer customer = temp.get();
+			
+			//set customer with the login details provided
 			customer.setLogin(login);
+			
+			//save the customer
 			customerCrudRepo.save(customer);
+			
 			return customer;
 		} else {
 			throw new CustomerNotFoundException("No such customer. Please check the provided details.");
@@ -219,6 +268,12 @@ public class CustomerService implements CustomerServiceInterface {
 		
 	}
 	
+	
+	//-------------------------------------------------------------------------//
+	//	1. To remove customer address details
+	//	2. Get the customer Id & address Id
+	//	3. remove Bi-directional mapping
+	//-------------------------------------------------------------------------//
 	@Override
 	public Customer removeCustomerAddress(Integer customerId, Integer addressId) {
 		// TODO Auto-generated method stub
@@ -228,11 +283,20 @@ public class CustomerService implements CustomerServiceInterface {
 		
 		if (customer.isPresent()) {
 			
+			//Iterate into the list of address and remove it
 			for (int i = 0; i < customer.get().getAddresses().size(); i++) {
-				if (customer.get().getAddresses().get(i).getAddressId() == addressId)
+				if (customer.get().getAddresses().get(i).getAddressId() == addressId) {
 					customer.get().getAddresses().remove(i);
+					flag = true;
+				}
 			}
 			
+			//If the address id not found throw the exception
+			if (!flag) {
+				throw new AddressNotFoundException("Address Not Found");
+			}
+			
+			//save the customer & address to get bi directional 
 			Customer savedcustomer = customerCrudRepo.save(customer.get());
 			
 			addressService.deleteAddress(addressId);
@@ -243,15 +307,28 @@ public class CustomerService implements CustomerServiceInterface {
 		}
 	}
 	
+	
+	//-------------------------------------------------------------------------//
+	//	1. To add customer orders
+	//	2. Get the customer Id & order
+	//  3. Provide Bi-directional mapping
+	//-------------------------------------------------------------------------//
 	@Override
 	public Customer addCustomerOrder(Integer customerId, Ordered order) {
 
 		Optional<Customer> getCustomer = customerCrudRepo.findById(customerId);
 		
 		if (getCustomer.isPresent()) {
+			
+			//Persist the order
 			Ordered addOrder = orderService.addOrder(order);
+			
+			//Add the orders to the customer Id provided
 			getCustomer.get().getOrders().add(addOrder);
+			
+			//save the customer to table
 			Customer savedCustomer = customerCrudRepo.save(getCustomer.get());
+			
 			return savedCustomer;
 		} else {
 			throw new CustomerAlreadyExistsException("Wrong customer ID, check your login key");

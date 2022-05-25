@@ -13,8 +13,8 @@ public interface CartServiceInterface {
 	
 	public List<Item> getAllItem(Cart cart);
 	
-	public Cart alterCart(Customer customer, ItemDTO item);
-	
 	//Test
 	public List<Item> sendToOrder(int customerId);
+
+	public Cart alterCart(Customer customer, ItemDTO newItem);
 }

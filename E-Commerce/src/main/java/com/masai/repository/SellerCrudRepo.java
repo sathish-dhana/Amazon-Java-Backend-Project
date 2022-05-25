@@ -12,6 +12,8 @@ import com.masai.beans.Seller;
 public interface SellerCrudRepo extends JpaRepository<Seller, Integer> {
 	
 	public Optional<Seller> findByUserName(String userName);
+	
 	public Optional<Seller> findByUserPassword(String userPassword);
+	
 	public Optional<Seller> findByUserNameAndUserPassword(String userName, String password);
 }
