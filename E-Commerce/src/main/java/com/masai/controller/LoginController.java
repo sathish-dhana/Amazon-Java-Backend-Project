@@ -16,13 +16,14 @@ import com.masai.beans.UserDTO;
 import com.masai.service.LoginServiceInterface;
 
 @RestController
-@RequestMapping("/ecommerce/")
+@RequestMapping("/ecommerce")
+
 public class LoginController {
 	
 	@Autowired
 	LoginServiceInterface loginService;
 	
-	@PostMapping("login/{type}")
+	@PostMapping("/login/{type}")
 	public ResponseEntity<User> loginUser(@RequestBody UserDTO loginInfo, @PathVariable String type) {
 		User loggedInUser = loginService.login(loginInfo, type);
 		return new ResponseEntity<User>(loggedInUser, HttpStatus.OK);

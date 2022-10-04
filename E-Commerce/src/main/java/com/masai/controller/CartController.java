@@ -50,7 +50,7 @@ public class CartController {
 	private ProductCrudRepo productCrudRepo;
 	
 	
-	// Handle		 --> /ecommerce/customersPortal/cart
+	// Handle		 --> / e-commerce/customersPortal/cart
 	// What is does? --> Adds the given product to the cart with the specified quantity
 	// Request Type? --> POST request
 	// Input 		 --> API key as request parameter, and item with valid product id and quantity
@@ -58,7 +58,7 @@ public class CartController {
 	public ResponseEntity<Cart> addToCart(@RequestParam String key, @RequestBody ItemDTO item) {
 			
 			Login loggedUser=loginService.isTokenValid(key);
-
+			
 			Customer customer=customerCrudRepo.findByUserId(loggedUser.getUser().getUserId());
 			Integer productId=item.getProductId();
 			//System.out.println(productId);
