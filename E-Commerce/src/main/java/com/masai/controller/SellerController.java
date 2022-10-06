@@ -43,9 +43,9 @@ public class SellerController {
 	// Request Type? --> Post Request
 	// Input 		 --> Seller object
 	@PostMapping("/seller")
-	public ResponseEntity<Seller> addSeller(@RequestBody @Valid Seller seller, HttpSession session) {
+	public ResponseEntity<Seller> addSeller(@RequestBody @Valid Seller seller) {
 		Seller addedSeller = sellerService.addSeller(seller);
-		session.setAttribute("SellerData", seller);
+		
 		return new ResponseEntity(addedSeller, HttpStatus.CREATED);
 	}
 	

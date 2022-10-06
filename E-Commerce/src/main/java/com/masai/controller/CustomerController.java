@@ -47,9 +47,9 @@ public class CustomerController {
 	// Request Type? --> POST Request
 	// Input 		 --> Customer object (All fields can be null except --userName-- and --userPassword--
 	@PostMapping("/customer")
-	public ResponseEntity<Customer> addCustomer(@RequestBody @Valid Customer customer, HttpSession session) {
+	public ResponseEntity<Customer> addCustomer(@RequestBody @Valid Customer customer) {
 		Customer newCustomer = customerService.addCustomer(customer);
-		session.setAttribute("customerData", newCustomer);
+		
 		return new ResponseEntity(newCustomer, HttpStatus.CREATED);
 	}
 	
@@ -103,7 +103,7 @@ public class CustomerController {
 	// What is does? --> Adds a new address to the address list of the customer
 	// Request Type? --> POST Request
 	// Input 		 --> Address Object and Login key in the param
-	@PostMapping("/customer/addAddress")
+	@PostMapping("/customer/address")
 	public ResponseEntity<Customer> addCustomerAddress(@RequestParam String key, @RequestBody @Valid Address address) {
 		Login currentLogin = loginService.isTokenValid(key);
 		Customer customer = customerService.addCustomerAddress(currentLogin.getUser().getUserId(), address);
@@ -115,7 +115,7 @@ public class CustomerController {
 	// What is does? --> Adds a new address to the address list of the seller
 	// Request Type? --> DELETE Request
 	// Input 		 --> Address Object and Login key in the param
-	@DeleteMapping("/customer/removeAddress")
+	@DeleteMapping("/customer/asddress")
 	public ResponseEntity<Customer> removeCustomerAddress(@RequestParam String key, @RequestParam Integer addressId) {
 		Login currentLogin = loginService.isTokenValid(key);
 		Customer customer = customerService.removeCustomerAddress(currentLogin.getUser().getUserId(), addressId);
