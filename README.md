@@ -19,4 +19,4 @@ Amazon is one of the most popular online marketplaces used by both individual as
 - Spring Boot
 - Spring data JPA
 - Hibernate
-
+Updated by Cursor.
